@@ -1,0 +1,5138 @@
+[ 
+
+  { 
+
+    "id": "T1_001", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "Define software engineering.", 
+
+    "answer": "Software engineering is an engineering discipline concerned with all aspects of software production, including specification, design, implementation, validation, and maintenance.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "discipline", "intro"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_002", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "Why is software engineering needed?", 
+
+    "answer": "It is needed to manage the complexity of large systems, ensure reliability, maintainability, and safety, and produce software using systematic, disciplined methods.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["importance", "complexity"] 
+
+  },
+
+  { 
+
+    "id": "T1_003", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "What are the main activities of software engineering?", 
+
+    "answer": "Requirements definition, system design, implementation and testing, and management of the development process.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["process", "activities"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_004", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "What are 'attributes of good software'?", 
+
+    "answer": "Maintainability, dependability, efficiency, and usability — ensuring the system performs reliably, can evolve, and meets user needs effectively.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["quality", "attributes"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_005", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "What does dependability mean in software engineering?", 
+
+    "answer": "Dependability refers to the trustworthiness of the software — its reliability, safety, and ability to function correctly in all valid conditions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["quality", "dependability"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_006", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "Explain the difference between 'easy' and 'hard' software systems.", 
+
+    "answer": "Easy systems are developed by a single person for limited use, while hard systems involve multiple users, developers, and products, requiring formal engineering processes.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["complexity", "scale"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_007", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "What are the responsibilities of software engineers?", 
+
+    "answer": "They must act ethically, respect confidentiality, protect intellectual property, avoid misuse of computing resources, and only undertake work within their competence.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["ethics", "responsibility"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_008", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "How is AI and machine learning software different from traditional software?", 
+
+    "answer": "AI software includes trained models with probabilistic behaviour, making outcomes less deterministic and harder to verify explicitly.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["ai", "machine learning", "ethics"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_009", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "Give two examples of major software failures and what they teach us.", 
+
+    "answer": "The Ariane 5 rocket explosion and the Mars Climate Orbiter loss show how small software errors can lead to catastrophic consequences, highlighting the need for rigorous engineering.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["failures", "case studies"] 
+
+  }, 
+
+  { 
+
+    "id": "T1_010", 
+
+    "topic": "Software Engineering", 
+
+    "prompt": "What are some characteristics of good software engineers?", 
+
+    "answer": "They learn from mistakes, document their work, test thoroughly, collaborate well, and produce maintainable, understandable code.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["skills", "best practices"] 
+
+  },
+
+  { 
+
+    "id": "T2_001", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What is a software process?", 
+
+    "answer": "A software process is a structured set of activities whose goal is the development or evolution of a software system.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_002", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What are the four fundamental activities in software processes?", 
+
+    "answer": "Specification, development, validation, and evolution.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["process", "core activities"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_003", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "Describe the Waterfall model.", 
+
+    "answer": "A sequential development process with distinct phases: requirements, design, implementation, testing, and maintenance. Changes are hard to accommodate once underway.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["waterfall", "model", "traditional"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_004", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What are two disadvantages of the Waterfall model?", 
+
+    "answer": "It is inflexible to change and unsuitable when requirements are unclear or likely to evolve.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["waterfall", "limitations"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_005", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "Explain the concept of Evolutionary Development.", 
+
+    "answer": "It involves developing an initial version, exposing it to users, and refining it iteratively based on feedback to evolve the final system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["iterative", "evolutionary", "prototyping"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_006", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What is Incremental Development (Scrum)?", 
+
+    "answer": "It breaks the project into increments or sprints, each delivering usable functionality, allowing early delivery and adaptation to change.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["agile", "scrum", "incremental"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_007", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "List some advantages of Incremental Development.", 
+
+    "answer": "Early delivery of value, user feedback integration, reduced risk of total project failure, and focus on high-priority features first.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["scrum", "advantages", "agile"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_008", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "Why are software processes context-dependent?", 
+
+    "answer": "Different domains require different levels of formality — for example, safety-critical systems need rigorous processes, while web apps can use agile or prototyping.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["context", "process", "formality"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_009", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What is software specification?", 
+
+    "answer": "It defines what services the system should provide and the constraints on its operation and development.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["specification", "requirements"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_010", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What are the main stages of testing according to the software process model?", 
+
+    "answer": "Unit testing, integration testing, system testing, and acceptance testing.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["testing", "process", "stages"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_011", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What is meant by 'validation' in the software process?", 
+
+    "answer": "Validation ensures that the software meets the customer’s actual needs and requirements.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["validation", "quality"] 
+
+  }, 
+
+  { 
+
+    "id": "T2_012", 
+
+    "topic": "Software Processes", 
+
+    "prompt": "What is software evolution?", 
+
+    "answer": "The ongoing process of modifying software after delivery to correct faults, improve performance, or adapt to a changed environment.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["maintenance", "evolution"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_001", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is requirements engineering?", 
+
+    "answer": "It is the process of establishing the services the customer requires from a system and the constraints under which it operates and is developed.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "requirements", "engineering"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_002", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "Why are well-defined requirements essential in software projects?", 
+
+    "answer": "Poorly defined requirements lead to misunderstandings, increased costs, project delays, and systems that fail to meet user needs.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["importance", "project", "quality"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_003", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "Differentiate between user requirements and system requirements.", 
+
+    "answer": "User requirements are high-level statements written in natural language for customers, while system requirements are detailed technical specifications for developers.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["user", "system", "comparison"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_004", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What are functional requirements?", 
+
+    "answer": "They describe what the system should do — its functions, services, or reactions to inputs under specific conditions.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["functional", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_005", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What are non-functional requirements?", 
+
+    "answer": "They specify system properties and constraints such as performance, reliability, usability, and security, rather than specific behaviours.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["non-functional", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_006", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "List three categories of non-functional requirements.", 
+
+    "answer": "Product requirements, organisational requirements, and external requirements.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["non-functional", "categories"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_007", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is a domain requirement?", 
+
+    "answer": "A requirement that originates from the specific application domain, such as legal, safety, or industry regulations influencing system behaviour.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["domain", "regulations"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_008", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is the difference between a goal and a verifiable requirement?", 
+
+    "answer": "A goal expresses a general intention, while a verifiable requirement defines a measurable criterion that can be objectively tested.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["goals", "verification"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_009", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What are the main stages of the requirements engineering process?", 
+
+    "answer": "Feasibility study, elicitation and analysis, specification, validation, and management.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["process", "stages"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_010", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is the purpose of a feasibility study?", 
+
+    "answer": "To determine whether the proposed system is worthwhile, achievable with current technology, and aligns with organisational goals.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["feasibility", "analysis"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_011", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is requirements elicitation?", 
+
+    "answer": "It is the process of discovering system requirements by consulting stakeholders, reviewing documents, and analysing existing systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["elicitation", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_012", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "Name common problems encountered during requirements analysis.", 
+
+    "answer": "Stakeholders may not know what they want, use different terminology, have conflicting goals, or change their requirements over time.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["analysis", "problems"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_013", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "Who are stakeholders in a system?", 
+
+    "answer": "Stakeholders include all individuals and systems affected by the software, such as end-users, managers, developers, regulators, and external services.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["stakeholders", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_014", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is a viewpoint in requirements analysis?", 
+
+    "answer": "A viewpoint represents a particular stakeholder’s perspective on the system, helping identify and structure different requirements.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["viewpoints", "stakeholders"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_015", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "Describe two techniques for requirements discovery.", 
+
+    "answer": "Interviewing stakeholders and conducting ethnographic observation of real work practices.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["elicitation", "techniques"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_016", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is ethnography in software engineering?", 
+
+    "answer": "A social science technique where analysts observe people in their real working environment to uncover implicit practices and social factors.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["elicitation", "ethnography"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_017", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What are the four main types of security requirements?", 
+
+    "answer": "Confidentiality, integrity, authentication and authorisation, and non-repudiation.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["security", "non-functional"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_018", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is the Bell–LaPadula model used for?", 
+
+    "answer": "It enforces information flow security using 'no read up' and 'no write down' rules based on security clearance levels.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["security", "models"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_019", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What are the five key checks during requirements validation?", 
+
+    "answer": "Validity, consistency, completeness, realism, and verifiability.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["validation", "checking"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_020", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What are scenarios used for in requirements validation?", 
+
+    "answer": "They act as testable examples showing how the system should behave in specific situations, reducing ambiguity and aiding testing.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["validation", "scenarios"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_021", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is requirements management?", 
+
+    "answer": "The process of managing requirement changes over time, ensuring traceability and consistency throughout development.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["management", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_022", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "Why is security logging and alerting important?", 
+
+    "answer": "Logs track access and detect unusual behaviour, supporting audits, alerts, and prevention of unauthorised activities.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["security", "monitoring"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_023", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "What is an availability requirement and how is it measured?", 
+
+    "answer": "It defines system uptime targets, often expressed in 'nines' (e.g., 99.999%), corresponding to allowable annual downtime.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["availability", "non-functional"] 
+
+  }, 
+
+  { 
+
+    "id": "T3_024", 
+
+    "topic": "Requirements Engineering", 
+
+    "prompt": "How can agile tools like Cucumber assist in requirements validation?", 
+
+    "answer": "They link human-readable specifications written in Gherkin to automated test cases, ensuring that requirements are testable and verifiable.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["agile", "validation", "tools"] 
+
+  },
+
+  { 
+
+    "id": "T4_001", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What is a use case in software engineering?", 
+
+    "answer": "A use case describes an interaction between an external actor and the system to achieve a specific goal, showing system behaviour from the user’s perspective.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["usecase", "uml", "interaction"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_002", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What is the purpose of a use case diagram?", 
+
+    "answer": "It visually represents the actors interacting with the system and the use cases they participate in, defining the system’s external behaviour and boundaries.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "diagram", "visualisation"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_003", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "Differentiate between functional and non-functional requirements using a use case example.", 
+
+    "answer": "Functional: what the system does (e.g., allow a user to log in). Non-functional: constraints on how it operates (e.g., passwords must be 8 characters long).", 
+
+    "difficulty": "medium", 
+
+    "tags": ["requirements", "comparison"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_004", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "In UML, what is an actor?", 
+
+    "answer": "An actor is any external entity (human or non-human) that interacts with the system, such as a user, hardware device, or external service.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "actors", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_005", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What does the <<include>> relationship in a use case diagram represent?", 
+
+    "answer": "It indicates that a base use case always incorporates another use case’s behaviour as part of its own flow.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "include", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_006", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What does the <<extend>> relationship represent in a use case diagram?", 
+
+    "answer": "It shows optional or conditional behaviour that extends a base use case under certain circumstances.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "extend", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_007", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "Why should include and extend relations be used with care?", 
+
+    "answer": "Overusing them can reduce the clarity and simplicity of diagrams, making them harder for customers to understand.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "bestpractice"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_008", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What elements should a full use case description contain?", 
+
+    "answer": "ID, name, description, preconditions, event flow, post-conditions, includes, extensions, and triggers.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["template", "structure"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_009", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What is the purpose of alternate or extension cases in a use case?", 
+
+    "answer": "They describe exceptional or alternative flows of events when something deviates from the main scenario.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["exception", "flow", "extensions"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_010", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "Give an example of actors and use cases in an ATM system.", 
+
+    "answer": "Actors: Customer, Bank Staff, Service Engineer. Use cases: Withdraw cash, Check balance, Add cash to machine, Check security video.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["example", "atm", "actors"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_011", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "In a use case description, what does a 'trigger' indicate?", 
+
+    "answer": "It specifies the event or action that initiates the use case, such as a button click or request from an actor.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["trigger", "event"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_012", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "Why are use cases considered system-external behaviour?", 
+
+    "answer": "They describe interactions between the system and external actors, not the system’s internal logic or processes.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "scope", "external"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_013", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What is a business rule in the hotel booking case study?", 
+
+    "answer": "Example: Guests can cancel bookings up to 3 days before stay; otherwise, a one-day charge applies.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["case study", "business rules"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_014", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "List three stakeholder roles in the hotel booking system.", 
+
+    "answer": "Guest, Receptionist, Hotel Manager — plus others such as Cleaner, Accountant, Tax Inspector.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["stakeholders", "case study"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_015", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What non-human actors exist in the hotel booking case study?", 
+
+    "answer": "External systems such as PayPal, Google Pay, and Expedia that interact with the booking system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["nonhuman", "integration"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_016", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "Give an example of a non-functional requirement from the hotel system.", 
+
+    "answer": "The system must respond to all report requests within 500 ms and support at least 5 million transactions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["non-functional", "performance"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_017", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What does NFR5 specify in the hotel booking case?", 
+
+    "answer": "Passwords must be at least 8 characters, containing upper- and lower-case letters and a digit; usernames must be 10 characters.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["non-functional", "security", "example"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_018", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What is the importance of defining system boundaries?", 
+
+    "answer": "It clarifies which functionality belongs to the system and which lies in external systems, preventing scope creep.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["boundaries", "system scope"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_019", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "What is the purpose of decomposing functionality into use cases?", 
+
+    "answer": "It helps identify the system’s external interfaces, define specific interactions, and clarify system behaviour from each actor’s viewpoint.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["analysis", "decomposition"] 
+
+  }, 
+
+  { 
+
+    "id": "T4_020", 
+
+    "topic": "Use Cases and Case Studies", 
+
+    "prompt": "Summarise the key lesson from the hotel booking case study.", 
+
+    "answer": "Always define boundaries, stakeholders, functional and non-functional requirements, and use cases to specify clear external behaviour before design.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["case study", "summary"] 
+
+  },
+
+  { 
+
+    "id": "T5_001", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is a system model?", 
+
+    "answer": "A system model is an abstract graphical representation of a system’s structure, behaviour, or data that helps analysts understand and communicate system functionality.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "modelling", "abstraction"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_002", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "Why is system modelling important in the requirements process?", 
+
+    "answer": "It helps analysts visualise, analyse, and communicate system requirements, reducing ambiguity between customers and developers.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["requirements", "communication"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_003", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What are the three main perspectives used in system modelling?", 
+
+    "answer": "External perspective (context), behavioural perspective, and structural perspective.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["perspectives", "views"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_004", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is a context model?", 
+
+    "answer": "It defines the boundaries of a system and shows how it interacts with external systems and the environment.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["context", "boundary"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_005", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What does a data flow diagram (DFD) represent?", 
+
+    "answer": "It shows how data moves through a system, illustrating processes, data stores, and data flows between them.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["data flow", "diagrams"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_006", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is the difference between process models and data flow models?", 
+
+    "answer": "Process models show the order of activities; data flow models emphasise the movement and transformation of data within those activities.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["models", "process", "dataflow"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_007", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is a behavioural model?", 
+
+    "answer": "It describes how the system responds to internal or external events and how data is processed as it flows through the system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["behavioural", "events"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_008", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is the purpose of a statechart diagram?", 
+
+    "answer": "It models how a system changes state in response to events, showing states as nodes and transitions as arcs.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "statechart"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_009", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What do initial and final states represent in UML state diagrams?", 
+
+    "answer": "The initial state marks where the process starts, and the final state marks the completion or termination of the process.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "states"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_010", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is the purpose of guards in UML statecharts?", 
+
+    "answer": "Guards are conditions that must be true for a transition to occur between states.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "guards", "logic"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_011", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is a composite state in a statechart?", 
+
+    "answer": "A composite state contains sub-states or subdiagrams, used to model more complex subsystems or behaviours within a single state.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "states", "hierarchy"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_012", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "Define a finite state machine (FSM).", 
+
+    "answer": "An FSM is a model of computation consisting of states, inputs, and transitions that describe how a system changes state in response to inputs.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["fsm", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_013", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is the difference between Mealy and Moore machines?", 
+
+    "answer": "In a Mealy machine, outputs depend on the current state and input; in a Moore machine, outputs depend only on the current state.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["fsm", "mealy", "moore"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_014", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "Why are Petri nets used in system modelling?", 
+
+    "answer": "They model distributed systems with concurrent events and resource sharing, supporting rigorous analysis of system properties.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["petri nets", "modelling"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_015", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is an entity-relationship-attribute (ERA) model?", 
+
+    "answer": "It shows the entities in a system, their attributes, and relationships, commonly used for database and data structure design.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["data", "model", "era"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_016", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is the purpose of a data dictionary?", 
+
+    "answer": "It lists all names, entities, and relationships in system models, ensuring consistent naming and providing organisational information.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["data dictionary", "consistency"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_017", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is an object model?", 
+
+    "answer": "An object model describes the system in terms of object classes, their attributes, and operations, often using inheritance and aggregation relationships.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["object", "uml", "class"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_018", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is the Unified Modelling Language (UML)?", 
+
+    "answer": "UML is a standard visual modelling language for representing object-oriented systems using diagrams such as use-case, class, and sequence diagrams.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "definition", "standard"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_019", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "List three common UML diagrams used in software engineering.", 
+
+    "answer": "Use-case diagrams, class diagrams, and sequence diagrams.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "diagrams"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_020", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What does a UML class diagram show?", 
+
+    "answer": "It shows classes with their attributes and operations, and relationships such as associations and inheritance between them.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "class diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_021", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is inheritance in UML?", 
+
+    "answer": "It represents generalisation, where a subclass inherits attributes and operations from a parent class, promoting reuse and hierarchy.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "inheritance"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_022", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "What is a sequence diagram used for?", 
+
+    "answer": "It shows how objects interact over time, depicting the sequence of messages exchanged between them.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "sequence diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T5_023", 
+
+    "topic": "System Modelling and UML", 
+
+    "prompt": "How do system models support both analysis and design?", 
+
+    "answer": "They provide a bridge from abstract requirements to detailed system design by visualising structure, behaviour, and data flow.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["modelling", "bridge"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_001", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is a Petri net?", 
+
+    "answer": "A Petri net is a mathematical and graphical modelling tool consisting of places, transitions, and directed arcs used to model concurrent systems.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "modelling", "distributed"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_002", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "Who invented the Petri net and when?", 
+
+    "answer": "Carl Adam Petri invented Petri nets in 1962 as part of his doctoral dissertation.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["history", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_003", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What are the main components of a Petri net?", 
+
+    "answer": "Places (represent conditions or states), transitions (represent events or actions), and tokens (represent resources or information).", 
+
+    "difficulty": "easy", 
+
+    "tags": ["components", "basics"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_004", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What do directed arcs in a Petri net represent?", 
+
+    "answer": "They connect places and transitions, showing the flow of control or resources between them.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["connections", "flow"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_005", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is a marking in a Petri net?", 
+
+    "answer": "A marking defines the current state of the system, represented by the distribution of tokens across places.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["marking", "state"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_006", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "When is a transition enabled in a Petri net?", 
+
+    "answer": "A transition is enabled if all its input places contain at least one token.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["enabling", "rules"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_007", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What happens when a transition fires in a Petri net?", 
+
+    "answer": "It consumes tokens from input places and produces tokens in output places, changing the marking of the system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["firing", "behaviour"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_008", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "Why are Petri nets considered non-deterministic?", 
+
+    "answer": "Multiple enabled transitions may fire in any order, leading to different possible future states of the system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["nondeterminism", "concurrency"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_009", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What does a transition without input places represent?", 
+
+    "answer": "It can fire at any time, creating tokens in its output places (a source of tokens).", 
+
+    "difficulty": "medium", 
+
+    "tags": ["structure", "creation"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_010", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What does a transition without output places represent?", 
+
+    "answer": "It consumes tokens from input places and removes them permanently (a sink of tokens).", 
+
+    "difficulty": "medium", 
+
+    "tags": ["structure", "consumption"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_011", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is meant by conflict in a Petri net?", 
+
+    "answer": "A situation where two or more transitions compete for the same token, making the next state uncertain.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["conflict", "nondeterminism"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_012", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What can tokens represent in a Petri net model?", 
+
+    "answer": "Tokens can represent resources, information, people, or states depending on the system being modelled.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["tokens", "representation"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_013", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What are 'reachable states' in a Petri net?", 
+
+    "answer": "All possible markings that can be achieved from the current marking by firing enabled transitions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["states", "reachability"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_014", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is a deadlock state in a Petri net?", 
+
+    "answer": "A state in which no transitions are enabled, meaning the system cannot proceed further.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["deadlock", "state"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_015", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "Give an example of a system that can be modelled with Petri nets.", 
+
+    "answer": "Examples include traffic light systems, manufacturing processes, or message-passing in distributed systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["examples", "applications"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_016", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What are high-level Petri nets?", 
+
+    "answer": "They extend classical Petri nets with features such as colour, time, and hierarchy for more detailed modelling.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["high-level", "extensions"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_017", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is the purpose of colour in high-level Petri nets?", 
+
+    "answer": "Colour allows tokens to have attributes or values, enabling the modelling of more complex object interactions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["colour", "attributes"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_018", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is the purpose of time in high-level Petri nets?", 
+
+    "answer": "Time defines the duration of transitions, enabling performance analysis and modelling of delays or timed events.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["time", "performance"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_019", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What does hierarchy represent in high-level Petri nets?", 
+
+    "answer": "Hierarchy allows large systems to be decomposed into subnets, simplifying complex models and showing multiple abstraction levels.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["hierarchy", "abstraction"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_020", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "Why are Petri nets useful for critical systems?", 
+
+    "answer": "They formally define system behaviour, allowing analysis of deadlocks, reachability, and correctness in concurrent systems.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["analysis", "critical systems"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_021", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is a subnet in a hierarchical Petri net?", 
+
+    "answer": "A subnet is a smaller Petri net embedded within another, representing part of the system at a finer level of detail.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["hierarchy", "structure"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_022", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "How can Petri nets help identify ambiguity in specifications?", 
+
+    "answer": "By converting informal specifications into formal Petri net models, inconsistencies and unclear behaviours become explicit.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["formalisation", "clarity"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_023", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is meant by 'firing is atomic' in Petri nets?", 
+
+    "answer": "Each firing of a transition happens as a single, indivisible action, preventing simultaneous partial transitions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["firing", "atomic"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_024", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "Give one advantage of hierarchical modelling using Petri nets.", 
+
+    "answer": "It reduces complexity by structuring large models into manageable subcomponents, improving clarity and scalability.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["hierarchy", "advantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_025", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What does 'colour' represent in the context of tokens?", 
+
+    "answer": "It denotes specific properties or identifiers, such as the name or type of an entity represented by a token.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["colour", "token attributes"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_026", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "How can Petri nets model non-determinism?", 
+
+    "answer": "When multiple transitions are enabled simultaneously, the order of firing is unpredictable, reflecting real-world concurrency.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["nondeterminism", "modelling"] 
+
+  }, 
+
+  { 
+
+    "id": "T6_027", 
+
+    "topic": "Petri Nets", 
+
+    "prompt": "What is the main purpose of using Petri nets in software engineering?", 
+
+    "answer": "To rigorously specify and analyse concurrent, distributed, or event-driven systems with precise mathematical semantics.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["purpose", "software engineering"] 
+
+  },
+  
+  { 
+
+    "id": "T7_001", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is the goal of software design?", 
+
+    "answer": "The goal of software design is to derive a solution that satisfies the system’s requirements by defining structure, components, and their interactions.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["design", "definition", "requirements"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_002", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "Why is software design needed before implementation?", 
+
+    "answer": "It helps manage complexity by decomposing the system into understandable parts, ensuring maintainability, reusability, and clarity before coding begins.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["importance", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_003", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "List the main stages of software design.", 
+
+    "answer": "Problem understanding, identifying possible solutions, evaluating and selecting a solution, describing abstractions, and refining until primitive components are defined.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["stages", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_004", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What are the six key phases in the design process?", 
+
+    "answer": "Architectural design, abstract specification, interface design, component design, data structure design, and algorithm design.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["phases", "design"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_005", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "Define modularity in software design.", 
+
+    "answer": "Modularity refers to dividing a system into independent, self-contained modules that can be developed and understood separately.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "modularity"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_006", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What are the five criteria for evaluating modular design methods?", 
+
+    "answer": "Modular decomposability, modular composability, modular understandability, modular continuity, and modular protection.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["criteria", "evaluation"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_007", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "Explain modular decomposability.", 
+
+    "answer": "It measures how effectively a design method supports dividing a problem into smaller sub-problems that can be solved independently.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["modularity", "decomposition"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_008", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is modular composability?", 
+
+    "answer": "It describes how easily modules can be combined or reused to create new systems without extensive modification.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["modularity", "reuse"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_009", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is modular understandability?", 
+
+    "answer": "It means each module is simple, well-named, and documented, making the system easy to read and maintain.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["readability", "documentation"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_010", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is modular continuity?", 
+
+    "answer": "A design has modular continuity when small changes in requirements only affect a small number of modules.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["continuity", "change management"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_011", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "Define modular protection.", 
+
+    "answer": "It ensures that abnormal conditions or errors in one module have minimal impact on other modules.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["fault tolerance", "robustness"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_012", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What lesson was learned from the Ariane 5 software failure?", 
+
+    "answer": "Reusing components without verifying that original assumptions still hold can cause catastrophic failures, such as the unhandled numeric overflow that destroyed Ariane 5.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["case study", "reuse"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_013", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is a repository model?", 
+
+    "answer": "A system architecture where all subsystems share data through a central database, managed by a repository manager.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["architecture", "data sharing"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_014", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "List two advantages of the repository model.", 
+
+    "answer": "Efficient data sharing and centralized control over backup, security, and recovery operations.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["repository", "advantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_015", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "List two disadvantages of the repository model.", 
+
+    "answer": "Subsystems must agree on a single data model, and evolution is difficult due to tightly coupled data dependencies.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["repository", "disadvantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_016", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What five principles support good modular design?", 
+
+    "answer": "Linguistic modular units, few interfaces, small interfaces, explicit interfaces, and information hiding.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["principles", "modularity"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_017", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is information hiding?", 
+
+    "answer": "Keeping a module’s internal workings private and exposing only necessary details through a defined interface.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["encapsulation", "interfaces"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_018", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is the principle of few interfaces?", 
+
+    "answer": "Modules should communicate with as few others as possible to reduce dependencies and complexity.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["interfaces", "dependencies"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_019", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "Explain small interfaces (loose coupling).", 
+
+    "answer": "When modules communicate, they should exchange only essential information to avoid tight interconnections.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["coupling", "interfaces"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_020", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is cohesion in software design?", 
+
+    "answer": "Cohesion measures how well the parts of a module work together to perform a single, focused purpose.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["cohesion", "quality"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_021", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "List the levels of cohesion from weakest to strongest.", 
+
+    "answer": "Coincidental, logical, temporal, communicational, sequential, functional, and object cohesion.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["cohesion", "classification"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_022", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "How does high cohesion improve maintainability?", 
+
+    "answer": "Changes are localised within individual modules, reducing side effects and making testing and debugging easier.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["maintainability", "cohesion"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_023", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "Differentiate between cohesion and encapsulation.", 
+
+    "answer": "Cohesion ensures a module performs a single task well; encapsulation hides a module’s internal details from other components.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["comparison", "encapsulation"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_024", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "What is stepwise refinement?", 
+
+    "answer": "A design technique where high-level problems are broken into smaller sub-problems repeatedly until simple implementable components remain.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["refinement", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T7_025", 
+
+    "topic": "Design Methodology & Modular Design", 
+
+    "prompt": "How do good modular designs improve software reusability?", 
+
+    "answer": "They feature high cohesion, low coupling, and well-defined interfaces, making modules easier to integrate into new systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["reusability", "design quality"] 
+
+  },
+
+  { 
+
+    "id": "T8_001", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is software architecture?", 
+
+    "answer": "Software architecture defines the overall structure of a system, identifying its sub-systems and the framework for their control and communication.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["architecture", "definition", "structure"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_002", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is the purpose of architectural design?", 
+
+    "answer": "It bridges the gap between specification and detailed design by defining high-level structure and relationships between major components.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["purpose", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_003", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "List the three main activities of architectural design.", 
+
+    "answer": "System structuring, control modelling, and modular decomposition.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["activities", "architecture"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_004", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "Differentiate between a sub-system and a module.", 
+
+    "answer": "A sub-system operates independently as a system in its own right, whereas a module is a smaller component providing services to other parts of the system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["subsystem", "module", "comparison"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_005", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is the repository model?", 
+
+    "answer": "A model where all sub-systems share data through a central database or repository managed by a common interface.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["repository", "model", "data sharing"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_006", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is a client-server architecture?", 
+
+    "answer": "It’s a distributed system where servers provide services and clients request them over a network, separating data, application, and presentation layers.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["client-server", "architecture"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_007", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "List one advantage and one disadvantage of client-server architecture.", 
+
+    "answer": "Advantage: easy to add or upgrade servers. Disadvantage: lack of a shared data model may lead to inefficient data interchange.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["client-server", "advantages", "disadvantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_008", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What are control models in architecture?", 
+
+    "answer": "They describe how control flows between sub-systems, typically using centralised or event-based control.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["control", "architecture"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_009", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "Describe the call-return model of control.", 
+
+    "answer": "It is a top-down hierarchical model where control flows sequentially through subroutines, typical of sequential programs like C or Java.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["control", "call-return"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_010", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is the manager model in centralised control?", 
+
+    "answer": "A concurrent control model where one component manages the start, stop, and coordination of other processes.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["manager", "control"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_011", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is event-driven control?", 
+
+    "answer": "Control is triggered by external or internal events, such as user input or sensor data, rather than a fixed sequence of commands.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["event-driven", "control"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_012", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "Explain the difference between broadcast and interrupt-driven models.", 
+
+    "answer": "Broadcast models send events to all sub-systems; interrupt-driven models respond immediately to specific hardware or system events.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["events", "models"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_013", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is modular decomposition?", 
+
+    "answer": "It breaks sub-systems into modules that can be designed, implemented, and tested independently.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["modular", "decomposition"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_014", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "Name two modular decomposition models.", 
+
+    "answer": "The object model and the data-flow (pipe and filter) model.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["models", "modular decomposition"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_015", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is a distributed system?", 
+
+    "answer": "A distributed system executes across multiple networked computers that cooperate to provide services and share resources.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["distributed", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_016", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "List three key characteristics of distributed systems.", 
+
+    "answer": "Resource sharing, concurrency, and fault tolerance.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["distributed", "characteristics"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_017", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "Name one advantage and one disadvantage of distributed systems.", 
+
+    "answer": "Advantage: scalability and openness. Disadvantage: complexity and potential security issues.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["distributed", "proscons"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_018", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is middleware in distributed systems?", 
+
+    "answer": "Middleware is software that manages communication and coordination between components in a distributed system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["middleware", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_019", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "Differentiate between thin-client and fat-client architectures.", 
+
+    "answer": "Thin clients handle only presentation logic; fat clients handle both application and presentation logic locally.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["client-server", "architecture"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_020", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is a three-tier architecture?", 
+
+    "answer": "A model where presentation, application, and data management layers are separated, often running on different processors for scalability.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["three-tier", "architecture"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_021", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What are distributed object architectures?", 
+
+    "answer": "Architectures where each entity is an object that can both provide and request services from other objects over a network.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["distributed", "objects"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_022", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is the role of an Object Request Broker (ORB)?", 
+
+    "answer": "It is middleware that manages communication between objects in a distributed object system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["ORB", "middleware"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_023", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "List one advantage of distributed object architectures.", 
+
+    "answer": "They allow flexible and dynamic allocation of services and make the system more scalable and open.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["distributed", "advantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_024", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "List one disadvantage of distributed object architectures.", 
+
+    "answer": "They are complex to design and manage compared to simpler client-server systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["distributed", "disadvantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T8_025", 
+
+    "topic": "Architectural Design & Distributed Systems", 
+
+    "prompt": "What is the key difference between client-server and distributed object systems?", 
+
+    "answer": "Client-server separates clients and servers, while distributed object architectures remove this distinction, allowing any object to act as both.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["comparison", "distributed"] 
+
+  },
+
+  { 
+
+    "id": "T9_001", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is object-oriented design?", 
+
+    "answer": "It is a design approach that organises software as a collection of interacting objects that encapsulate both data and behaviour.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["definition", "oop", "design"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_002", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "Define an object in object-oriented programming.", 
+
+    "answer": "An object is an entity with state, behaviour, and identity that can receive and respond to messages.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["object", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_003", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What are the three characteristics of an object?", 
+
+    "answer": "State, behaviour, and identity.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["object", "characteristics"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_004", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is meant by an object's state?", 
+
+    "answer": "The state of an object is the data it encapsulates — its current attribute values that may change over time.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["state", "object"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_005", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is meant by an object's behaviour?", 
+
+    "answer": "Behaviour refers to the actions an object performs or how it responds to messages, often changing its state as a result.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["behaviour", "object"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_006", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is object identity?", 
+
+    "answer": "Each object has a unique identity that distinguishes it from all other objects, even if their state and behaviour are identical.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["identity", "object"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_007", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is encapsulation?", 
+
+    "answer": "Encapsulation hides an object’s internal data and implementation details, exposing only its public interface.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["encapsulation", "information hiding"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_008", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "Why should objects not expose public data members?", 
+
+    "answer": "Because direct access breaks encapsulation and can cause dependencies that make code harder to maintain.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["encapsulation", "design principle"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_009", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is a class?", 
+
+    "answer": "A class defines a blueprint for objects with shared attributes and behaviours, describing how instances are structured and act.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["class", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_010", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is the relationship between classes and objects?", 
+
+    "answer": "Objects are instances of classes; each object follows the structure and behaviour defined by its class.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["class", "object", "relationship"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_011", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is the purpose of an object interface?", 
+
+    "answer": "It defines which messages or operations an object can accept, providing a contract between the object and the outside world.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["interface", "object"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_012", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is inheritance in object-oriented design?", 
+
+    "answer": "Inheritance allows one class to derive attributes and methods from another, enabling code reuse and hierarchy creation.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["inheritance", "oop"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_013", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "Differentiate between superclass and subclass.", 
+
+    "answer": "A subclass extends a superclass by inheriting its attributes and methods and adding specialised features.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["inheritance", "hierarchy"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_014", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is polymorphism?", 
+
+    "answer": "Polymorphism allows objects of different classes related by inheritance to be treated as instances of a common superclass.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["polymorphism", "oop"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_015", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is dynamic binding?", 
+
+    "answer": "Dynamic binding is the process of determining at runtime which method implementation to invoke for an object.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["binding", "runtime"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_016", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is the benefit of dynamic binding?", 
+
+    "answer": "It enables flexible and extensible code by allowing method behaviour to vary depending on the actual object type at runtime.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["binding", "flexibility"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_017", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "Why should inheritance be used carefully?", 
+
+    "answer": "Overuse can create tightly coupled hierarchies; composition is often preferred for flexibility and reduced dependency.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["inheritance", "composition", "design principle"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_018", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is composition in object-oriented design?", 
+
+    "answer": "Composition builds complex objects by combining simpler ones, promoting flexibility over rigid inheritance structures.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["composition", "design"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_019", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "How are objects related to software components?", 
+
+    "answer": "Objects are potential building blocks for reusable software components, but reusability depends on context and design quality.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["components", "reusability"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_020", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "Who developed UML and what is its purpose?", 
+
+    "answer": "UML was developed by Booch, Rumbaugh, and Jacobsen to provide a unified notation for specifying, visualising, and documenting object-oriented systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "history", "purpose"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_021", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What are some influences on UML development?", 
+
+    "answer": "Meyer (pre/post conditions), Harel (statecharts), Wirfs-Brock (responsibilities), and Gamma (design patterns).", 
+
+    "difficulty": "hard", 
+
+    "tags": ["uml", "influences"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_022", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is generalisation in UML?", 
+
+    "answer": "Generalisation represents inheritance in UML diagrams, drawn with an open triangular arrow pointing from subclass to superclass.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "notation", "inheritance"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_023", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "What is the purpose of CASE tools?", 
+
+    "answer": "CASE (Computer-Aided Software Engineering) tools support the creation, analysis, and management of software models using automated diagramming and validation features.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["CASE", "tools"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_024", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "List three common components of a CASE tool.", 
+
+    "answer": "Diagram editors, model checkers, and code generation tools.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["CASE", "components"] 
+
+  }, 
+
+  { 
+
+    "id": "T9_025", 
+
+    "topic": "Object-Oriented Design Concepts", 
+
+    "prompt": "Summarise why object-oriented design simplifies system evolution.", 
+
+    "answer": "Because objects encapsulate data and behaviour, changes are localised, making systems easier to modify and extend.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["evolution", "maintainability"] 
+
+  },
+
+  { 
+
+    "id": "T10_001", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the purpose of object-oriented analysis (OOA)?", 
+
+    "answer": "OOA identifies the objects, classes, and relationships needed to model a system, bridging requirements and design.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["OOA", "definition", "analysis"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_002", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is noun analysis?", 
+
+    "answer": "Noun analysis involves scanning the system description for nouns and noun phrases to identify candidate classes and attributes.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["analysis", "classes", "techniques"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_003", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "Why doesn’t every noun become a class?", 
+
+    "answer": "Some nouns represent attributes, relationships, or concepts outside the system’s scope, so they are excluded or merged.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["OOA", "filtering", "classes"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_004", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "In the hotel booking system, what information must the database capture?", 
+
+    "answer": "Room details, guest details, booking and payment data, check-in/check-out status, and total bill calculation.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["case study", "data", "hotel booking"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_005", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "List three main use cases from the hotel booking system.", 
+
+    "answer": "Create a booking, cancel a booking, and check a guest in or out.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["usecase", "hotel system"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_006", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "Give two examples of additional classes inferred during design in the hotel system.", 
+
+    "answer": "RoomDescription and RoomBooking classes were added to model shared descriptions and bookings of multiple rooms.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["class design", "inferred classes"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_007", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the relationship between Room and RoomDescription classes?", 
+
+    "answer": "A one-to-many relationship — several Room objects can share the same RoomDescription instance.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["relationship", "uml", "one-to-many"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_008", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the purpose of the RoomBooking class?", 
+
+    "answer": "It models the association between bookings and specific rooms, allowing multiple rooms per booking.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["relationship", "OOA"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_009", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "Why is an Address class often modelled separately?", 
+
+    "answer": "Because many entities (like guests or staff) share addresses, making it reusable and reducing duplication.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["normalisation", "reuse", "design"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_010", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the relationship between Guest and Booking?", 
+
+    "answer": "One-to-many — a guest can have multiple bookings, but each booking belongs to one guest.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["relationship", "uml"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_011", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the purpose of the Invoice class?", 
+
+    "answer": "It stores billing information for a booking, linking payment and booking data together.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["billing", "uml"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_012", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the purpose of the Payment class?", 
+
+    "answer": "It records how invoices are settled, supporting multiple methods such as cash, card, or PayPal.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["payment", "uml"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_013", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the relationship between User and Login classes?", 
+
+    "answer": "A one-to-one relationship — each user account corresponds to a single login record.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "authentication"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_014", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "Why should methods only include essential behaviour in UML diagrams?", 
+
+    "answer": "To avoid clutter — only operations defining key object behaviour, not simple getters and setters, should be shown.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "methods"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_015", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "List three example methods in the Room class.", 
+
+    "answer": "available(startDate, endDate), findRooms(startDate, endDate, hotel), and findRoomsByDescription().", 
+
+    "difficulty": "medium", 
+
+    "tags": ["methods", "room", "uml"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_016", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What is the importance of unique IDs in class design?", 
+
+    "answer": "They provide persistent object identity and support linking between relational database tables.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["design", "database"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_017", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "Why should the design not dictate implementation?", 
+
+    "answer": "The design should support various implementation options rather than constrain developers to a specific one.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["design", "flexibility"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_018", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What are the main stages of designing classes from a case study?", 
+
+    "answer": "Identify classes and attributes, define relationships, specify methods, and refine with inheritance and composition.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["design process", "OOA"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_019", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "How can UML sequence diagrams help in analysis?", 
+
+    "answer": "They show object interactions over time, clarifying how classes collaborate to implement use cases.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "sequence diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_020", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "In the health clinic case study, who are the main actors?", 
+
+    "answer": "Doctors, nurses, receptionists, and patients.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["actors", "clinic"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_021", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "List two key use cases from the clinic system.", 
+
+    "answer": "Book appointment and request repeat prescription.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["usecase", "clinic"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_022", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What classes were identified in the clinic case study?", 
+
+    "answer": "Doctor, Nurse, Receptionist, Patient, Appointment, and Prescription.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["classes", "clinic"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_023", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What relationship exists between Doctor and Nurse classes?", 
+
+    "answer": "They share similar associations and can be generalised into a common superclass such as HealthCareStaff.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["inheritance", "uml"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_024", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What UML diagram shows how objects interact during a scenario?", 
+
+    "answer": "A sequence diagram.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "interaction"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_025", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "What UML diagram shows how an object’s internal data changes in response to events?", 
+
+    "answer": "A state diagram.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "state diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T10_026", 
+
+    "topic": "Object-Oriented Case Studies & Analysis", 
+
+    "prompt": "Why is iteration important in OO system development?", 
+
+    "answer": "It allows developers to refine class structures, relationships, and behaviour progressively based on stakeholder feedback.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["iteration", "OOA"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_001", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is a class diagram in UML?", 
+
+    "answer": "A class diagram represents the static structure of a system by showing its classes, attributes, operations, and the relationships between them.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "class diagram", "structure"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_002", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What are the three compartments of a UML class box?", 
+
+    "answer": "The top for the class name, the middle for attributes, and the bottom for operations.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "notation"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_003", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is an association in UML?", 
+
+    "answer": "An association represents a relationship between two classes, showing how objects of one class are connected to objects of another.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "association", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_004", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is multiplicity in UML?", 
+
+    "answer": "Multiplicity defines how many instances of one class can be associated with a single instance of another class.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "multiplicity"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_005", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "Give two examples of multiplicity notation in UML.", 
+
+    "answer": "1..* means one or many; 0..1 means optional (zero or one).", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "notation", "multiplicity"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_006", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is aggregation in UML?", 
+
+    "answer": "Aggregation is a 'whole–part' relationship where one class contains another, but both can exist independently.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "aggregation", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_007", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is composition in UML?", 
+
+    "answer": "Composition is a strong form of aggregation where the contained object cannot exist without the container.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "composition", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_008", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is the difference between aggregation and composition?", 
+
+    "answer": "In aggregation, parts can exist independently; in composition, parts are destroyed when the whole is destroyed.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "aggregation", "composition"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_009", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What does inheritance represent in UML?", 
+
+    "answer": "Inheritance (generalisation) shows that a subclass inherits the attributes and operations of its superclass.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "inheritance", "generalisation"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_010", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "How is inheritance shown in a UML class diagram?", 
+
+    "answer": "With a solid line and an open triangular arrowhead pointing from the subclass to the superclass.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "notation", "inheritance"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_011", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is the purpose of visibility indicators in UML?", 
+
+    "answer": "They define access control: '+' for public, '-' for private, and '#' for protected members.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "visibility"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_012", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What does it mean for a class to be abstract in UML?", 
+
+    "answer": "An abstract class cannot be instantiated and usually contains abstract operations to be implemented by subclasses.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "abstraction"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_013", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is a dependency in UML?", 
+
+    "answer": "A dependency is a weak relationship showing that one class relies on another, usually through parameters or temporary references.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "dependency"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_014", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is a stereotype in UML?", 
+
+    "answer": "A stereotype extends UML’s vocabulary, providing extra meaning to elements, e.g., <<interface>> or <<constructor>>.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "stereotype"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_015", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is a use of packages in UML class diagrams?", 
+
+    "answer": "Packages group related classes to improve organisation and modularity within large models.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "packages", "organisation"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_016", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "Why is UML considered a 'unified' modelling language?", 
+
+    "answer": "It integrates notations from multiple earlier methods, providing a standardised way to visualise object-oriented systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "definition", "unification"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_017", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "Name four common UML diagrams used in software engineering.", 
+
+    "answer": "Use-case diagrams, class diagrams, sequence diagrams, and state diagrams.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "diagrams"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_018", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is a sequence diagram used for in UML?", 
+
+    "answer": "To model the interaction between objects over time by showing message exchanges and their order.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "sequence diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_019", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is a state diagram used for in UML?", 
+
+    "answer": "To represent how an object changes state in response to events, showing transitions and actions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "state diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_020", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is the advantage of using UML in software design?", 
+
+    "answer": "UML provides a clear, standardised way to document system structure and behaviour, improving communication and reducing ambiguity.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "advantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_021", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is the purpose of multiplicity notation like '1..*'?", 
+
+    "answer": "It shows that one object of a class is associated with one or many instances of another class, clarifying data relationships.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "notation", "multiplicity"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_022", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What are association names and roles in UML?", 
+
+    "answer": "They describe the meaning of relationships and the role each class plays within that association.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "association", "roles"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_023", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "Why are multiplicities important in class modelling?", 
+
+    "answer": "They define quantitative constraints between classes, helping ensure accurate database and code structure alignment.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["uml", "constraints"] 
+
+  }, 
+
+  { 
+
+    "id": "T11_024", 
+
+    "topic": "Class Models & UML Essentials", 
+
+    "prompt": "What is the relationship between design models and code?", 
+
+    "answer": "UML class models serve as blueprints for implementation, guiding the creation of consistent class structures and relationships in code.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "design", "implementation"] 
+
+  },
+
+  {   "id": "T12_001", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is aggregation in UML?", 
+
+    "answer": "Aggregation represents a whole–part relationship where the part can exist independently of the whole. It is shown with an open diamond symbol.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "aggregation", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_002", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is composition in UML?", 
+
+    "answer": "Composition is a strong form of aggregation where parts cannot exist independently of the whole. It is shown with a filled diamond.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "composition", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_003", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "How does aggregation differ from composition?", 
+
+    "answer": "In aggregation, parts can exist independently; in composition, parts are destroyed when the whole is destroyed.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "comparison", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_004", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What are roles in UML associations?", 
+
+    "answer": "Roles label the ends of an association, describing the function or purpose each class plays in that relationship.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "roles", "association"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_005", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What does navigability indicate in UML?", 
+
+    "answer": "Navigability shows the direction in which one class can access or send messages to another, represented by an arrow on an association line.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "navigability", "association"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_006", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is a qualified association?", 
+
+    "answer": "A qualified association uses an attribute (like an ID or index) to select a specific related object from a set, improving clarity in large associations.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "association", "qualified"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_007", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is a derived association?", 
+
+    "answer": "A derived association is implied by other associations and shown with a leading slash (e.g. /teaches). It does not need direct implementation.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "derived", "association"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_008", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is an XOR constraint in UML?", 
+
+    "answer": "An XOR constraint specifies that an object can be related to one of several classes, but not more than one at the same time.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "constraints", "xor"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_009", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is an association class?", 
+
+    "answer": "An association class represents information about a relationship itself, combining an association and a class to store attributes like grades or roles.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "association class", "relationships"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_010", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is the purpose of interfaces in UML?", 
+
+    "answer": "Interfaces define a set of operations that other classes must implement, represented with the stereotype <<interface>>.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "interface"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_011", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is an abstract class in UML?", 
+
+    "answer": "An abstract class defines common behaviour for subclasses but cannot be instantiated itself. It is marked with italics or the keyword 'abstract'.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "abstract class"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_012", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is a collaboration in UML?", 
+
+    "answer": "A collaboration is a set of objects and their links that work together to perform a task or realise a use case.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "collaboration", "interaction"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_013", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is a sequence diagram used for?", 
+
+    "answer": "A sequence diagram shows how objects interact over time by exchanging messages, with time progressing vertically.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "sequence diagram", "interaction"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_014", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is the difference between collaboration and sequence diagrams?", 
+
+    "answer": "Collaboration diagrams focus on object relationships and structure; sequence diagrams emphasise the temporal order of messages.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "comparison", "interaction"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_015", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "How is a message to self represented in UML?", 
+
+    "answer": "A message to self is shown by a looped arrow from an object’s lifeline back to itself, representing an internal method call.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "messages", "self"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_016", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What are timing constraints in UML sequence diagrams?", 
+
+    "answer": "Timing constraints specify when messages must occur, useful for real-time systems where order and delay are critical.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "timing", "sequence diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_017", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is the purpose of activity diagrams?", 
+
+    "answer": "Activity diagrams model the flow of control or data between activities, showing decisions, concurrency, and synchronization.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "activity diagram", "flow"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_018", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "List key elements of an activity diagram.", 
+
+    "answer": "Activities, transitions, decision diamonds, synchronization bars, and start/stop markers.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["uml", "activity diagram", "elements"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_019", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is a synchronization bar in an activity diagram?", 
+
+    "answer": "A thick horizontal bar used to coordinate parallel activities that must all complete before continuing.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "synchronization", "activity diagram"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_020", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "How do activity diagrams differ from state diagrams?", 
+
+    "answer": "Activity diagrams model workflows and parallel actions, while state diagrams show object state transitions triggered by events.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "comparison", "diagrams"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_021", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What are the advantages of using activity diagrams?", 
+
+    "answer": "They clearly show dependencies, concurrency, and sequencing between actions, helping to plan process logic.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "advantages", "workflow"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_022", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What are sub-collaborations in UML?", 
+
+    "answer": "Sub-collaborations are subsets of objects and links within a larger collaboration, used to simplify and focus on key interactions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "collaboration", "abstraction"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_023", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "What is the significance of packages in UML?", 
+
+    "answer": "Packages group related elements such as classes or collaborations, improving modularity and model organisation.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "packages", "organisation"] 
+
+  }, 
+
+  { 
+
+    "id": "T12_024", 
+
+    "topic": "Advanced UML Modelling (Class, Interaction & Activity Diagrams)", 
+
+    "prompt": "Why are UML interaction diagrams important?", 
+
+    "answer": "They help visualise object communication and behaviour, aiding understanding of dynamic system interactions.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["uml", "interaction", "communication"] 
+
+  },
+
+  { 
+
+    "id": "T13_001", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is the difference between verification and validation?", 
+
+    "answer": "Verification asks 'Are we building the product right?' while validation asks 'Are we building the right product?'.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["vv", "definition", "comparison"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_002", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is the main goal of verification?", 
+
+    "answer": "To ensure the software conforms to its specification and meets documented functional and non-functional requirements.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["verification", "specification"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_003", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is the main goal of validation?", 
+
+    "answer": "To ensure the system satisfies the customer's real needs and expectations in its operational environment.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["validation", "requirements"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_004", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What are the two main forms of verification?", 
+
+    "answer": "Static verification (e.g. inspections, reviews) and dynamic verification (e.g. testing during execution).", 
+
+    "difficulty": "medium", 
+
+    "tags": ["vv", "static", "dynamic"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_005", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is the key difference between testing and debugging?", 
+
+    "answer": "Testing aims to reveal the presence of defects, while debugging locates and fixes those defects.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["testing", "debugging", "difference"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_006", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "Why can testing only show the presence, not the absence, of defects?", 
+
+    "answer": "Because even extensive testing cannot guarantee that all possible inputs and execution paths have been exercised.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["testing", "limitations"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_007", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is regression testing?", 
+
+    "answer": "Re-running previous tests after making changes to ensure that bug fixes or updates haven’t introduced new faults.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["regression", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_008", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What are syntax errors and how are they detected?", 
+
+    "answer": "Syntax errors violate language rules and are detected by the compiler, often with an error message and line number.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["syntax", "errors"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_009", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What are semantic errors?", 
+
+    "answer": "Semantic (logical) errors occur when a program compiles but produces incorrect results due to logic flaws.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["semantic", "errors"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_010", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is the purpose of inspections in software development?", 
+
+    "answer": "Inspections involve systematically examining code or documentation to find defects early without executing the system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["inspection", "verification"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_011", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "List two advantages of software inspections.", 
+
+    "answer": "They can detect many defects before testing and help ensure standards, maintainability, and clarity.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["inspection", "advantages"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_012", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "Why are inspections and testing complementary?", 
+
+    "answer": "Inspections find static defects and conformance issues, while testing evaluates dynamic behaviour and performance.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["inspection", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_013", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is black-box testing?", 
+
+    "answer": "Testing based only on system specifications, ignoring internal structure — focused on inputs, outputs, and observable behaviour.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["black-box", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_014", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is white-box testing?", 
+
+    "answer": "Testing based on internal program logic and structure, ensuring all paths or statements are executed.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["white-box", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_015", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is equivalence partitioning?", 
+
+    "answer": "A black-box testing technique where input data is divided into groups (partitions) expected to exhibit similar behaviour.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["equivalence", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_016", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "Why are boundary values important in testing?", 
+
+    "answer": "Errors often occur at boundaries, so testing at and around limits helps identify edge-case defects.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["boundary", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_017", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is path testing?", 
+
+    "answer": "A structural testing method ensuring that each possible path through the program is executed at least once.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["path", "white-box"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_018", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is cyclomatic complexity?", 
+
+    "answer": "A measure of the number of linearly independent paths through a program, calculated as edges − nodes + 2.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["complexity", "metric"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_019", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "Why can high cyclomatic complexity be problematic?", 
+
+    "answer": "It indicates complex logic that is harder to test, maintain, and debug.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["complexity", "maintenance"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_020", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is integration testing?", 
+
+    "answer": "Testing combined components or subsystems to identify interface defects and verify correct interactions.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["integration", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_021", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "Differentiate between top-down and bottom-up integration testing.", 
+
+    "answer": "Top-down starts with high-level modules and uses stubs; bottom-up starts with lower-level modules and uses drivers.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["integration", "approaches"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_022", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is regression testing and why is it important?", 
+
+    "answer": "It ensures that code changes do not introduce new errors in previously tested functionality.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["regression", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_023", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is interface testing?", 
+
+    "answer": "Testing that focuses on interactions between modules to detect errors in data passing, assumptions, or timing.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["interface", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_024", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "List four types of software interfaces.", 
+
+    "answer": "Parameter, shared memory, procedural, and message-passing interfaces.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["interfaces", "types"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_025", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is stress testing?", 
+
+    "answer": "Testing the system beyond its design limits to check for graceful degradation or failure recovery.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["stress", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_026", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is object-oriented testing?", 
+
+    "answer": "Testing focuses on classes, their operations, attributes, and interactions between objects in OO systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["object-oriented", "testing"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_027", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is cluster testing?", 
+
+    "answer": "Cluster testing verifies groups of related classes that work together, based on their interactions or shared functionality.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["cluster", "integration"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_028", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is scenario-based testing?", 
+
+    "answer": "It tests use-case scenarios from the user’s perspective to ensure end-to-end behaviour works correctly.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["scenario", "usecase"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_029", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What is the purpose of a software test plan?", 
+
+    "answer": "To define the testing process, items to be tested, responsibilities, schedule, and resources required.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["test plan", "management"] 
+
+  }, 
+
+  { 
+
+    "id": "T13_030", 
+
+    "topic": "Verification, Validation & Defect Testing", 
+
+    "prompt": "What does the V-model of development show?", 
+
+    "answer": "It links each development phase with a corresponding test phase, illustrating that verification and validation occur throughout.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["v-model", "testing"] 
+
+  },
+
+  { 
+
+    "id": "T14_001", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is software project management?", 
+
+    "answer": "Software project management involves planning, organising, and controlling the development of software to ensure it is delivered on time, within budget, and meets requirements.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["project management", "definition"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_002", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "Why is project management necessary in software engineering?", 
+
+    "answer": "Because software projects are constrained by time, cost, and quality goals, and software is intangible and complex, requiring structured oversight.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["importance", "management"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_003", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "List the key management activities in a software project.", 
+
+    "answer": "Proposal writing, planning and scheduling, costing, monitoring and reviews, personnel management, and reporting.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["activities", "management"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_004", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is the main purpose of project planning?", 
+
+    "answer": "To determine what needs to be done, when, and by whom, ensuring resources and tasks are aligned to meet project objectives.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["planning", "project"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_005", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "List three types of project plans besides the main schedule plan.", 
+
+    "answer": "Quality plan, validation plan, configuration management plan, maintenance plan, or staff development plan.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["planning", "types"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_006", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What are milestones and deliverables?", 
+
+    "answer": "Milestones are key progress points marking task completion; deliverables are tangible results produced for stakeholders.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["milestones", "deliverables"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_007", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is a Gantt chart?", 
+
+    "answer": "A graphical tool showing task durations and scheduling over calendar time, useful for tracking project progress.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["gantt", "scheduling"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_008", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is an activity network?", 
+
+    "answer": "A diagram showing task dependencies and the order of execution, used to identify the project’s critical path.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["network", "dependencies"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_009", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is the critical path in a project?", 
+
+    "answer": "It is the longest sequence of dependent tasks that determines the minimum project completion time.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["critical path", "scheduling"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_010", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is risk management?", 
+
+    "answer": "Risk management identifies, analyses, plans, and monitors potential events that could negatively affect the project.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["risk", "management"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_011", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "List three types of software project risks.", 
+
+    "answer": "Project risks (affect schedule/resources), product risks (affect quality), and business risks (affect the organisation).", 
+
+    "difficulty": "medium", 
+
+    "tags": ["risk", "types"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_012", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What are the four stages of the risk management process?", 
+
+    "answer": "Risk identification, risk analysis, risk planning, and risk monitoring.", 
+
+    "difficulty": "easy", 
+
+    "tags": ["risk", "process"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_013", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What are avoidance, minimisation, and contingency strategies in risk planning?", 
+
+    "answer": "Avoidance reduces the probability of the risk, minimisation reduces its impact, and contingency defines actions if it occurs.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["risk", "strategies"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_014", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What does 'slack' represent in a PERT chart?", 
+
+    "answer": "Slack is the amount of time a task can be delayed without affecting the overall project deadline.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["PERT", "slack"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_015", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "Why is estimating software cost difficult?", 
+
+    "answer": "Because early estimates are based on incomplete information, and factors like new technologies and unfamiliar teams add uncertainty.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["estimation", "challenges"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_016", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "List the main cost components in software projects.", 
+
+    "answer": "Hardware and software, travel and training, and effort costs including salaries, insurance, and overheads.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["costs", "components"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_017", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What are the key estimation techniques in software engineering?", 
+
+    "answer": "Algorithmic cost modelling, expert judgement, estimation by analogy, Parkinson’s Law, and pricing to win.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["estimation", "techniques"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_018", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is algorithmic cost modelling?", 
+
+    "answer": "A mathematical approach estimating effort as a function of size and other attributes, often using historical data (e.g. COCOMO).", 
+
+    "difficulty": "hard", 
+
+    "tags": ["estimation", "algorithmic"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_019", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "Write the basic COCOMO-style formula for effort estimation.", 
+
+    "answer": "Effort = A × Size^B × M, where A is a constant, B reflects project size growth, and M accounts for product, process, and people factors.", 
+
+    "difficulty": "hard", 
+
+    "tags": ["COCOMO", "formula"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_020", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is 'pricing to win' and when is it used?", 
+
+    "answer": "A strategy where cost is set based on customer budget rather than actual effort — used when detailed information is unavailable.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["pricing", "strategy"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_021", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What does Parkinson’s Law state in project estimation?", 
+
+    "answer": "Work expands to fill the time available, so cost tends to match allocated resources rather than actual requirements.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["estimation", "law"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_022", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What are function points?", 
+
+    "answer": "A size-based estimation measure derived from the number of user inputs, outputs, interfaces, and files used by a system.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["estimation", "function points"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_023", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What are object points?", 
+
+    "answer": "A function-related measure based on screens, reports, and program modules to be developed — common in GUI-based systems.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["estimation", "object points"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_024", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "List three factors affecting programmer productivity.", 
+
+    "answer": "Application type, experience and capability, and tool support or programming language used.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["productivity", "factors"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_025", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "What is the main trade-off between productivity and quality?", 
+
+    "answer": "Increasing productivity often reduces quality if less time is spent on verification and maintenance.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["productivity", "quality"] 
+
+  }, 
+
+  { 
+
+    "id": "T14_026", 
+
+    "topic": "Project Management, Risk & Estimation", 
+
+    "prompt": "Why should estimation be experience-based but multi-method?", 
+
+    "answer": "Because combining methods like expert judgement, analogy, and models improves accuracy and reduces bias.", 
+
+    "difficulty": "medium", 
+
+    "tags": ["estimation", "accuracy"] 
+
+  } 
+]
+
+  
