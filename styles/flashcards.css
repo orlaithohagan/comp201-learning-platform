@@ -1,0 +1,122 @@
+/* Layout padding */
+.block-container { padding-top: 1.5rem; padding-bottom: 3rem; }
+
+/* Topic list row (optional, if you want a styled row) */
+.topic-row {
+  padding: 12px 16px; border-radius: 12px;
+  background: #f6f8fb; border: 1px solid #e7ecf3;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topic-name { font-weight: 600; }
+
+/* Flashcard shell */
+.fc-card {
+  margin: 14px auto; max-width: 960px; min-height: 120px;
+  background: #f8f9fa; border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  border: 1px solid #eef1f5;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px 36px; text-align: center;
+  font-size: 18px; line-height: 1.55;
+}
+.fc-card.question { background: #f5f9ff; }
+.fc-card.answer   { background: #effaf3; }
+
+/* Subheader spacing under the topic title (optional) */
+.fc-subheader { margin: 0.5rem 0 1.25rem 0; }
+
+/* Ensure flashcards stand out clearly */
+.fc-card {
+  background: white;
+  color: #1e1e1e;
+  transition: all 0.25s ease;
+}
+
+/* Subtle hover scale to make it feel interactive */
+.fc-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Color distinction between question and answer sides */
+.fc-card.question {
+  background: #f0f6ff; /* soft blue */
+  border-left: 6px solid #6fa8dc;
+}
+.fc-card.answer {
+  background: #f0fff4; /* soft green */
+  border-left: 6px solid #93c47d;
+}
+
+/* Buttons: give consistent shape and color accent */
+button[kind="secondary"] {
+  background-color: #e9eef6 !important;
+  border-radius: 8px !important;
+  color: #333 !important;
+  font-weight: 600 !important;
+  transition: background 0.2s ease;
+}
+button[kind="secondary"]:hover {
+  background-color: #d6e2f0 !important;
+}
+
+/* Progress bar tweaks */
+.stProgress > div > div > div > div {
+  background-color: #0078d7 !important;
+}
+
+/* ---------- Flip card animation ---------- */
+.flip-wrap {
+  perspective: 1200px;
+  margin: 14px auto;
+  max-width: 960px;
+}
+.flip-inner {
+  position: relative;
+  width: 100%;
+  min-height: 140px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+.flip-inner.is-flipped { transform: rotateY(180deg); }
+
+.flip-face {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px 36px; border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  border: 1px solid #eef1f5; background: #f8f9fa; text-align: center;
+  font-size: 18px; line-height: 1.55; backface-visibility: hidden;
+}
+.flip-front { background: #f0f6ff; }
+.flip-back  { background: #f0fff4; transform: rotateY(180deg); }
+
+/* Small inline progress bar for dashboard rows */
+.topic-progress {
+  height: 8px; border-radius: 999px; background:#e9eef6; overflow:hidden;
+}
+.topic-progress > span {
+  display:block; height:100%; background:#0078d7;
+}
+
+/* ---------- Learning aid buttons ---------- */
+.learning-aids {
+  display: flex;
+  justify-content: center;      /* centers the button group */
+  gap: 20px;                    /* spacing between buttons */
+  margin: 20px 0;               /* vertical spacing */
+}
+
+.learning-aids .stButton > button {
+  background: #e9eef6;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 600;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.learning-aids .stButton > button:hover {
+  background: #d6e2f0;
+}
+
