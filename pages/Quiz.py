@@ -1,212 +1,277 @@
-from __future__ import annotations
-import streamlit as st
-from typing import List, Optional, Dict, Any
+import json
+import random
 from pathlib import Path
-import pandas as pd
 
-from src.quiz import (
-    load_flashcards,
-    list_topics,
-    generate_quiz_questions,
-    QuizQuestion,
-    Flashcard,
-)
+import streamlit as st
+
+# ---------------------------------------------------------
+# Basic helpers
+# ---------------------------------------------------------
 
 
-# Session state keys used:
-QS_STARTED = "quiz_started"
-QS_INDEX = "current_question_index"
-QS_QUESTIONS = "quiz_questions"
-QS_ANSWERS = "user_answers"
-QS_SCORE = "score"
+def load_flashcards_data() -> list:
+    """
+    Load questions from data/flashcards.json.
+    Expects a list of objects with at least:
+    id, topic, prompt, answer, (optional) distractors.
+    """
+    data_path = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
 
+    if not data_path.exists():
+        st.error(f"Could not find flashcards data at {data_path}")
+        return []
 
-def init_session_state() -> None:
-    if QS_STARTED not in st.session_state:
-        st.session_state[QS_STARTED] = False
-    if QS_INDEX not in st.session_state:
-        st.session_state[QS_INDEX] = 0
-    if QS_QUESTIONS not in st.session_state:
-        st.session_state[QS_QUESTIONS] = []
-    if QS_ANSWERS not in st.session_state:
-        st.session_state[QS_ANSWERS] = []
-    if QS_SCORE not in st.session_state:
-        st.session_state[QS_SCORE] = 0
-
-
-def start_quiz(topic: str, flashcards: List[Flashcard], num_questions: int = 10) -> None:
-    questions = generate_quiz_questions(topic, flashcards, num_questions=num_questions)
-    st.session_state[QS_QUESTIONS] = questions
-    st.session_state[QS_INDEX] = 0
-    st.session_state[QS_ANSWERS] = [None] * len(questions)
-    st.session_state[QS_SCORE] = 0
-    st.session_state[QS_STARTED] = True
-    # clear any per-question locks if present
-    for i in range(len(questions)):
-        lock_key = f"locked_{i}"
-        if lock_key in st.session_state:
-            del st.session_state[lock_key]
-        radio_key = f"radio_{i}"
-        if radio_key in st.session_state:
-            # remove prior selections so radio will reflect new quiz
-            del st.session_state[radio_key]
-
-
-def submit_answer(index: int) -> None:
-    q_key = f"radio_{index}"
-    chosen = st.session_state.get(q_key, None)
-    if chosen is None:
-        st.warning("Please select an option before submitting.")
-        return
-
-    # lock the answer for this index
-    st.session_state[f"locked_{index}"] = True
-    st.session_state[QS_ANSWERS][index] = chosen
-
-    # update score if correct
-    q: QuizQuestion = st.session_state[QS_QUESTIONS][index]
-    if chosen == q.correct_answer:
-        # Avoid double counting if user submits more than once (shouldn't happen when locked)
-        # Count only if not previously recorded as correct
-        # We'll assume answers are muted once set, so increment if newly correct
-        # If a previous value existed, we won't change score.
-        # Here we only increment if this submit sets a previously None answer.
-        # Because we store answers only once, this is safe.
-        st.session_state[QS_SCORE] += 1
-
-
-def go_next() -> None:
-    idx = st.session_state[QS_INDEX]
-    total = len(st.session_state[QS_QUESTIONS])
-    if idx < total - 1:
-        st.session_state[QS_INDEX] = idx + 1
-    else:
-        # reached the end; mark quiz as finished by setting started False but keeping questions/answers
-        st.session_state[QS_STARTED] = False
-
-
-def restart_quiz() -> None:
-    # Reset all quiz-related session state
-    keys = [QS_STARTED, QS_INDEX, QS_QUESTIONS, QS_ANSWERS, QS_SCORE]
-    for k in keys:
-        if k in st.session_state:
-            del st.session_state[k]
-    # Remove any per-question keys like radio_*/locked_*
-    for key in list(st.session_state.keys()):
-        if key.startswith("radio_") or key.startswith("locked_"):
-            del st.session_state[key]
-    init_session_state()
-
-def main() -> None:
-    st.set_page_config(page_title="Quiz Mode", layout="centered")
-    st.title("Quiz Mode")
-
-    init_session_state()
-
-    # Load flashcards
     try:
-        flashcards = load_flashcards()
-    except FileNotFoundError:
-        st.error("Could not find data/flashcards.json. Make sure it exists.")
-        return
-    except Exception as exc:
-        st.error(f"Error loading flashcards: {exc}")
+        with data_path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+    except json.JSONDecodeError as e:
+        st.error(f"Failed to parse flashcards JSON: {e}")
+        return []
+
+    if not isinstance(data, list):
+        st.error("flashcards.json must contain a JSON list of question objects.")
+        return []
+
+    return data
+
+
+def get_topics(questions: list) -> list:
+    """Return a sorted list of unique topics."""
+    topics = sorted({q.get("topic", "Unknown") for q in questions})
+    return topics
+
+
+def prepare_quiz_questions(all_questions: list, topic: str, num_questions: int = 10) -> list:
+    """
+    Filter questions by topic and build a quiz:
+    - Up to num_questions questions
+    - Each question has 4 options (correct + 3 distractors)
+    - Options are shuffled, and we store the index of the correct one
+    """
+    topic_questions = [q for q in all_questions if q.get("topic") == topic]
+
+    if not topic_questions:
+        return []
+
+    random.shuffle(topic_questions)
+    selected = topic_questions[:num_questions]
+
+    quiz_questions = []
+
+    # Build options for each question
+    for q in selected:
+        correct_answer = q.get("answer", "")
+        distractors = q.get("distractors", [])
+
+        # Fallback: if fewer than 3 distractors, pad with other answers from same topic
+        if len(distractors) < 3:
+            extra_pool = [x.get("answer", "") for x in topic_questions if x is not q]
+            random.shuffle(extra_pool)
+            while len(distractors) < 3 and extra_pool:
+                candidate = extra_pool.pop()
+                if candidate != correct_answer and candidate not in distractors:
+                    distractors.append(candidate)
+
+        # Still not enough? Just duplicate some (rare edge case, keeps quiz running)
+        while len(distractors) < 3:
+            distractors.append(f"Option {len(distractors) + 1}")
+
+        options = [correct_answer] + distractors[:3]
+        random.shuffle(options)
+        correct_index = options.index(correct_answer)
+
+        quiz_questions.append(
+            {
+                "id": q.get("id"),
+                "topic": topic,
+                "prompt": q.get("prompt", ""),
+                "options": options,
+                "correct_index": correct_index,
+                "answer": correct_answer,
+            }
+        )
+
+    return quiz_questions
+
+
+def reset_quiz_state():
+    """Clear quiz-related state (but keep the selected topic)."""
+    for key in [
+        "quiz_questions",
+        "quiz_index",
+        "quiz_answers",
+        "quiz_score",
+        "quiz_complete",
+    ]:
+        if key in st.session_state:
+            del st.session_state[key]
+
+
+# ---------------------------------------------------------
+# Main page
+# ---------------------------------------------------------
+
+
+def main():
+    st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
+
+    st.title("Topic Quiz")
+    st.write(
+        "Each quiz is built from the questions for a single COMP201 topic. "
+        "You’ll answer up to 10 questions and see your score at the end."
+    )
+
+    all_questions = load_flashcards_data()
+    if not all_questions:
         return
 
-    topics = list_topics(flashcards)
+    topics = get_topics(all_questions)
     if not topics:
         st.warning("No topics found in flashcards.json.")
         return
 
-    # Topic selection and quiz controls
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        topic = st.selectbox("Choose a topic", options=topics)
-    with col2:
-        num_q = st.number_input("Questions", min_value=1, max_value=50, value=10, step=1)
+    # ---------------- Sidebar: topic + controls ----------------
+    st.sidebar.header("Quiz Settings")
 
-    # If quiz not started, show Start button
-    if not st.session_state[QS_STARTED] and (not st.session_state[QS_QUESTIONS] or st.session_state[QS_INDEX] == 0):
-        start_col1, start_col2 = st.columns([3, 1])
-        with start_col1:
-            st.write("")  # spacing
-        with start_col2:
-            if st.button("Start Quiz"):
-                start_quiz(topic, flashcards, num_questions=int(num_q))
+    # Default topic comes from the Flashcards page (if set)
+    default_topic = st.session_state.get("quiz_topic_from_dashboard")
+    if default_topic in topics:
+        default_index = topics.index(default_topic)
+    else:
+        default_index = 0
 
-     # If quiz started, show current question
-    if st.session_state[QS_STARTED]:
-        questions: List[QuizQuestion] = st.session_state[QS_QUESTIONS]
-        idx: int = st.session_state[QS_INDEX]
-        total = len(questions)
-        if total == 0:
-            st.info("No questions available for this topic. Try another topic.")
-            st.session_state[QS_STARTED] = False
+    selected_topic = st.sidebar.selectbox(
+        "Choose a topic",
+        topics,
+        index=default_index,
+    )
+
+    # Start / restart quiz button
+    if st.sidebar.button("Start / Restart Quiz"):
+        reset_quiz_state()
+        st.session_state.quiz_topic_from_dashboard = selected_topic  # remember last topic
+        st.session_state.quiz_questions = prepare_quiz_questions(
+            all_questions, selected_topic, num_questions=10
+        )
+        st.session_state.quiz_index = 0
+        st.session_state.quiz_answers = []
+        st.session_state.quiz_score = 0
+        st.session_state.quiz_complete = False
+
+    # ---------------- Main content: quiz or instructions ----------------
+    quiz_questions = st.session_state.get("quiz_questions", [])
+    quiz_index = st.session_state.get("quiz_index", 0)
+    quiz_complete = st.session_state.get("quiz_complete", False)
+
+    if not quiz_questions and not quiz_complete:
+        st.info("Choose a topic in the sidebar and click **Start / Restart Quiz** to begin.")
+        return
+
+    if quiz_complete:
+        show_quiz_results()
+    else:
+        show_current_question(quiz_questions, quiz_index)
+
+
+def show_current_question(quiz_questions: list, quiz_index: int):
+    """Render the current quiz question and handle answer submission."""
+    total_questions = len(quiz_questions)
+    if total_questions == 0:
+        st.warning("No quiz questions available for this topic.")
+        return
+
+    question = quiz_questions[quiz_index]
+
+    st.subheader(
+        f"Question {quiz_index + 1} of {total_questions} "
+        f"· Topic: {question.get('topic', 'Unknown')}"
+    )
+
+    st.write(question["prompt"])
+
+    # Simple progress bar
+    st.progress((quiz_index) / total_questions)
+
+    # Use a unique key per question so Streamlit remembers choices
+    radio_key = f"quiz_q_{quiz_index}"
+    selected_option = st.radio(
+        "Choose one answer:",
+        question["options"],
+        index=None,
+        key=radio_key,
+    )
+
+    is_last = quiz_index == total_questions - 1
+    button_label = "Finish quiz" if is_last else "Next question"
+
+    if st.button(button_label):
+        if selected_option is None:
+            st.warning("Please select an answer before continuing.")
             return
 
-        q = questions[idx]
-        st.markdown(f"**Question {idx + 1} of {total}**")
-        st.write(q.prompt)
+        # Store the chosen option index
+        option_index = question["options"].index(selected_option)
 
-        # Radio key and locked key
-        radio_key = f"radio_{idx}"
-        locked_key = f"locked_{idx}"
-        locked = st.session_state.get(locked_key, False)
+        answers = st.session_state.get("quiz_answers", [])
+        if len(answers) <= quiz_index:
+            answers.append(option_index)
+        else:
+            answers[quiz_index] = option_index
+        st.session_state.quiz_answers = answers
 
-        # Show options with radio buttons
-        # Note: st.radio will default-select the first option. We rely on 'Submit Answer' to lock choice.
-        choice = st.radio("Select one answer", options=q.options, key=radio_key, disabled=locked)
+        if is_last:
+            # Compute final score
+            score = 0
+            for i, q in enumerate(quiz_questions):
+                if i < len(answers) and answers[i] == q["correct_index"]:
+                    score += 1
 
-        submit_col, next_col = st.columns(2)
-        with submit_col:
-            if not locked:
-                if st.button("Submit Answer"):
-                    submit_answer(idx)
-                    st.experimental_rerun()
-            else:
-                st.write("Answer submitted.")
-        with next_col:
-            if st.button("Next"):
-                # Allow Next only after submission
-                if not st.session_state[QS_ANSWERS][idx]:
-                    st.warning("Please submit an answer before moving to the next question.")
-                else:
-                    go_next()
-                    st.experimental_rerun()
+            st.session_state.quiz_score = score
+            st.session_state.quiz_complete = True
+        else:
+            st.session_state.quiz_index = quiz_index + 1
+        st.rerun()
 
-# If quiz has been started before and is now not started (meaning finished) OR user pressed Next to finish
-    if (not st.session_state[QS_STARTED]) and st.session_state[QS_QUESTIONS]:
-        # Show results summary
-        questions: List[QuizQuestion] = st.session_state[QS_QUESTIONS]
-        answers: List[Optional[str]] = st.session_state[QS_ANSWERS]
-        score: int = st.session_state[QS_SCORE]
 
-        st.header("Quiz Results")
-        st.markdown(f"Your score: **{score} / {len(questions)}**")
+def show_quiz_results():
+    """Display final score and per-question feedback."""
+    quiz_questions = st.session_state.get("quiz_questions", [])
+    answers = st.session_state.get("quiz_answers", [])
+    score = st.session_state.get("quiz_score", 0)
 
-        # Build summary table
-        rows = []
-        for i, q in enumerate(questions):
-            user_ans = answers[i] if i < len(answers) else None
-            correct = user_ans == q.correct_answer
-            rows.append(
-                {
-                    "Question #": i + 1,
-                    "Prompt": q.prompt,
-                    "Your answer": user_ans or "<no answer>",
-                    "Correct answer": q.correct_answer,
-                    "Correct?": "✅" if correct else "❌",
-                }
-            )
+    total = len(quiz_questions)
+    if total == 0:
+        st.warning("No questions were in this quiz.")
+        return
 
-        df = pd.DataFrame(rows)
-        # show a compact table
-        st.dataframe(df[["Question #", "Your answer", "Correct answer", "Correct?"]], use_container_width=True)
+    st.subheader("Quiz complete! 🎉")
 
-        # Restart button
-        if st.button("Restart Quiz"):
-            restart_quiz()
-            st.experimental_rerun()
+    st.write(f"**Your score:** {score} / {total}")
+    st.progress(score / total)
+
+    # Simple breakdown
+    st.markdown("### Review")
+    for i, q in enumerate(quiz_questions):
+        user_choice_index = answers[i] if i < len(answers) else None
+        correct_index = q["correct_index"]
+
+        if user_choice_index == correct_index:
+            result_text = "✅ Correct"
+        elif user_choice_index is None:
+            result_text = "⚠️ No answer selected"
+        else:
+            result_text = "❌ Incorrect"
+
+        st.markdown(f"**Q{i + 1}. {q['prompt']}**")
+        st.write(result_text)
+        st.write(f"- **Correct answer:** {q['options'][correct_index]}")
+        if user_choice_index is not None and user_choice_index != correct_index:
+            st.write(f"- **Your answer:** {q['options'][user_choice_index]}")
+        st.write("---")
+
+    if st.button("Take quiz again"):
+        reset_quiz_state()
+        st.rerun()
 
 
 if __name__ == "__main__":
