@@ -7,9 +7,19 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     
-#Page Configuration
+# Page Configuration
 st.set_page_config(page_title="Flashcards", page_icon=":books:", layout="wide")
-st.title("Flashcard & Quizzes Dashboard")
+
+# Main heading for this page
+st.title("Flashcards")
+
+st.markdown(
+    "<p style='color:#4b5563; margin-top:0.25rem;'>"
+    "Choose a topic to start studying with interactive flashcards."
+    "</p>",
+    unsafe_allow_html=True,
+)
+
 
 # Apply external CSS styling
 css_path = Path(__file__).resolve().parents[1] / "styles" / "flashcards.css"
@@ -66,7 +76,8 @@ if "shuffle" not in st.session_state:
 
 #Dashboard rendering
 def render_dashboard():
-    st.subheader("Revision Topics:")
+    st.subheader("Revision Topics")
+
     topics = list_topics()
     if not topics:
         st.info("No revision topics available.")
@@ -78,16 +89,28 @@ def render_dashboard():
         seen = len(st.session_state.stats.get(topic, {}).get("seen", set()))
         pct = int((seen / total) * 100)
 
-        col_topic, col_prog, col_study, col_quiz = st.columns([4, 3, 2, 2])
+        # Wrap each topic row in a styled div from your CSS
+        st.markdown('<div class="topic-row">', unsafe_allow_html=True)
+
+        col_topic, col_prog, col_study = st.columns([4, 4, 2])
+
         with col_topic:
-            st.write(f"**{topic}**")
+            st.markdown(f"<span class='topic-name'>{topic}</span>", unsafe_allow_html=True)
+
         with col_prog:
-            # small inline progress bar
+            # small inline progress bar using your CSS classes
             st.markdown(
-                f'<div class="topic-progress"><span style="width:{pct}%"></span></div>'
-                f'<div style="font-size:12px;margin-top:4px;color:#6b7280">{seen}/{total} studied</div>',
-                unsafe_allow_html=True
+                f"""
+                <div class="topic-progress">
+                  <span style="width:{pct}%;"></span>
+                </div>
+                <div style="font-size:12px;margin-top:4px;color:#6b7280">
+                  {seen}/{total} cards studied
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
+
         with col_study:
             if st.button("Study", key=f"study_{topic}"):
                 st.session_state.selected_topic = topic
@@ -95,10 +118,14 @@ def render_dashboard():
                 st.session_state.flashcard_index = 0
                 st.session_state.show_answer = False
                 # start stats timer if first time
-                st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
+                st.session_state.stats.setdefault(
+                    topic,
+                    {"start": time.time(), "seen": set(), "flips": 0},
+                )
                 st.rerun()
-        with col_quiz:
-            st.button("Quiz", key=f"quiz_{topic}")  # Phase 2 placeholder
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 #Study Mode Rendering
