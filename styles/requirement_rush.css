@@ -1,0 +1,68 @@
+/* ============================
+   Requirement Rush Styling
+   ============================ */
+
+/* Page layout */
+.block-container {
+    padding-top: 1.5rem;
+}
+
+/* Scoreboard container */
+.rr-score-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0.75rem;
+}
+.rr-score-card {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+    border: 1px solid #c7d2fe;
+    font-size: 0.9rem;
+}
+.rr-score-card h4 {
+    margin: 0 0 4px 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #4f46e5;
+}
+
+/* Drag & drop lanes – these are the REAL containers */
+.sortable-container {
+    padding: 10px 8px !important;
+    margin-bottom: 12px !important;
+    border-radius: 18px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+/* Colour each lane differently (assumes 3 containers) */
+.sortable-container:nth-of-type(1) {
+    background: #f8fafc;              /* Unassigned */
+}
+.sortable-container:nth-of-type(2) {
+    background: #ecfdf5;              /* Functional */
+    border-color: #bbf7d0 !important;
+}
+.sortable-container:nth-of-type(3) {
+    background: #fefce8;              /* Non-functional */
+    border-color: #fde68a !important;
+}
+
+.sortable-item {
+    background: #4471a8 !important;   /* light blue background */
+    color: #1e3a8a !important;         /* dark blue text */
+    border-radius: 999px !important;
+    padding: 6px 12px !important;
+    margin: 4px 6px !important;
+    font-size: 0.82rem !important;
+    font-weight: 500;
+    border: none !important;
+
+    /* slight shadow for floating effect */
+    box-shadow: 0 2px 5px rgba(30, 58, 138, 0.15);
+}
+

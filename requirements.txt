@@ -1,1 +1,2 @@
 streamlit>=1.39
+streamlit-sortables==0.3.1
