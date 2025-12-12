@@ -1,48 +1,53 @@
 import time
+import json
+import random
+from pathlib import Path
+
 import streamlit as st
 from streamlit_sortables import sort_items  # drag & drop component
 
-# ---------------- GAME DATA ----------------
+# ---------------- CONFIG ----------------
 
-REQ_ITEMS_MASTER = [
-    ("The system shall allow users to reset their password via email.", "Functional"),
-    ("The system must respond to user requests within 2 seconds.", "Non-functional"),
-    ("Users shall be able to view their order history.", "Functional"),
-    ("The system must be available 99.9% of the time.", "Non-functional"),
-    ("The system shall send a confirmation email after registration.", "Functional"),
-    ("The user interface must be accessible to screen readers.", "Non-functional"),
-    ("The system shall allow students to submit assignments online.", "Functional"),
-    ("The application must support up to 500 concurrent users.", "Non-functional"),
-]
+TIME_LIMIT_SECONDS = 30  # visual target (updates when Streamlit reruns)
+REQ_DATA_PATH = Path("data/requirements_rush.json")
+MAX_REQ_PER_GAME = 10
 
-TIME_LIMIT_SECONDS = 30  # visual “beat the clock” target
+
+# ---------------- DATA LOADER ----------------
+
+@st.cache_data
+def load_all_requirements():
+    with REQ_DATA_PATH.open(encoding="utf-8") as f:
+        raw = json.load(f)
+    return [(item["text"], item["type"]) for item in raw]
+
+
+def choose_game_requirements():
+    all_reqs = load_all_requirements()
+    if len(all_reqs) <= MAX_REQ_PER_GAME:
+        return all_reqs
+    return random.sample(all_reqs, MAX_REQ_PER_GAME)
 
 
 # ---------------- CSS LOADER ----------------
 
 def load_rr_css():
-    """Load Requirement Rush–specific CSS from styles/requirement_rush.css."""
     try:
-        with open("styles/requirement_rush.css") as f:
+        with open("styles/requirement_rush.css", encoding="utf-8") as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     except FileNotFoundError:
-        st.warning(
-            "Could not find styles/requirement_rush.css. "
-            "Requirement Rush will use default styling."
-        )
+        st.warning("Could not find styles/requirement_rush.css. Using default styling.")
 
 
 # ---------------- STATE HELPERS ----------------
 
 def init_requirement_rush_state():
-    """Initialise all state needed for the drag-and-drop board."""
     ss = st.session_state
 
-    # Map requirement text -> correct type
     if "rr_type_map" not in ss:
-        ss.rr_type_map = {text: rtype for text, rtype in REQ_ITEMS_MASTER}
+        selected = choose_game_requirements()
+        ss.rr_type_map = {text: rtype for text, rtype in selected}
 
-    # Containers for drag-and-drop (Unassigned, Functional, Non-functional)
     if "rr_containers" not in ss:
         all_texts = list(ss.rr_type_map.keys())
         ss.rr_containers = [
@@ -62,11 +67,9 @@ def init_requirement_rush_state():
 
 
 def reset_requirement_rush():
-    """Reset the game board to the initial state."""
     ss = st.session_state
-
-    if "rr_type_map" not in ss:
-        ss.rr_type_map = {text: rtype for text, rtype in REQ_ITEMS_MASTER}
+    selected = choose_game_requirements()
+    ss.rr_type_map = {text: rtype for text, rtype in selected}
 
     all_texts = list(ss.rr_type_map.keys())
     ss.rr_containers = [
@@ -82,16 +85,14 @@ def reset_requirement_rush():
 # ---------------- MAIN GAME ----------------
 
 def play_requirement_rush():
-    """Render and run the Requirement Rush drag-and-drop mini-game."""
     load_rr_css()
     init_requirement_rush_state()
     ss = st.session_state
 
-    # ------- TIMER (visual only) -------
+    # Visual timer (updates when Streamlit reruns due to interaction)
     elapsed = time.time() - ss.rr_start_time
     remaining = max(0, int(TIME_LIMIT_SECONDS - elapsed))
 
-    # ------- TITLE / INTRO -------
     st.markdown(
         "<h2 style='text-align:center; margin-bottom:0.25rem;'>"
         "Requirement Rush – Drag & Drop Board 🎮"
@@ -100,22 +101,20 @@ def play_requirement_rush():
     )
     st.markdown(
         "<p style='text-align:center; color:#6b7280; margin-bottom:1rem;'>"
-        "Drag each requirement card into <b>Functional</b> or <b>Non-functional</b>. "
-        "Try to finish within 30 seconds, then click <b>Check my answers</b>!</p>",
+        f"Drag each requirement into <b>Functional</b> or <b>Non-functional</b>. "
+        f"Each round uses a random selection of up to {MAX_REQ_PER_GAME} requirements. "
+        "Then click <b>Check my answers</b>.</p>",
         unsafe_allow_html=True,
     )
 
-    # Back button
     back_col, _ = st.columns([1, 5])
     with back_col:
         if st.button("← Back to Games Hub", key="rr_back"):
             ss.view = "hub"
             st.rerun()
 
-    # ------- DRAG & DROP CONTAINERS -------
     containers = ss.rr_containers
 
-    # This renders the actual draggable lists
     sorted_containers = sort_items(
         containers,
         multi_containers=True,
@@ -123,7 +122,6 @@ def play_requirement_rush():
     )
     ss.rr_containers = sorted_containers
 
-    # Extract lists by header
     by_header = {c["header"]: c["items"] for c in sorted_containers}
     unassigned_items = by_header.get("Unassigned", [])
     functional_items = by_header.get("Functional", [])
@@ -132,48 +130,29 @@ def play_requirement_rush():
     total = len(ss.rr_type_map)
     placed = total - len(unassigned_items)
 
-    # ------- SCOREBOARD STRIP -------
     st.markdown(
         "<div class='rr-score-row'>"
-        f"<div class='rr-score-card'>"
-        f"<h4>Time Goal</h4>"
-        f"<div>⏱ {remaining}s left (aim)</div>"
-        f"</div>"
-        f"<div class='rr-score-card'>"
-        f"<h4>Cards Sorted</h4>"
-        f"<div>{placed} / {total} placed</div>"
-        f"</div>"
-        f"<div class='rr-score-card'>"
-        f"<h4>Status</h4>"
-        f"<div>{'Ready to check ✅' if len(unassigned_items)==0 else 'Sorting in progress…'}</div>"
-        f"</div>"
+        f"<div class='rr-score-card'><h4>Time</h4><div>⏱ {remaining}s left (aim)</div></div>"
+        f"<div class='rr-score-card'><h4>Cards Sorted</h4><div>{placed} / {total} placed</div></div>"
+        f"<div class='rr-score-card'><h4>Status</h4><div>{'Ready to check ✅' if len(unassigned_items)==0 else 'Sorting…'}</div></div>"
         "</div>",
         unsafe_allow_html=True,
     )
 
     st.markdown("---")
 
-    # ------- CHECK / RESET CONTROLS -------
     all_assigned = len(unassigned_items) == 0
-
     check_col, reset_col = st.columns([2, 1])
 
     with check_col:
-        if st.button(
-            "✅ Check my answers",
-            key="rr_check",
-            disabled=not all_assigned,
-        ):
+        if st.button("✅ Check my answers", key="rr_check", disabled=not all_assigned):
             score = 0
-
             for text in functional_items:
                 if ss.rr_type_map[text] == "Functional":
                     score += 1
-
             for text in nonfunctional_items:
                 if ss.rr_type_map[text] == "Non-functional":
                     score += 1
-
             ss.rr_score = score
             ss.rr_checked = True
 
@@ -182,7 +161,6 @@ def play_requirement_rush():
             reset_requirement_rush()
             st.rerun()
 
-    # ------- FEEDBACK / RESULTS -------
     if ss.rr_checked:
         st.markdown("### Results 🎉")
         st.write(f"You correctly classified **{ss.rr_score} / {total}** requirements.")
@@ -193,13 +171,10 @@ def play_requirement_rush():
         elif ss.rr_score >= total * 0.75:
             st.info("Nice work! Just a few to revise.")
         else:
-            st.warning(
-                "Good attempt! Revisit the differences between Functional and "
-                "Non-functional requirements."
-            )
+            st.warning("Good attempt! Revisit Functional vs Non-functional requirements.")
 
         with st.expander("See detailed feedback"):
-            def bucket_of(text: str) -> str:
+            def bucket_of(text):
                 if text in functional_items:
                     return "Functional"
                 if text in nonfunctional_items:
@@ -210,14 +185,9 @@ def play_requirement_rush():
 
             for text, correct_type in ss.rr_type_map.items():
                 chosen = bucket_of(text)
-                is_correct = (chosen == correct_type)
-                icon = "✅" if is_correct else "❌"
-                st.markdown(
-                    f"{icon} **Your choice:** {chosen} — **Correct:** {correct_type}  \n"
-                    f"> {text}"
-                )
+                icon = "✅" if chosen == correct_type else "❌"
+                st.markdown(f"{icon} **Your choice:** {chosen} — **Correct:** {correct_type}\n\n> {text}")
 
-        st.write("")
         c1, c2 = st.columns(2)
         with c1:
             if st.button("Play again 🧩", key="rr_play_again"):
