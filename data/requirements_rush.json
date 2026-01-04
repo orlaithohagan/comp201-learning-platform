@@ -1,0 +1,236 @@
+[
+  {
+    "text": "The system shall allow users to reset their password via email.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system must respond to user requests within 2 seconds.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "Users shall be able to view their order history.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system must be available 99.9% of the time.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system shall send a confirmation email after registration.",
+    "type": "Functional"
+  },
+  {
+    "text": "The user interface must be accessible to screen readers.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system shall allow students to submit assignments online.",
+    "type": "Functional"
+  },
+  {
+    "text": "The application must support up to 500 concurrent users.",
+    "type": "Non-functional"
+  },
+
+  {
+    "text": "The system shall allow users to search for products by keyword.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to create a new account using their email address.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to update their profile information.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow administrators to add new items to the catalogue.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to download their transaction history.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to apply discount codes at checkout.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall generate a receipt after each purchase.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to filter search results by category.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow lecturers to upload course materials.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow students to submit quiz answers online.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow managers to generate monthly sales reports.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall notify users when their subscription is about to expire.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to reset their multi-factor authentication settings.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow customers to track the delivery status of their orders.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to bookmark articles for later reading.",
+    "type": "Functional"
+  },
+
+  {
+    "text": "The system shall allow users to add and remove items from their shopping cart.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to follow and unfollow other users.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow notifications to be sent when a user's post receives a comment.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow administrators to deactivate user accounts.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to upload profile pictures.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to share their live location with friends.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to schedule reminders for upcoming deadlines.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to change their notification preferences.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow teachers to grade assignment submissions.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system shall allow users to send direct messages to other users.",
+    "type": "Functional"
+  },
+  {
+    "text": "The system must load the homepage within 3 seconds under normal network conditions.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must support 2,000 concurrent users without performance degradation.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must be available 24 hours a day, 7 days a week.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must store user passwords in encrypted form only.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system interface shall follow accessibility standards for colour contrast.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must recover from a server failure within 5 minutes.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must be compatible with the latest versions of major web browsers.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must process payment transactions within 5 seconds.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must not exceed 60% CPU utilisation under peak load.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must comply with GDPR data protection regulations.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must ensure 99.5% uptime annually.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system's user interface must be fully navigable using a keyboard.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must be able to scale horizontally when new servers are added.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must log all authentication attempts for auditing purposes.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must maintain data consistency in the event of concurrent updates.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must encrypt all data transmitted between client and server using HTTPS.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must remain functional during maintenance through redundant failover servers.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must return search results within 1 second for typical queries.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must ensure data is backed up at least once every 24 hours.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system's documentation must be updated within 1 week of any major release.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must meet WCAG AA accessibility standards for all interactive elements.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must operate correctly on devices with screen sizes ranging from 4 to 27 inches.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must retain user activity logs for a minimum of 90 days.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must generate error logs for all unexpected failures.",
+    "type": "Non-functional"
+  },
+  {
+    "text": "The system must allow new modules to be added without requiring downtime.",
+    "type": "Non-functional"
+  }
+]
