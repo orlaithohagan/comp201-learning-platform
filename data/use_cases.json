@@ -1,0 +1,74 @@
+[
+  {
+    "id": "UC_001",
+    "title": "Login to the system",
+    "difficulty": "Easy",
+    "steps": [
+      "User opens the login page",
+      "System displays login form",
+      "User enters username and password",
+      "User clicks 'Login'",
+      "System validates credentials",
+      "System redirects user to dashboard"
+    ]
+  },
+  {
+    "id": "UC_002",
+    "title": "Reset password",
+    "difficulty": "Medium",
+    "steps": [
+      "User clicks 'Forgot password'",
+      "System prompts for email address",
+      "User enters email and submits",
+      "System sends password reset link",
+      "User opens the reset link",
+      "System prompts for new password",
+      "User enters and confirms new password",
+      "System updates password and confirms success"
+    ]
+  },
+
+{
+    "title": "Enroll in a module",
+    "difficulty": "Easy",
+    "steps": [
+        "User logs in",
+        "User navigates to the module catalogue",
+        "System displays available modules",
+        "User selects a module",
+        "System displays module details and enrol option",
+        "User clicks 'Enrol'",
+        "System confirms enrolment and updates user account",
+        "System shows the module on the user's dashboard"
+    ]
+    },
+    {
+    "title": "Submit coursework assignment",
+    "difficulty": "Medium",
+    "steps": [
+        "User logs in",
+        "User opens the module page",
+        "System displays assessment list and deadlines",
+        "User selects an assignment",
+        "System displays assignment brief and upload area",
+        "User uploads file and clicks 'Submit'",
+        "System validates file type/size and checks deadline",
+        "System confirms submission and records timestamp"
+    ]
+    },
+    {
+    "title": "Attempt quiz and view results",
+    "difficulty": "Hard",
+    "steps": [
+        "User logs in",
+        "User opens the quiz page",
+        "System displays quiz instructions and 'Start quiz'",
+        "User clicks 'Start quiz'",
+        "System displays the first question",
+        "User answers questions and navigates through the quiz",
+        "User clicks 'Submit quiz'",
+        "System marks answers and calculates score",
+        "System displays score and feedback"
+    ]
+    }
+]
