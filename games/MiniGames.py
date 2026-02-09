@@ -1,6 +1,8 @@
 # games/MiniGames.py
 import streamlit as st
 from games.requirement_rush import play_requirement_rush, reset_requirement_rush
+from games.use_case_scramble import play_use_case_scramble
+
 
 
 def run_games_hub():
@@ -12,6 +14,11 @@ def run_games_hub():
     if st.session_state.view == "requirement_rush":
         play_requirement_rush()
         return
+
+    if st.session_state.view == "use_case_scramble":
+        play_use_case_scramble()
+        return
+
 
     # ---------- HUB SCREEN ----------
     st.title("Mini Games Hub 🎮")
@@ -28,8 +35,9 @@ def run_games_hub():
     # === Use Case Scramble placeholder ===
     with col2:
         st.markdown("### Use Case Scramble")
-        st.write("Coming soon...")
-        st.button("Locked", disabled=True, key="btn_locked_ucs")
+        st.write("Drag and drop steps into the correct order.")
+        start_ucs = st.button("Play Use Case Scramble", key="btn_ucs")
+
 
     # === Design Detective placeholder ===
     with col3:
@@ -44,3 +52,8 @@ def run_games_hub():
         reset_requirement_rush()              # start a fresh run
         st.session_state.view = "requirement_rush"
         st.rerun()
+    
+    if start_ucs:
+        st.session_state.view = "use_case_scramble"
+        st.rerun()
+

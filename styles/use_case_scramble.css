@@ -1,0 +1,48 @@
+/* styles/use_case_scramble.css */
+
+/* Small instruction line */
+.ucs-instructions {
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  color: rgba(49, 51, 63, 0.7);
+  font-size: 0.95rem;
+}
+
+/* Button row spacing */
+.ucs-btn-row {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Feedback section */
+.ucs-feedback-title {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Feedback "pill" rows */
+.ucs-step {
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  margin: 0.5rem 0;
+  border: 1px solid rgba(49, 51, 63, 0.15);
+  background: rgba(49, 51, 63, 0.04);
+  font-size: 1rem;
+}
+
+/* Correct / incorrect colour blocks */
+.ucs-step.correct {
+  border: 1px solid rgba(0, 160, 90, 0.45);
+  background: rgba(0, 160, 90, 0.12);
+}
+
+.ucs-step.wrong {
+  border: 1px solid rgba(220, 53, 69, 0.45);
+  background: rgba(220, 53, 69, 0.12);
+}
+
+/* Slightly nicer score line */
+.ucs-score {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
