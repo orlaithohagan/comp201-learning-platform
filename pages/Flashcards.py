@@ -2,6 +2,10 @@ import streamlit as st
 import json
 import time, random
 from pathlib import Path
+from src.services.auth_ui import require_login, logout_button
+
+require_login()
+logout_button()
 
 def local_css(file_name):
     with open(file_name) as f:

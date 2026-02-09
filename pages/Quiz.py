@@ -4,6 +4,11 @@ from pathlib import Path
 
 import streamlit as st
 
+from src.services.auth_ui import require_login, logout_button
+
+require_login()
+logout_button()
+
 
 # ------------ Helpers ------------ #
 
