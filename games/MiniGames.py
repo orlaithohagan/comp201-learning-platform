@@ -2,6 +2,7 @@
 import streamlit as st
 from games.requirement_rush import play_requirement_rush, reset_requirement_rush
 from games.use_case_scramble import play_use_case_scramble
+from games.design_detective import play_design_detective, reset_design_detective 
 
 
 
@@ -17,6 +18,10 @@ def run_games_hub():
 
     if st.session_state.view == "use_case_scramble":
         play_use_case_scramble()
+        return
+    
+    if st.session_state.view == "design_detective":
+        play_design_detective()
         return
 
 
@@ -42,8 +47,8 @@ def run_games_hub():
     # === Design Detective placeholder ===
     with col3:
         st.markdown("### Design Detective")
-        st.write("Coming soon...")
-        st.button("Locked", disabled=True, key="btn_locked_dd")
+        st.write("Investigate scenarios and choose the best design fix.")
+        start_dd = st.button("Play Design Detective", key="btn_dd")
 
     st.write("---")
 
@@ -55,5 +60,10 @@ def run_games_hub():
     
     if start_ucs:
         st.session_state.view = "use_case_scramble"
+        st.rerun()
+
+    if start_dd:
+        reset_design_detective()
+        st.session_state.view = "design_detective"
         st.rerun()
 

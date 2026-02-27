@@ -1,0 +1,518 @@
+[
+  {
+    "id": "dd_01",
+    "title": "Ambiguous Requirement",
+    "difficulty": "easy",
+    "category": "Requirements",
+    "scenario": "A stakeholder provides a requirement that is later interpreted differently by the development team and the customer.",
+    "evidence": {
+      "requirements": [
+        "The system shall load quickly.",
+        "The system shall be user-friendly."
+      ],
+      "snippet": "No code provided — focus on requirement quality."
+    },
+    "questions": {
+      "primary": {
+        "question": "What is the main problem with these requirements?",
+        "options": [
+          "They are ambiguous and not measurable",
+          "They are written as non-functional requirements",
+          "They contain too many technical details",
+          "They use correct, testable language"
+        ],
+        "answer": "They are ambiguous and not measurable"
+      },
+      "secondary": {
+        "question": "What is the best improvement?",
+        "options": [
+          "Rewrite using measurable criteria (e.g., seconds, error rate, satisfaction score)",
+          "Move the requirements into the code comments",
+          "Remove non-functional requirements entirely",
+          "Replace them with user stories only"
+        ],
+        "answer": "Rewrite using measurable criteria (e.g., seconds, error rate, satisfaction score)"
+      }
+    },
+    "hint": "Ask yourself: could you test 'quickly' or 'user-friendly' objectively?",
+    "explanation": "The wording is vague and open to interpretation. Good requirements should be clear and verifiable (testable). Rewriting with measurable targets improves precision and reduces misunderstanding."
+  },
+  {
+    "id": "dd_02",
+    "title": "Missing Security Requirement",
+    "difficulty": "medium",
+    "category": "Requirements",
+    "scenario": "A team designs a system to store student records. The requirements list features and performance targets but nothing about access control or data protection.",
+    "evidence": {
+      "requirements": [
+        "Users can view student profiles.",
+        "Users can edit student profiles.",
+        "The system must support 500 concurrent users."
+      ],
+      "snippet": "The database contains names, addresses, and grades."
+    },
+    "questions": {
+      "primary": {
+        "question": "What is the most serious missing requirement type?",
+        "options": [
+          "Security / access control requirement",
+          "Usability requirement",
+          "Functional requirement",
+          "Internationalisation requirement"
+        ],
+        "answer": "Security / access control requirement"
+      },
+      "secondary": {
+        "question": "What is the most appropriate fix?",
+        "options": [
+          "Add requirements for authentication, authorisation, and audit logging",
+          "Add more performance requirements only",
+          "Remove editing features",
+          "Delay security decisions until after deployment"
+        ],
+        "answer": "Add requirements for authentication, authorisation, and audit logging"
+      }
+    },
+    "hint": "What protects sensitive data from unauthorised users?",
+    "explanation": "When handling sensitive records, security requirements are essential (authentication, authorisation, auditing, and data protection). Leaving them out is a major risk."
+  },
+  {
+    "id": "dd_03",
+    "title": "Incorrect Multiplicity",
+    "difficulty": "medium",
+    "category": "Modelling",
+    "scenario": "A team models a system where students submit assignments. They create a Student–Assignment relationship but users report the model doesn't reflect reality.",
+    "evidence": {
+      "diagram_text": "Model states: Student (1) --- (1) AssignmentSubmission",
+      "requirements": [
+        "A student can submit multiple assignment submissions (one per assignment).",
+        "Each submission belongs to exactly one student."
+      ],
+      "snippet": "No code provided — focus on the object model."
+    },
+    "questions": {
+      "primary": {
+        "question": "What is wrong with the relationship shown?",
+        "options": [
+          "Multiplicity should be 1-to-many (Student to AssignmentSubmission)",
+          "It should be many-to-many",
+          "It should be composition instead of association",
+          "Multiplicity is correct as 1-to-1"
+        ],
+        "answer": "Multiplicity should be 1-to-many (Student to AssignmentSubmission)"
+      },
+      "secondary": {
+        "question": "Which corrected multiplicities best fit the requirements?",
+        "options": [
+          "Student (1) --- (0..*) AssignmentSubmission",
+          "Student (0..*) --- (0..*) AssignmentSubmission",
+          "Student (1) --- (1) AssignmentSubmission",
+          "Student (0..1) --- (1) AssignmentSubmission"
+        ],
+        "answer": "Student (1) --- (0..*) AssignmentSubmission"
+      }
+    },
+    "hint": "Can one student submit more than one thing over time?",
+    "explanation": "The requirements state multiple submissions per student. The model should represent one-to-many: a student can have zero or more submissions, while each submission has exactly one student."
+  },
+  {
+    "id": "dd_04",
+    "title": "Aggregation vs Composition",
+    "difficulty": "hard",
+    "category": "OO Design",
+    "scenario": "A team designs a model for an Order system. They debate whether Order 'has' OrderLines using aggregation or composition.",
+    "evidence": {
+      "diagram_text": "Order o--- OrderLine (aggregation)",
+      "requirements": [
+        "An Order consists of one or more OrderLines.",
+        "OrderLines should not exist without an Order.",
+        "Deleting an Order deletes its lines."
+      ],
+      "snippet": "No code provided — focus on relationship semantics."
+    },
+    "questions": {
+      "primary": {
+        "question": "Which relationship type best fits the requirements?",
+        "options": [
+          "Composition (Order owns OrderLines)",
+          "Aggregation (Order references shared OrderLines)",
+          "Inheritance (OrderLine is an Order)",
+          "No relationship should be modelled"
+        ],
+        "answer": "Composition (Order owns OrderLines)"
+      },
+      "secondary": {
+        "question": "Why is composition more appropriate here?",
+        "options": [
+          "OrderLines have the same lifecycle as Order and don’t exist independently",
+          "OrderLines must be shared between multiple Orders",
+          "OrderLines should exist even when the Order is deleted",
+          "Composition always replaces associations"
+        ],
+        "answer": "OrderLines have the same lifecycle as Order and don’t exist independently"
+      }
+    },
+    "hint": "What happens to the parts when the whole is deleted?",
+    "explanation": "Composition indicates strong ownership and shared lifecycle. Since OrderLines should not exist without an Order, composition fits better than aggregation."
+  },
+  {
+    "id": "dd_05",
+    "title": "Low Cohesion / High Coupling Module",
+    "difficulty": "hard",
+    "category": "Design",
+    "scenario": "A single module handles input validation, database operations, report formatting, and email notifications. Changing any feature often breaks others.",
+    "evidence": {
+      "snippet": "class SystemManager:\n  def validate_input(...):\n    ...\n  def save_to_db(...):\n    ...\n  def generate_report_pdf(...):\n    ...\n  def send_email(...):\n    ...\n",
+      "requirements": [
+        "Reports must be downloadable as PDF.",
+        "Emails must be sent after actions.",
+        "Database operations must be reliable."
+      ]
+    },
+    "questions": {
+      "primary": {
+        "question": "What is the main design problem?",
+        "options": [
+          "Low cohesion and high coupling due to too many responsibilities in one module",
+          "Incorrect multiplicity in the model",
+          "A missing state transition",
+          "A performance-only issue"
+        ],
+        "answer": "Low cohesion and high coupling due to too many responsibilities in one module"
+      },
+      "secondary": {
+        "question": "Which improvement is best?",
+        "options": [
+          "Split into separate modules/services (validation, persistence, reporting, notifications) with clear interfaces",
+          "Add more functions to the same class to keep everything together",
+          "Move all functionality into global variables",
+          "Remove validation to reduce complexity"
+        ],
+        "answer": "Split into separate modules/services (validation, persistence, reporting, notifications) with clear interfaces"
+      }
+    },
+    "hint": "How many different reasons could this module change?",
+    "explanation": "Combining unrelated responsibilities reduces cohesion and increases coupling. Splitting concerns and using clear module boundaries supports modular design and easier maintenance."
+  },
+  {
+    "id": "dd_06",
+    "title": "Verification vs Validation Confusion",
+    "difficulty": "easy",
+    "category": "Testing",
+    "scenario": "A team claims the system is 'validated' because unit tests pass, but users report it doesn't meet their needs.",
+    "evidence": {
+      "requirements": [
+        "Users need a simple workflow with minimal steps.",
+        "The system must prevent common input mistakes."
+      ],
+      "snippet": "Unit tests cover internal functions, but no user acceptance testing has been performed."
+    },
+    "questions": {
+      "primary": {
+        "question": "What is the core mistake being made?",
+        "options": [
+          "Confusing verification (building it right) with validation (building the right thing)",
+          "Using black-box testing instead of white-box",
+          "Having too much regression testing",
+          "Testing too late in the lifecycle"
+        ],
+        "answer": "Confusing verification (building it right) with validation (building the right thing)"
+      },
+      "secondary": {
+        "question": "What is the best next step to address this?",
+        "options": [
+          "Perform user acceptance testing and review requirements with stakeholders",
+          "Write more unit tests only",
+          "Remove all tests until the end",
+          "Only measure code coverage"
+        ],
+        "answer": "Perform user acceptance testing and review requirements with stakeholders"
+      }
+    },
+    "hint": "Unit tests show correctness of code, but do they prove it meets user needs?",
+    "explanation": "Verification checks conformance to specification and correctness. Validation checks whether the product meets stakeholder needs. Both are required."
+  }
+  ,
+{
+  "id": "dd_07",
+  "title": "Conflicting Stakeholder Views",
+  "difficulty": "medium",
+  "category": "Requirements",
+  "scenario": "Two stakeholders disagree: one wants detailed data export features, the other wants minimal system complexity.",
+  "evidence": {
+    "requirements": [
+      "The system shall provide full CSV export of all user activity.",
+      "The system shall remain lightweight and simple."
+    ]
+  },
+  "questions": {
+    "primary": {
+      "question": "What is the main issue?",
+      "options": [
+        "Conflicting stakeholder requirements",
+        "Incorrect UML notation",
+        "Low cohesion",
+        "Too many test cases"
+      ],
+      "answer": "Conflicting stakeholder requirements"
+    },
+    "secondary": {
+      "question": "What is the best resolution approach?",
+      "options": [
+        "Facilitate stakeholder negotiation and prioritisation",
+        "Ignore one stakeholder",
+        "Implement everything immediately",
+        "Remove all export functionality"
+      ],
+      "answer": "Facilitate stakeholder negotiation and prioritisation"
+    }
+  },
+  "hint": "Consider how requirements are prioritised when stakeholders disagree.",
+  "explanation": "Conflicting stakeholder viewpoints must be negotiated and prioritised. Requirements engineering involves balancing competing needs."
+},
+
+{
+  "id": "dd_08",
+  "title": "Unbounded Loop in State Model",
+  "difficulty": "hard",
+  "category": "Modelling",
+  "scenario": "A state diagram allows a transition from 'Processing' back to 'Processing' without exit conditions.",
+  "evidence": {
+    "diagram_text": "Processing --> Processing (no guard condition)"
+  },
+  "questions": {
+    "primary": {
+      "question": "What modelling issue is present?",
+      "options": [
+        "Potential infinite loop due to missing guard condition",
+        "Incorrect multiplicity",
+        "Aggregation instead of composition",
+        "Poor user interface design"
+      ],
+      "answer": "Potential infinite loop due to missing guard condition"
+    },
+    "secondary": {
+      "question": "What is the correct improvement?",
+      "options": [
+        "Add guard conditions or exit criteria to the transition",
+        "Delete the Processing state",
+        "Convert it to inheritance",
+        "Increase performance targets"
+      ],
+      "answer": "Add guard conditions or exit criteria to the transition"
+    }
+  },
+  "hint": "What prevents the system from staying in the same state forever?",
+  "explanation": "State transitions should include clear guards or exit conditions to avoid unintended infinite loops."
+},
+
+{
+  "id": "dd_09",
+  "title": "Incorrect Use of Inheritance",
+  "difficulty": "medium",
+  "category": "OO Design",
+  "scenario": "A developer makes Payment inherit from User because payments are made by users.",
+  "evidence": {
+    "diagram_text": "class Payment extends User"
+  },
+  "questions": {
+    "primary": {
+      "question": "What is wrong with this design?",
+      "options": [
+        "Inheritance is misused where association is more appropriate",
+        "Multiplicity is incorrect",
+        "It violates performance requirements",
+        "It lacks regression testing"
+      ],
+      "answer": "Inheritance is misused where association is more appropriate"
+    },
+    "secondary": {
+      "question": "What is the better modelling choice?",
+      "options": [
+        "Model Payment as associated with User",
+        "Make User extend Payment",
+        "Delete Payment",
+        "Convert to composition"
+      ],
+      "answer": "Model Payment as associated with User"
+    }
+  },
+  "hint": "Is a Payment a type of User?",
+  "explanation": "Inheritance represents an 'is-a' relationship. A Payment is not a type of User; it is associated with a User."
+},
+
+{
+  "id": "dd_10",
+  "title": "Overly Large Sprint Commitment",
+  "difficulty": "medium",
+  "category": "Project Management",
+  "scenario": "A team commits to delivering 25 major features in a two-week sprint.",
+  "evidence": {
+    "requirements": ["25 new features planned in 14 days."]
+  },
+  "questions": {
+    "primary": {
+      "question": "What is the likely issue?",
+      "options": [
+        "Unrealistic sprint planning",
+        "Incorrect multiplicity",
+        "Too much regression testing",
+        "Overuse of composition"
+      ],
+      "answer": "Unrealistic sprint planning"
+    },
+    "secondary": {
+      "question": "What is the best corrective action?",
+      "options": [
+        "Re-estimate and reduce scope based on velocity",
+        "Increase documentation only",
+        "Skip testing",
+        "Add more UML diagrams"
+      ],
+      "answer": "Re-estimate and reduce scope based on velocity"
+    }
+  },
+  "hint": "Consider agile estimation and team velocity.",
+  "explanation": "Sprint planning should align with realistic team capacity. Overcommitment increases risk and technical debt."
+},
+
+{
+  "id": "dd_11",
+  "title": "Hard-Coded Security Logic",
+  "difficulty": "hard",
+  "category": "Design",
+  "scenario": "Authentication checks are hard-coded inside multiple modules instead of centralised.",
+  "evidence": {
+    "snippet": "if user.role == 'admin': allow_access()"
+  },
+  "questions": {
+    "primary": {
+      "question": "What design problem exists?",
+      "options": [
+        "Security logic is tightly coupled and duplicated",
+        "Incorrect UML aggregation",
+        "Too few requirements",
+        "Incorrect state transition"
+      ],
+      "answer": "Security logic is tightly coupled and duplicated"
+    },
+    "secondary": {
+      "question": "What is a better approach?",
+      "options": [
+        "Centralise authentication and authorisation in a dedicated module",
+        "Add more hard-coded checks",
+        "Disable authentication",
+        "Move logic to comments"
+      ],
+      "answer": "Centralise authentication and authorisation in a dedicated module"
+    }
+  },
+  "hint": "What happens when access rules change?",
+  "explanation": "Duplicated security logic increases coupling and maintenance cost. Centralised control improves modularity."
+},
+
+{
+  "id": "dd_12",
+  "title": "No Regression Testing",
+  "difficulty": "medium",
+  "category": "Testing",
+  "scenario": "A team fixes a bug but does not re-run previous test cases.",
+  "evidence": {
+    "requirements": ["System must remain stable after updates."]
+  },
+  "questions": {
+    "primary": {
+      "question": "What is the risk?",
+      "options": [
+        "New changes may break existing functionality",
+        "Multiplicity errors",
+        "Inheritance misuse",
+        "Improved performance"
+      ],
+      "answer": "New changes may break existing functionality"
+    },
+    "secondary": {
+      "question": "What should be implemented?",
+      "options": [
+        "Regression testing suite",
+        "Delete test cases",
+        "Manual testing only",
+        "Remove version control"
+      ],
+      "answer": "Regression testing suite"
+    }
+  },
+  "hint": "Think about changes affecting existing features.",
+  "explanation": "Regression testing ensures that new changes do not introduce unintended side effects."
+},
+
+{
+  "id": "dd_13",
+  "title": "Uncontrolled Risk",
+  "difficulty": "medium",
+  "category": "Project Management",
+  "scenario": "A project identifies data migration as high risk but creates no mitigation plan.",
+  "evidence": {
+    "requirements": ["System must migrate legacy data."]
+  },
+  "questions": {
+    "primary": {
+      "question": "What is missing?",
+      "options": [
+        "Risk mitigation planning",
+        "More UML diagrams",
+        "Unit tests",
+        "Inheritance hierarchy"
+      ],
+      "answer": "Risk mitigation planning"
+    },
+    "secondary": {
+      "question": "What is the correct response?",
+      "options": [
+        "Define mitigation and contingency strategies",
+        "Ignore the risk",
+        "Add features",
+        "Shorten the schedule"
+      ],
+      "answer": "Define mitigation and contingency strategies"
+    }
+  },
+  "hint": "Risk management involves more than identification.",
+  "explanation": "Risks must be analysed and mitigation strategies defined to reduce project failure probability."
+},
+
+{
+  "id": "dd_14",
+  "title": "Incorrect Many-to-Many",
+  "difficulty": "hard",
+  "category": "Modelling",
+  "scenario": "A model shows Students and Courses as 1-to-1.",
+  "evidence": {
+    "diagram_text": "Student (1) --- (1) Course"
+  },
+  "questions": {
+    "primary": {
+      "question": "What is incorrect?",
+      "options": [
+        "Multiplicity should allow many-to-many",
+        "Aggregation should be used",
+        "Inheritance required",
+        "Add performance requirements"
+      ],
+      "answer": "Multiplicity should allow many-to-many"
+    },
+    "secondary": {
+      "question": "Correct multiplicity?",
+      "options": [
+        "Student (0..*) --- (0..*) Course",
+        "Student (1) --- (1) Course",
+        "Student (1) --- (0..1) Course",
+        "Student (0..1) --- (1) Course"
+      ],
+      "answer": "Student (0..*) --- (0..*) Course"
+    }
+  },
+  "hint": "Can a student enrol in more than one course?",
+  "explanation": "Students can enrol in multiple courses, and courses contain multiple students — many-to-many."
+}
+]
