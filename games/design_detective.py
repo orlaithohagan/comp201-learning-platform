@@ -230,59 +230,122 @@ def _build_improvement_tips(results):
     return tips
 
 
-def _summary_screen():
-    ss = st.session_state
-    st.title("Design Detective — Round Summary 🧾")
+# def _summary_screen():
+#     ss = st.session_state
+#     st.title("Design Detective — Round Summary 🧾")
 
-    total_cases = len(ss.dd_results)
-    if total_cases == 0:
-        st.info("No cases completed yet.")
-        return
+#     total_cases = len(ss.dd_results)
+#     if total_cases == 0:
+#         st.info("No cases completed yet.")
+#         return
 
-    total_score = ss.dd_score
-    perfect_cases = sum(1 for r in ss.dd_results if r["issue_correct"] and r["fix_correct"] and not r["hint_used"])
-    both_correct = sum(1 for r in ss.dd_results if r["issue_correct"] and r["fix_correct"])
-    any_correct = sum(1 for r in ss.dd_results if r["issue_correct"] or r["fix_correct"])
-    hints = sum(1 for r in ss.dd_results if r["hint_used"])
+#     total_score = ss.dd_score
+#     perfect_cases = sum(1 for r in ss.dd_results if r["issue_correct"] and r["fix_correct"] and not r["hint_used"])
+#     both_correct = sum(1 for r in ss.dd_results if r["issue_correct"] and r["fix_correct"])
+#     any_correct = sum(1 for r in ss.dd_results if r["issue_correct"] or r["fix_correct"])
+#     hints = sum(1 for r in ss.dd_results if r["hint_used"])
 
-    st.markdown("### Results")
-    st.write(f"**Total score:** {total_score}")
-    st.write(f"**Cases completed:** {total_cases}")
-    st.write(f"**Perfect cases (both correct, no hint):** {perfect_cases} / {total_cases}")
-    st.write(f"**Both correct (hint allowed):** {both_correct} / {total_cases}")
-    st.write(f"**At least one correct answer:** {any_correct} / {total_cases}")
-    st.write(f"**Hints used:** {hints}")
+#     st.markdown("### Results")
+#     st.write(f"**Total score:** {total_score}")
+#     st.write(f"**Cases completed:** {total_cases}")
+#     st.write(f"**Perfect cases (both correct, no hint):** {perfect_cases} / {total_cases}")
+#     st.write(f"**Both correct (hint allowed):** {both_correct} / {total_cases}")
+#     st.write(f"**At least one correct answer:** {any_correct} / {total_cases}")
+#     st.write(f"**Hints used:** {hints}")
 
-    # Category breakdown
-    st.markdown("### Category breakdown")
-    categories = {}
-    for r in ss.dd_results:
-        cat = r["category"]
-        categories.setdefault(cat, {"cases": 0, "points": 0, "q_correct": 0, "q_total": 0})
-        categories[cat]["cases"] += 1
-        categories[cat]["points"] += r["points_awarded"]
-        categories[cat]["q_total"] += 2
-        categories[cat]["q_correct"] += (1 if r["issue_correct"] else 0) + (1 if r["fix_correct"] else 0)
+#     # Category breakdown
+#     st.markdown("### Category breakdown")
+#     categories = {}
+#     for r in ss.dd_results:
+#         cat = r["category"]
+#         categories.setdefault(cat, {"cases": 0, "points": 0, "q_correct": 0, "q_total": 0})
+#         categories[cat]["cases"] += 1
+#         categories[cat]["points"] += r["points_awarded"]
+#         categories[cat]["q_total"] += 2
+#         categories[cat]["q_correct"] += (1 if r["issue_correct"] else 0) + (1 if r["fix_correct"] else 0)
 
-    for cat, info in categories.items():
-        acc = int(round((info["q_correct"] / info["q_total"]) * 100)) if info["q_total"] else 0
-        st.write(f"**{cat}** — {info['points']} pts, accuracy: {acc}% ({info['cases']} case(s))")
+#     for cat, info in categories.items():
+#         acc = int(round((info["q_correct"] / info["q_total"]) * 100)) if info["q_total"] else 0
+#         st.write(f"**{cat}** — {info['points']} pts, accuracy: {acc}% ({info['cases']} case(s))")
 
-    st.markdown("### Suggested improvements")
-    for tip in _build_improvement_tips(ss.dd_results):
-        st.write(f"• {tip}")
+#     st.markdown("### Suggested improvements")
+#     for tip in _build_improvement_tips(ss.dd_results):
+#         st.write(f"• {tip}")
+
+#     st.markdown("---")
+#     c1, c2 = st.columns(2)
+#     with c1:
+#         if st.button("Play another round 🔁", use_container_width=True):
+#             all_cases = load_cases()
+#             start_new_round(all_cases, CASES_PER_ROUND)
+#             st.rerun()
+#     with c2:
+#         if st.button("Back to Games Hub 🏠", use_container_width=True):
+#             st.session_state.view = "hub"
+#             st.rerun()
+
+def render_round_summary(state: dict):
+    """
+    state should contain:
+      - correct_count
+      - total_questions
+      - weak_topics (list[str])  e.g. ["Cohesion", "Coupling"]
+      - streak_best (optional)
+    """
+    correct = state.get("correct_count", 0)
+    total = state.get("total_questions", 0)
+    weak_topics = state.get("weak_topics", [])[:2]  # keep it short
+    pct = (correct / total * 100) if total else 0
 
     st.markdown("---")
-    c1, c2 = st.columns(2)
-    with c1:
-        if st.button("Play another round 🔁", use_container_width=True):
-            all_cases = load_cases()
-            start_new_round(all_cases, CASES_PER_ROUND)
+    st.header("Round complete 🎉")
+
+    # Big headline score
+    st.subheader(f"Score: **{correct} / {total}**")
+
+    # Engaging “result vibe”
+    if pct >= 90:
+        st.success("Design Detective level: **Elite 🏆** — you’re spotting issues like a pro.")
+        badge = "🏆 Elite"
+    elif pct >= 70:
+        st.info("Nice work! **Solid Detective 🕵️‍♀️** — a bit more practice and you’ll ace it.")
+        badge = "🕵️‍♀️ Solid Detective"
+    elif pct >= 50:
+        st.warning("Good start! **Getting Warmer 🔍** — you’re close, keep going.")
+        badge = "🔍 Getting Warmer"
+    else:
+        st.error("Tough round — but that’s how you learn. **Keep practicing 💪**")
+        badge = "💪 Keep Practicing"
+
+    # Quick “what to focus on” (no huge breakdowns)
+    st.markdown("### Quick tip for next round")
+    if weak_topics:
+        st.write("Focus on:")
+        for t in weak_topics:
+            st.write(f"• **{t}** (try to explain it in one sentence before answering)")
+    else:
+        st.write("You didn’t show any clear weak spots — try increasing difficulty next round!")
+
+    # Optional: streak shout-out (short + fun)
+    if state.get("streak_best"):
+        st.caption(f"🔥 Best streak this round: {state['streak_best']}")
+
+    # CTA buttons
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Play another round", use_container_width=True):
+            st.session_state.dd_round_active = False  # or whatever your reset flag is
+            st.session_state.dd_start_new_round = True
             st.rerun()
-    with c2:
-        if st.button("Back to Games Hub 🏠", use_container_width=True):
-            st.session_state.view = "hub"
+
+    with col2:
+        if st.button("Back to Games Hub", use_container_width=True):
+            st.session_state.view = "hub"  # matches your MiniGames hub routing
             st.rerun()
+
+    # Tiny reward (optional)
+    if pct >= 70:
+        st.balloons()
 
 
 def play_design_detective():
@@ -330,10 +393,40 @@ def play_design_detective():
             st.rerun()
         return
 
-    # If finished
+    # --- End of round ---
     if ss.dd_idx >= len(ss.dd_cases):
-        _summary_screen()
-        return
+        correct = sum(
+            1 for r in ss.dd_results
+            if r["issue_correct"] and r["fix_correct"]
+        )
+
+        total = len(ss.dd_results)
+
+        weak_topics = []
+        category_stats = {}
+
+        for r in ss.dd_results:
+            cat = r["category"]
+            category_stats.setdefault(cat, {"correct": 0, "total": 0})
+            category_stats[cat]["total"] += 2
+            category_stats[cat]["correct"] += (
+                (1 if r["issue_correct"] else 0) +
+                (1 if r["fix_correct"] else 0)
+            )
+
+        for cat, stats in category_stats.items():
+            acc = stats["correct"] / stats["total"]
+            if acc < 0.6:
+                weak_topics.append(cat)
+
+        render_round_summary({
+            "correct_count": correct,
+            "total_questions": total,
+            "weak_topics": weak_topics,
+            "streak_best": ss.dd_streak,
+        })
+
+        return  # IMPORTANT so the rest of the game UI doesn't run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     case = _current_case()
     if not case:
