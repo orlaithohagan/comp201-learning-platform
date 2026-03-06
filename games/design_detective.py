@@ -11,10 +11,29 @@ HINT_PENALTY = 1
 # Session format
 CASES_PER_ROUND = 5  # <-- rounds of 5 cases
 
+DD_KEYS = [
+    "dd_in_session",
+    "dd_cases",
+    "dd_idx",
+    "dd_score",
+    "dd_streak",
+    "dd_best_streak",
+    "dd_results",
+    "dd_hint_used",
+    "dd_checked",
+    "dd_last_feedback",
+]
 
-def load_cases():
+# def load_cases():
+#     if not DATA_PATH.exists():
+#         st.error("Design Detective data file not found: data/design_detective_cases.json")
+#         return []
+#     with open(DATA_PATH, "r", encoding="utf-8") as f:
+#         return json.load(f)
+
+@st.cache_data
+def load_cases_cached():
     if not DATA_PATH.exists():
-        st.error("Design Detective data file not found: data/design_detective_cases.json")
         return []
     with open(DATA_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -27,28 +46,32 @@ def _init_dd_state():
     ss.setdefault("dd_idx", 0)
     ss.setdefault("dd_score", 0)
     ss.setdefault("dd_streak", 0)
+    ss.setdefault("dd_best_streak", 0)
     ss.setdefault("dd_results", [])  # list of dicts per case
     ss.setdefault("dd_hint_used", False)
     ss.setdefault("dd_checked", False)
     ss.setdefault("dd_last_feedback", None)
 
 
-def reset_design_detective():
-    ss = st.session_state
-    for k in [
-        "dd_in_session",
-        "dd_cases",
-        "dd_idx",
-        "dd_score",
-        "dd_streak",
-        "dd_results",
-        "dd_hint_used",
-        "dd_checked",
-        "dd_last_feedback",
-    ]:
-        ss.pop(k, None)
-    _init_dd_state()
+# def reset_design_detective():
+#     ss = st.session_state
+#     for k in [
+#         "dd_in_session",
+#         "dd_cases",
+#         "dd_idx",
+#         "dd_score",
+#         "dd_streak",
+#         "dd_results",
+#         "dd_hint_used",
+#         "dd_checked",
+#         "dd_last_feedback",
+#     ]:
+#         ss.pop(k, None)
+#     _init_dd_state()
 
+def reset_design_detective():
+    for k in DD_KEYS:
+        st.session_state.pop(k, None)
 
 def _shuffle_case_options(case: dict) -> dict:
     """
@@ -81,7 +104,7 @@ def start_new_round(all_cases, n=CASES_PER_ROUND):
     and shuffle answer options for each case.
     """
     reset_design_detective()
-    _init_dd_state()
+    # _init_dd_state()
     ss = st.session_state
 
     if len(all_cases) < n:
@@ -98,6 +121,7 @@ def start_new_round(all_cases, n=CASES_PER_ROUND):
     ss.dd_idx = 0
     ss.dd_score = 0
     ss.dd_streak = 0
+    ss.dd_best_streak = 0
     ss.dd_results = []
     ss.dd_hint_used = False
     ss.dd_checked = False
@@ -359,8 +383,9 @@ def play_design_detective():
             ss.view = "hub"
             st.rerun()
 
-    all_cases = load_cases()
+    all_cases = load_cases_cached()
     if not all_cases:
+        st.error("No Design Detective cases found. Check data/design_detective_cases.json")
         return
 
     # Start round if not in one yet
@@ -395,12 +420,11 @@ def play_design_detective():
 
     # --- End of round ---
     if ss.dd_idx >= len(ss.dd_cases):
-        correct = sum(
-            1 for r in ss.dd_results
-            if r["issue_correct"] and r["fix_correct"]
+        correct_q = sum(
+            (1 if r["issue_correct"] else 0) + (1 if r["fix_correct"] else 0)
+            for r in ss.dd_results
         )
-
-        total = len(ss.dd_results)
+        total_q = len(ss.dd_results) * 2
 
         weak_topics = []
         category_stats = {}
@@ -420,10 +444,10 @@ def play_design_detective():
                 weak_topics.append(cat)
 
         render_round_summary({
-            "correct_count": correct,
-            "total_questions": total,
+            "correct_count": correct_q,
+            "total_questions": total_q,
             "weak_topics": weak_topics,
-            "streak_best": ss.dd_streak,
+            "streak_best": ss.dd_best_streak,  # (after you implement B)
         })
 
         return  # IMPORTANT so the rest of the game UI doesn't run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -486,6 +510,9 @@ def play_design_detective():
                 ss.dd_streak += 1
             else:
                 ss.dd_streak = 0
+
+            #Track best streak of the round
+            ss.dd_best_streak = max(ss.dd_best_streak, ss.dd_streak)
 
             # Simple streak bonus every 3 perfect cases (within the round)
             bonus = 0
