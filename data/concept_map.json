@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "id": "comp201",
+      "label": "COMP201 Software Engineering",
+      "category": "core",
+      "description": "This is the central topic for the COMP201 learning platform, connecting the key software engineering concepts covered in the module.",
+      "related_tools": ["flashcards", "quiz", "mini_games", "ai_tutor"]
+    },
+
+    {
+      "id": "requirements_engineering",
+      "label": "Requirements Engineering",
+      "category": "topic",
+      "description": "Requirements engineering focuses on discovering, analysing, documenting, and validating what a software system should do.",
+      "related_tools": ["flashcards", "quiz", "ai_tutor"]
+    },
+    {
+      "id": "functional_requirements",
+      "label": "Functional Requirements",
+      "category": "subtopic",
+      "description": "Functional requirements describe the services and behaviours the system must provide.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+    {
+      "id": "non_functional_requirements",
+      "label": "Non-Functional Requirements",
+      "category": "subtopic",
+      "description": "Non-functional requirements describe qualities such as usability, reliability, performance, and security.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+
+    {
+      "id": "software_processes",
+      "label": "Software Processes",
+      "category": "topic",
+      "description": "Software processes describe how software is developed, tested, delivered, and maintained.",
+      "related_tools": ["flashcards", "quiz", "ai_tutor"]
+    },
+    {
+      "id": "waterfall_model",
+      "label": "Waterfall Model",
+      "category": "subtopic",
+      "description": "A linear development model where each stage is completed before the next begins.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+    {
+      "id": "agile_development",
+      "label": "Agile Development",
+      "category": "subtopic",
+      "description": "An iterative and flexible approach to software development focused on collaboration and responsiveness to change.",
+      "related_tools": ["flashcards", "quiz", "mini_games"]
+    },
+
+    {
+      "id": "system_modelling",
+      "label": "System Modelling and UML",
+      "category": "topic",
+      "description": "System modelling uses diagrams and abstractions to represent software systems and their behaviour.",
+      "related_tools": ["flashcards", "quiz", "mini_games"]
+    },
+    {
+      "id": "use_case_diagrams",
+      "label": "Use Case Diagrams",
+      "category": "subtopic",
+      "description": "Use case diagrams show interactions between users or external actors and the system.",
+      "related_tools": ["flashcards", "quiz", "mini_games"]
+    },
+    {
+      "id": "class_diagrams",
+      "label": "Class Diagrams",
+      "category": "subtopic",
+      "description": "Class diagrams show classes, attributes, methods, and relationships in object-oriented design.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+
+    {
+      "id": "ood",
+      "label": "Object-Oriented Design",
+      "category": "topic",
+      "description": "Object-oriented design structures software around objects, classes, inheritance, and encapsulation.",
+      "related_tools": ["flashcards", "quiz", "ai_tutor"]
+    },
+    {
+      "id": "inheritance",
+      "label": "Inheritance",
+      "category": "subtopic",
+      "description": "Inheritance allows one class to derive properties and behaviours from another.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+    {
+      "id": "encapsulation",
+      "label": "Encapsulation",
+      "category": "subtopic",
+      "description": "Encapsulation keeps data and behaviour bundled together and protects internal state.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+
+    {
+      "id": "architectural_design",
+      "label": "Architectural Design",
+      "category": "topic",
+      "description": "Architectural design defines the high-level structure of a software system and how components interact.",
+      "related_tools": ["flashcards", "quiz", "ai_tutor"]
+    },
+    {
+      "id": "client_server",
+      "label": "Client-Server Architecture",
+      "category": "subtopic",
+      "description": "A distributed architecture where clients request services and servers provide them.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+    {
+      "id": "layered_architecture",
+      "label": "Layered Architecture",
+      "category": "subtopic",
+      "description": "A structure that separates a system into layers with distinct responsibilities.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+
+    {
+      "id": "project_management",
+      "label": "Project Management / Risk / Estimation",
+      "category": "topic",
+      "description": "This area covers planning, cost estimation, scheduling, and risk analysis in software projects.",
+      "related_tools": ["flashcards", "quiz", "ai_tutor"]
+    },
+    {
+      "id": "risk_management",
+      "label": "Risk Management",
+      "category": "subtopic",
+      "description": "Risk management identifies possible project problems and plans actions to reduce their impact.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+    {
+      "id": "effort_estimation",
+      "label": "Effort Estimation",
+      "category": "subtopic",
+      "description": "Effort estimation predicts the time, resources, and cost needed for software development.",
+      "related_tools": ["flashcards", "quiz"]
+    },
+
+    {
+      "id": "petri_nets",
+      "label": "Petri Nets",
+      "category": "topic",
+      "description": "Petri nets are a formal modelling technique used to represent concurrent and distributed systems.",
+      "related_tools": ["flashcards", "quiz", "ai_tutor"]
+    },
+
+    {
+      "id": "use_cases_case_studies",
+      "label": "Use Cases / Case Studies",
+      "category": "topic",
+      "description": "Use cases and case studies apply software engineering concepts to realistic scenarios and system interactions.",
+      "related_tools": ["flashcards", "quiz", "mini_games", "ai_tutor"]
+    }
+  ],
+  "edges": [
+    { "source": "comp201", "target": "requirements_engineering", "relationship": "includes" },
+    { "source": "comp201", "target": "software_processes", "relationship": "includes" },
+    { "source": "comp201", "target": "system_modelling", "relationship": "includes" },
+    { "source": "comp201", "target": "ood", "relationship": "includes" },
+    { "source": "comp201", "target": "architectural_design", "relationship": "includes" },
+    { "source": "comp201", "target": "project_management", "relationship": "includes" },
+    { "source": "comp201", "target": "petri_nets", "relationship": "includes" },
+    { "source": "comp201", "target": "use_cases_case_studies", "relationship": "includes" },
+
+    { "source": "requirements_engineering", "target": "functional_requirements", "relationship": "contains" },
+    { "source": "requirements_engineering", "target": "non_functional_requirements", "relationship": "contains" },
+
+    { "source": "software_processes", "target": "waterfall_model", "relationship": "contains" },
+    { "source": "software_processes", "target": "agile_development", "relationship": "contains" },
+
+    { "source": "system_modelling", "target": "use_case_diagrams", "relationship": "contains" },
+    { "source": "system_modelling", "target": "class_diagrams", "relationship": "contains" },
+
+    { "source": "ood", "target": "inheritance", "relationship": "contains" },
+    { "source": "ood", "target": "encapsulation", "relationship": "contains" },
+
+    { "source": "architectural_design", "target": "client_server", "relationship": "contains" },
+    { "source": "architectural_design", "target": "layered_architecture", "relationship": "contains" },
+
+    { "source": "project_management", "target": "risk_management", "relationship": "contains" },
+    { "source": "project_management", "target": "effort_estimation", "relationship": "contains" },
+
+    { "source": "requirements_engineering", "target": "use_case_diagrams", "relationship": "relates_to" },
+    { "source": "ood", "target": "class_diagrams", "relationship": "relates_to" },
+    { "source": "software_processes", "target": "project_management", "relationship": "relates_to" },
+    { "source": "use_cases_case_studies", "target": "requirements_engineering", "relationship": "applies" }
+  ]
+}

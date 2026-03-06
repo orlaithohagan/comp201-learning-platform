@@ -4,6 +4,8 @@ import time, random
 from pathlib import Path
 from src.services.auth_ui import require_login, logout_button
 
+selected_topic = st.session_state.get("selected_topic")
+
 require_login()
 logout_button()
 

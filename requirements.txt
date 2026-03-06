@@ -2,3 +2,5 @@ streamlit>=1.39
 streamlit-sortables
 streamlit-extras
 bcrypt
+networkx
+plotly
