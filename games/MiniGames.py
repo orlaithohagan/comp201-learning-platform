@@ -4,8 +4,6 @@ from games.requirement_rush import play_requirement_rush, reset_requirement_rush
 from games.use_case_scramble import play_use_case_scramble
 from games.design_detective import play_design_detective, reset_design_detective 
 
-
-
 def run_games_hub():
     # Which screen are we on? (hub or a specific game)
     if "view" not in st.session_state:
