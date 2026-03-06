@@ -49,7 +49,18 @@ def get_node_color(category):
 
 def create_plotly_figure(graph):
     """Create a Plotly network figure from the graph."""
-    pos = nx.spring_layout(graph, seed=42, k=1.3, iterations=100)
+    pos = nx.spring_layout(
+    graph,
+    seed=42,
+    k=1.8,
+    iterations=200,
+    center=(0, 0)
+    )
+    
+        # Force the core topic to the center
+    for node, attrs in graph.nodes(data=True):
+        if attrs.get("category") == "core":
+            pos[node] = (0, 0)
 
     edge_x = []
     edge_y = []
@@ -91,11 +102,11 @@ def create_plotly_figure(graph):
         node_colors.append(get_node_color(attrs["category"]))
 
         if attrs["category"] == "core":
-            node_sizes.append(34)
+            node_sizes.append(43)
         elif attrs["category"] == "topic":
-            node_sizes.append(26)
+            node_sizes.append(31)
         else:
-            node_sizes.append(20)
+            node_sizes.append(23)
 
     node_trace = go.Scatter(
         x=node_x,
