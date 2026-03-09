@@ -4,7 +4,10 @@ from pathlib import Path
 
 import streamlit as st
 
+from src.progress import log_quiz_attempt
 from src.services.auth_ui import require_login, logout_button
+
+st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
 
 require_login()
 logout_button()
@@ -98,6 +101,7 @@ def start_quiz(topic, cards):
     st.session_state.quiz_index = 0
     st.session_state.quiz_score = 0
     st.session_state.quiz_answers = []  # list of {prompt, correct, selected, is_correct}
+    st.session_state.quiz_logged = False
 
 
 def reset_quiz_state():
@@ -108,11 +112,8 @@ def reset_quiz_state():
     st.session_state.quiz_index = 0
     st.session_state.quiz_score = 0
     st.session_state.quiz_answers = []
+    st.session_state.quiz_logged = False
 
-
-# ------------ Page setup ------------ #
-
-st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
 
 # Optional: reuse your flashcards CSS if you like
 css_path = Path(__file__).resolve().parents[1] / "styles" / "flashcards.css"
@@ -133,6 +134,8 @@ if "quiz_score" not in st.session_state:
     st.session_state.quiz_score = 0
 if "quiz_answers" not in st.session_state:
     st.session_state.quiz_answers = []
+if "quiz_logged" not in st.session_state:
+    st.session_state.quiz_logged = False
 
 cards = load_flashcards()
 topics = get_topics(cards)
@@ -235,6 +238,22 @@ elif view == "results":
 
     total = len(st.session_state.quiz_questions)
     score = st.session_state.quiz_score
+
+    # TEST
+    # st.write("DEBUG user_id:", st.session_state.get("user_id"))
+
+    user_id = st.session_state.get("user_id")
+    topic_name = st.session_state.get("quiz_topic")
+    score_percent = round((score / total) * 100, 2) if total > 0 else 0
+
+    if user_id is not None and total > 0 and not st.session_state.quiz_logged:
+        log_quiz_attempt(
+            user_id=user_id,
+            topic_name=topic_name,
+            score=score_percent,
+            total_questions=total
+        )
+        st.session_state.quiz_logged = True
 
     st.subheader("Quiz complete! 🎉")
     st.write(f"**Your score:** {score} / {total}")

@@ -60,6 +60,9 @@ def login_page():
             st.stop()
 
         st.session_state["user"] = user
+        st.session_state["user_id"] = user["id"]
+        st.session_state["username"] = user["username"]
+
         st.success(f"Welcome, {user['username']}!")
         st.rerun()
 
@@ -145,6 +148,8 @@ def logout_button():
             st.write(f"👤 **{st.session_state['user']['username']}**")
             if st.button("Logout", use_container_width=True):
                 st.session_state.pop("user", None)
+                st.session_state.pop("user_id", None)
+                st.session_state.pop("username", None)
                 st.session_state["auth_view"] = "welcome"
                 st.rerun()
 
