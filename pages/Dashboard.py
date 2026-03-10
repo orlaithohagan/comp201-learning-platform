@@ -189,16 +189,23 @@ def main():
         st.caption("Compare quiz performance across all users.")
 
         if leaderboard:
+            current_user = st.session_state.get("username")
             leaderboard_df = pd.DataFrame(
                 leaderboard,
                 columns=["Username", "Average Score (%)", "Quizzes Completed"]
             )
 
-            leaderboard_df.index = range(1, len(leaderboard_df) + 1)
-            leaderboard_df.index.name = "Rank"
+            leaderboard_df["Average Score (%)"] = leaderboard_df["Average Score (%)"].round(2)
+            leaderboard_df.insert(0, "Rank", range(1, len(leaderboard_df) + 1))
+            medals = ["🥇", "🥈", "🥉"]
+            leaderboard_df["Rank"] = leaderboard_df["Rank"].apply(lambda x: medals[x - 1] if x <= 3 else x)
 
-            st.dataframe(leaderboard_df, width="stretch")
+            if current_user in leaderboard_df["Username"].values:
+                user_row = leaderboard_df[leaderboard_df["Username"] == current_user]
+                user_rank = user_row.index[0] + 1
+                st.info(f"You are currently ranked **#{user_rank}** on the leaderboard.")
 
+            st.dataframe(leaderboard_df, width="stretch", hide_index=True)
         else:
             st.info("No leaderboard data available yet.")
 
