@@ -4,7 +4,7 @@ import json
 import altair as alt
 from datetime import datetime
 from pathlib import Path
-from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress, get_attempted_topics, get_quiz_attempts_for_topic
+from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress, get_attempted_topics, get_quiz_attempts_for_topic, get_learning_streak
 from src.services.auth_ui import require_login, logout_button
 
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
@@ -50,6 +50,7 @@ def main():
     completed_count = len(attempted_topics)
     total_topics = len(all_topics)
     progress_percent = int((completed_count / total_topics) * 100) if total_topics > 0 else 0
+    learning_streak = get_learning_streak(user_id) 
 
     col1, col2, col3 = st.columns(3)
 
@@ -61,6 +62,14 @@ def main():
 
     with col3:
         st.metric("Best Score", f"{summary['best_score']}%")
+
+    st.markdown("---")
+    st.subheader("🔥 Learning Streak")
+
+    if learning_streak > 0:
+        st.success(f"You are on a {learning_streak}-day learning streak!")
+    else:
+        st.info("No learning streak yet. Complete a quiz today to start one.")
 
     st.markdown("---")
     st.subheader("📘 Course Progress")

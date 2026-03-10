@@ -4,7 +4,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from src.progress import log_quiz_attempt
+from src.progress import log_quiz_attempt, log_daily_activity
 from src.services.auth_ui import require_login, logout_button
 
 st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
@@ -253,6 +253,7 @@ elif view == "results":
             score=score_percent,
             total_questions=total
         )
+        log_daily_activity(user_id)
         st.session_state.quiz_logged = True
 
     st.subheader("Quiz complete! 🎉")

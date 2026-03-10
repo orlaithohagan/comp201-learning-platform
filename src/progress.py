@@ -1,5 +1,6 @@
 import sqlite3
 from pathlib import Path
+from datetime import datetime, timedelta
 
 DB_PATH = Path("data/app.db")
 
@@ -19,6 +20,15 @@ def create_progress_tables():
             score REAL NOT NULL,
             total_questions INTEGER NOT NULL,
             attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS daily_activity (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            activity_date TEXT NOT NULL,
+            UNIQUE(user_id, activity_date)
         )
     """)
 
@@ -135,5 +145,46 @@ def get_quiz_attempts_for_topic(user_id, topic_name):
 
     rows = cursor.fetchall()
     conn.close()
-
     return rows
+
+def log_daily_activity(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    cursor.execute("""
+        INSERT OR IGNORE INTO daily_activity (user_id, activity_date)
+        VALUES (?, ?)
+    """, (user_id, today))
+
+    conn.commit()
+    conn.close()
+
+def get_learning_streak(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT activity_date
+        FROM daily_activity
+        WHERE user_id = ?
+        ORDER BY activity_date DESC
+    """, (user_id,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    if not rows:
+        return 0
+
+    activity_dates = {row[0] for row in rows}
+
+    streak = 0
+    current_day = datetime.now().date()
+
+    while current_day.strftime("%Y-%m-%d") in activity_dates:
+        streak += 1
+        current_day -= timedelta(days=1)
+
+    return streak
