@@ -107,4 +107,19 @@ def get_quiz_scores_over_time(user_id):
     conn.close()
     return rows
 
+def get_attempted_topics(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT topic_name
+        FROM quiz_attempts
+        WHERE user_id = ?
+    """, (user_id,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return [row[0] for row in rows if row[0]]
+
     return rows
