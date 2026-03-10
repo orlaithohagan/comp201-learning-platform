@@ -137,4 +137,3 @@ def get_quiz_attempts_for_topic(user_id, topic_name):
     conn.close()
 
     return rows
-    return rows

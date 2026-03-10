@@ -46,6 +46,10 @@ def main():
     all_topics = get_all_quiz_topics()
     untested_topics = [topic for topic in all_topics if topic not in attempted_topics]
 
+    completed_count = len(attempted_topics)
+    total_topics = len(all_topics)
+    progress_percent = int((completed_count / total_topics) * 100) if total_topics > 0 else 0
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -56,6 +60,13 @@ def main():
 
     with col3:
         st.metric("Best Score", f"{summary['best_score']}%")
+
+    st.markdown("---")
+    st.subheader("📘 Course Progress")
+
+    st.write(f"{completed_count} / {total_topics} Topics Attempted")
+    st.progress(progress_percent / 100)
+    st.caption(f"{progress_percent}% of course topics attempted")
 
     st.markdown("---")
     st.subheader("Topic Progress")
@@ -124,6 +135,15 @@ def main():
         st.info("No quiz attempts recorded yet.")
     
     st.markdown("---")
+    st.subheader("Topics Not Yet Tested")
+
+    if untested_topics:
+        for topic in untested_topics:
+            st.info(topic)
+    else:
+        st.success("Great work! You have attempted quizzes for all available topics.")
+
+    st.markdown("---")
     st.subheader("Topics Needing Revision")
 
     weak_topics = [t for t in topic_progress if (t[1] or 0) < 40]
@@ -133,16 +153,6 @@ def main():
             st.write(f"⚠ **{topic_name}** — {round(abs(score or 0))}%")
     else:
         st.success("Great work! No weak topics detected.")
-
-    st.markdown("---")
-    st.subheader("Topics Not Yet Tested")
-
-    if untested_topics:
-        for topic in untested_topics:
-            st.info(topic)
-    else:
-        st.success("Great work! You have attempted quizzes for all available topics.")
-
 
 if __name__ == "__main__":
     main()
