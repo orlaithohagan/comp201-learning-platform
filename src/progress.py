@@ -78,4 +78,21 @@ def get_recent_quiz_attempts(user_id, limit=5):
     rows = cursor.fetchall()
     conn.close()
 
+def get_topic_progress(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT topic_name, AVG(score) as avg_score
+        FROM quiz_attempts
+        WHERE user_id = ?
+        GROUP BY topic_name
+        ORDER BY topic_name
+    """, (user_id,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return rows
+
     return rows

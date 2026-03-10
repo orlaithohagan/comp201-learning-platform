@@ -1,5 +1,5 @@
 import streamlit as st
-from src.progress import get_quiz_summary, get_recent_quiz_attempts
+from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress
 from src.services.auth_ui import require_login, logout_button
 
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
@@ -26,6 +26,7 @@ def main():
 
     summary = get_quiz_summary(user_id)
     recent_attempts = get_recent_quiz_attempts(user_id)
+    topic_progress = get_topic_progress(user_id)
 
     col1, col2, col3 = st.columns(3)
 
@@ -41,7 +42,13 @@ def main():
     st.markdown("---")
     st.subheader("Recent Quiz Attempts")
 
-    if recent_attempts:
+    if topic_progress:
+        for topic_name, avg_score in topic_progress:
+            score_value = abs(round(avg_score or 0, 2))
+            st.write(f"**{topic_name}** -{score_value}%")
+            st.progress(score_value / 100)
+
+    if recent_attempts: 
         for topic_name, score, total_questions, attempted_at in recent_attempts:
             st.markdown(
                 f"""
