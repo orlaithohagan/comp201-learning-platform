@@ -188,3 +188,25 @@ def get_learning_streak(user_id):
         current_day -= timedelta(days=1)
 
     return streak
+
+def get_leaderboard(limit=10):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT 
+            u.username,
+            ROUND(AVG(q.score), 2) as average_score,
+            COUNT(q.id) as quizzes_completed
+        FROM quiz_attempts q
+        JOIN users u ON q.user_id = u.id
+        GROUP BY q.user_id, u.username
+        HAVING COUNT(q.id) > 0
+        ORDER BY average_score DESC, quizzes_completed DESC
+        LIMIT ?
+    """, (limit,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return rows
