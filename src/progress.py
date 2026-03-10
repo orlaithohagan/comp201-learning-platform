@@ -122,4 +122,19 @@ def get_attempted_topics(user_id):
 
     return [row[0] for row in rows if row[0]]
 
+def get_quiz_attempts_for_topic(user_id, topic_name):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT score, attempted_at
+        FROM quiz_attempts
+        WHERE user_id = ? AND topic_name = ?
+        ORDER BY attempted_at ASC
+    """, (user_id, topic_name))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return rows
     return rows

@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
 import json
+import altair as alt
 from datetime import datetime
 from pathlib import Path
-from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress, get_quiz_scores_over_time, get_attempted_topics
+from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress, get_attempted_topics, get_quiz_attempts_for_topic
 from src.services.auth_ui import require_login, logout_button
 
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
@@ -40,7 +41,6 @@ def main():
     summary = get_quiz_summary(user_id)
     recent_attempts = get_recent_quiz_attempts(user_id)
     topic_progress = get_topic_progress(user_id)
-    score_history = get_quiz_scores_over_time(user_id)
 
     attempted_topics = get_attempted_topics(user_id)
     all_topics = get_all_quiz_topics()
@@ -69,22 +69,39 @@ def main():
         st.info("No topic progress recorded yet.")
 
     st.markdown("---")
-    st.subheader("Quiz Performance Over Time")
+    st.subheader("Quiz Performance by Topic")
+    st.caption("Only topics with at least one completed quiz attempt are shown.")
 
-    if score_history:
+    if attempted_topics:
+        selected_chart_topic = st.selectbox("Select a topic",options=attempted_topics)
 
-        attempts = list(range(1, len(score_history) + 1))
-        scores = [abs(row[1]) for row in score_history]
+        topic_attempts = get_quiz_attempts_for_topic(user_id, selected_chart_topic)
 
-        chart_df = pd.DataFrame({
-            "Attempt": attempts,
-            "Score (%)": scores
-        })
+        if topic_attempts:
+            chart_df = pd.DataFrame(
+                topic_attempts,
+                columns=["Score", "Attempted At"]
+            )
 
-        st.line_chart(chart_df.set_index("Attempt"))
+            chart_df["Score"] = chart_df["Score"].abs().round().astype(int)
+            chart_df["Attempt Number"] = range(1, len(chart_df) + 1)
 
+            chart = (
+                alt.Chart(chart_df)
+                .mark_bar()
+                .encode(
+                    x=alt.X("Attempt Number:O", title="Attempt", axis=alt.Axis(labelAngle=0)),
+                    y=alt.Y("Score:Q", title="Score (%)", scale=alt.Scale(domain=[0, 100])),
+                    tooltip=["Attempt Number", "Score", "Attempted At"]
+                )
+                .properties(width=600, height=300)
+            )
+
+            st.altair_chart(chart, width = "stretch")
+        else:
+            st.info("No quiz attempts available for this topic yet.")
     else:
-        st.info("No quiz history available yet.")
+        st.info("No quiz topics have been attempted yet.")
     
     st.markdown("---")
     st.subheader("Recent Quiz Attempts")
