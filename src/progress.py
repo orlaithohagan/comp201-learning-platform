@@ -7,7 +7,6 @@ DB_PATH = Path("data/app.db")
 def get_connection():
     return sqlite3.connect(DB_PATH)
 
-
 def create_progress_tables():
     conn = get_connection()
     cursor = conn.cursor()
@@ -25,7 +24,6 @@ def create_progress_tables():
 
     conn.commit()
     conn.close()
-
 
 def log_quiz_attempt(user_id, topic_name, score, total_questions):
     conn = get_connection()
@@ -62,7 +60,6 @@ def get_quiz_summary(user_id):
         "best_score": result[2] if result[2] is not None else 0
     }
 
-
 def get_recent_quiz_attempts(user_id, limit=5):
     conn = get_connection()
     cursor = conn.cursor()
@@ -77,6 +74,7 @@ def get_recent_quiz_attempts(user_id, limit=5):
 
     rows = cursor.fetchall()
     conn.close()
+    return rows
 
 def get_topic_progress(user_id):
     conn = get_connection()
@@ -92,7 +90,21 @@ def get_topic_progress(user_id):
 
     rows = cursor.fetchall()
     conn.close()
+    return rows
 
+def get_quiz_scores_over_time(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT attempted_at, score
+        FROM quiz_attempts
+        WHERE user_id = ?
+        ORDER BY attempted_at ASC
+    """, (user_id,))
+
+    rows = cursor.fetchall()
+    conn.close()
     return rows
 
     return rows
