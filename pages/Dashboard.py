@@ -41,6 +41,7 @@ def main():
     summary = get_quiz_summary(user_id)
     recent_attempts = get_recent_quiz_attempts(user_id)
     topic_progress = get_topic_progress(user_id)
+    weak_topics = [t for t in topic_progress if (t[1] or 0) < 40]
 
     attempted_topics = get_attempted_topics(user_id)
     all_topics = get_all_quiz_topics()
@@ -78,6 +79,23 @@ def main():
             st.progress(score_value / 100)
     else:
         st.info("No topic progress recorded yet.")
+
+    st.markdown("---")
+    st.subheader("Topic Mastery")
+
+    if topic_progress:
+        for topic_name, avg_score in topic_progress:
+            score_value = abs(round(avg_score or 0))
+
+            if score_value >= 70:
+                st.success(f"{topic_name} — {score_value}% (Mastered)")
+            elif score_value >= 40:
+                st.warning(f"{topic_name} — {score_value}% (In Progress)")
+            else:
+                st.error(f"{topic_name} — {score_value}% (Needs Revision)")
+    else:
+        st.info("No topic mastery data available yet.")
+
 
     st.markdown("---")
     st.subheader("Quiz Performance by Topic")
@@ -130,29 +148,30 @@ def main():
                 **Date:** {formatted_date}
                 """
             )
-            st.markdown("---")
     else:
         st.info("No quiz attempts recorded yet.")
     
     st.markdown("---")
-    st.subheader("Topics Not Yet Tested")
+    st.subheader("📌 Suggested Next Step")
 
     if untested_topics:
-        for topic in untested_topics:
-            st.info(topic)
+        st.info("You haven't attempted these topics yet. Try one of them next:")
+
+        for topic in untested_topics[:3]:
+            st.write(f"• **{topic}**")
+
+    elif weak_topics:
+        weakest_topic = min(weak_topics, key=lambda x: x[1] or 0)
+        topic_name, score = weakest_topic
+        st.warning(
+            f"You should revisit **{topic_name}**. "
+            f"Your current average score is {round(abs(score or 0))}%."
+        )
+
     else:
-        st.success("Great work! You have attempted quizzes for all available topics.")
-
-    st.markdown("---")
-    st.subheader("Topics Needing Revision")
-
-    weak_topics = [t for t in topic_progress if (t[1] or 0) < 40]
-
-    if weak_topics:
-        for topic_name, score in weak_topics:
-            st.write(f"⚠ **{topic_name}** — {round(abs(score or 0))}%")
-    else:
-        st.success("Great work! No weak topics detected.")
+        st.success(
+            "Great progress! You have attempted all topics and have no major weak areas right now."
+        )
 
 if __name__ == "__main__":
     main()
