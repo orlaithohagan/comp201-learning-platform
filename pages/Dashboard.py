@@ -107,7 +107,6 @@ def main():
         else:
             st.info("No topic mastery data available yet.")
 
-
         st.markdown("---")
         st.subheader("Quiz Performance by Topic")
         st.caption("Only topics with at least one completed quiz attempt are shown.")
