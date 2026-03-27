@@ -4,3 +4,4 @@ streamlit-extras
 bcrypt
 networkx
 plotly
+openai
