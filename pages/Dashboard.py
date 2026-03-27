@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress, get_attempted_topics, get_quiz_attempts_for_topic, get_learning_streak, get_leaderboard
 from src.services.auth_ui import require_login, logout_button
+from src.gamification import BADGES, get_user_badges
 
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
 
@@ -54,6 +55,20 @@ def main():
         learning_streak = get_learning_streak(user_id) 
         leaderboard = get_leaderboard()
 
+        best_topic_score = max(
+            [abs(round(avg_score or 0)) for _, avg_score in topic_progress],
+            default=0
+        )
+
+        user_stats = {
+            "quizzes_completed": summary["quizzes_completed"],
+            "streak": learning_streak,
+            "best_topic_score": best_topic_score,
+            "topics_attempted": completed_count
+        }
+
+        earned_badges = get_user_badges(user_stats)
+
         col1, col2, col3 = st.columns(3)
 
         with col1:
@@ -72,6 +87,55 @@ def main():
             st.success(f"You are on a {learning_streak}-day learning streak!")
         else:
             st.info("No learning streak yet. Complete a quiz today to start one.")
+
+        # st.markdown("---")
+        # st.subheader("🏆 Achievements")
+
+        # for badge in BADGES:
+        #     if badge["id"] in earned_badges:
+        #         st.success(f"🏅 {badge['name']} — {badge['description']}")
+        #     else:
+        #         st.info(f"🔒 {badge['name']} — {badge['description']}")
+
+        st.markdown("---")
+        st.subheader("🏆 Achievements")
+
+        cols = st.columns(2)
+
+        for i, badge in enumerate(BADGES):
+            with cols[i % 2]:
+                earned = badge["id"] in earned_badges
+
+                icon = "🏅" if earned else "🔒"
+                status = "Unlocked" if earned else "Locked"
+
+                box_color = "#e8f5e9" if earned else "#f3f4f6"
+                border_color = "#81c784" if earned else "#d1d5db"
+                text_color = "#1b5e20" if earned else "#374151"
+
+                st.markdown(
+                    f"""
+                    <div style="
+                        background-color: {box_color};
+                        border: 1px solid {border_color};
+                        border-radius: 12px;
+                        padding: 16px;
+                        margin-bottom: 12px;
+                    ">
+                        <div style="font-size: 18px; font-weight: 700; color: {text_color};">
+                            {icon} {badge['name']}
+                        </div>
+                        <div style="font-size: 14px; color: {text_color}; margin-top: 6px;">
+                            {badge['description']}
+                        </div>
+                        <div style="font-size: 12px; color: {text_color}; margin-top: 10px; opacity: 0.8;">
+                            {status}
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
 
         st.markdown("---")
         st.subheader("📘 Course Progress")
