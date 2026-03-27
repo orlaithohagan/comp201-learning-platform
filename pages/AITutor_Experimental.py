@@ -12,24 +12,8 @@ st.markdown(
     "This is an experimental built-in AI tutor for COMP201 topics. "
     "Your original Custom GPT tutor is still available as a fallback."
 )
-st.caption("⚡ Powered by OpenAI API with contextual prompting (topic-aware tutoring)")
+st.caption("⚡ Powered by OpenAI API with retrieval from COMP201 course materials")
 
-if st.button("Clear Chat"):
-    st.session_state.ai_tutor_messages = []
-    st.rerun()
-
-TOPICS = [
-    "Requirements Engineering",
-    "Software Processes",
-    "System Modelling and UML",
-    "Architectural Design",
-    "Object-Oriented Design",
-    "Petri Nets",
-    "Testing",
-]
-
-topic = st.selectbox("Choose a topic", TOPICS)
-st.caption("Try asking for an explanation, an example, a revision summary, or a practice question.")
 
 # Initialise chat history
 if "ai_tutor_messages" not in st.session_state:
@@ -38,70 +22,58 @@ if "ai_tutor_messages" not in st.session_state:
             "role": "assistant",
             "content": (
                 f"Hi! I'm your COMP201 AI tutor. "
-                f"You are currently studying **{topic}**. "
-                f"Ask me anything about this topic."
+                f"Ask me anything about software engineering concepts, and I'll do my best to explain them clearly. "
             ),
         }
     ]
 
-def build_prompt(topic: str, user_message: str) -> str:
-    return f"""
-You are helping a COMP201 Software Engineering student.
-
-Topic: {topic}
-
-Student request:
-{user_message}
-
-Please answer clearly, accurately, and in a student-friendly way.
-Use short explanations, examples, and revision-friendly wording where helpful.
-""".strip()
-
 def send_message(user_message: str):
-    prompt = build_prompt(topic, user_message)
-
     st.session_state.ai_tutor_messages.append(
         {"role": "user", "content": user_message}
     )
 
-    # with st.spinner("Generating response..."):
-    #     answer = ask_ai_tutor(prompt)
-
-    # st.session_state.ai_tutor_messages.append(
-    #     {"role": "assistant", "content": answer}
-    # )
-
     with st.spinner("Thinking..."):
-        answer = ask_ai_tutor(prompt)
+        answer, relevant_cards = ask_ai_tutor(user_message)
 
     st.session_state.ai_tutor_messages.append(
-        {"role": "assistant", "content": answer}
-    )
-
-# Reset intro message if topic changes
-if st.session_state.get("ai_tutor_last_topic") != topic:
-    st.session_state.ai_tutor_last_topic = topic
-    st.session_state.ai_tutor_messages = [
         {
             "role": "assistant",
-            "content": (
-                f"You're now exploring **{topic}**. "
-                f"Ask me anything about this topic and I'll help explain it clearly."
-            ),
+            "content": answer,
+            "sources": relevant_cards
         }
-    ]
+    )
 
 
-# Display chat history
-for message in st.session_state.ai_tutor_messages:
+for i, message in enumerate(st.session_state.ai_tutor_messages):
     with st.chat_message(message["role"]):
         if message["role"] == "assistant":
             st.markdown(f"🤖 {message['content']}")
+
+            if i == len(st.session_state.ai_tutor_messages) - 1:
+                st.caption("💡 Try asking: 'quiz me on this', 'give an example', or 'summarise this topic'")
+
+            sources = message.get("sources", [])
+            if sources:
+                with st.expander("View course context used"):
+                    for j, card in enumerate(sources, start=1):
+                        st.markdown(f"**{j}. {card['topic']}**")
+                        st.markdown(f"> **Q:** {card['prompt']}")
+                        st.markdown(f"> **A:** {card['answer']}")
+                        st.markdown("---")
+
         else:
             st.markdown(f"🧑 {message['content']}")
 
-# Chat input
-user_input = st.chat_input(f"Ask a question about {topic}...")
+
+col1, col2 = st.columns([6, 1])
+
+with col1:
+    user_input = st.chat_input(f"Ask a question about COMP201 software engineering....")
+
+with col2:
+    if st.button("🗑️", help="Clear chat"):
+        st.session_state.ai_tutor_messages = []
+        st.rerun()
 
 if user_input:
     send_message(user_input)
