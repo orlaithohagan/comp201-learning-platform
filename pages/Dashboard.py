@@ -176,7 +176,7 @@ def main():
                     if score_value < 40:
                         if st.button("Get Help using AI Tutor", key=f"ask_tutor_{topic_name}"):
                             st.session_state["tutor_prefill"] = topic_name
-                            st.switch_page("pages/AITutor_Experimental.py")
+                            st.switch_page("pages/AITutor.py")
         else:
             st.info("No topic mastery data available yet.")
 

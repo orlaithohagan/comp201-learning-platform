@@ -1,18 +1,114 @@
 import streamlit as st
 from src.services.auth_ui import require_login, logout_button
-
+from src.ai_tutor import ask_ai_tutor
 
 require_login()
 logout_button()
 
-st.title("AI Tutor")
+st.set_page_config(page_title="AI Tutor", layout="wide")
 
+st.title("AI Tutor")
 st.markdown(
-    "Use the AI Tutor to ask questions about COMP201 Software Engineering topics "
-    "(e.g., requirements, UML, testing, processes)."
+    "Your AI-powered COMP201 tutor. Ask questions, review weak topics, and get personalised explanations."
+)
+st.caption("⚡ Powered by OpenAI API with retrieval from COMP201 course materials")
+
+WELCOME_MESSAGE = (
+    "Hi! I'm your COMP201 AI tutor. "
+    "Ask me anything about software engineering concepts, and I'll do my best to explain them clearly."
 )
 
-GPT_LINK = "https://chatgpt.com/g/g-693c17c97eb4819190780cfb402e9fe4-ai-tutor"
+# Initialise chat history
+if "ai_tutor_messages" not in st.session_state:
+    st.session_state.ai_tutor_messages = [
+        {
+            "role": "assistant",
+            "content": WELCOME_MESSAGE,
+        }
+    ]
 
-st.link_button("Open AI Tutor (Custom GPT)", GPT_LINK)
-st.caption("Note: You may need to be logged into ChatGPT to use the tutor.")
+if "tutor_prefill" in st.session_state:
+    prefill_topic = st.session_state.pop("tutor_prefill")
+    user_message = f"""
+    I am struggling with {prefill_topic}.
+    Explain it clearly, simply, and give an example if possible.
+    """.strip()
+
+    st.session_state.ai_tutor_messages.append(
+        {"role": "user", "content": user_message}
+    )
+
+    with st.spinner("Loading tutor support..."):
+        answer, relevant_cards = ask_ai_tutor(
+            user_message,
+            st.session_state.ai_tutor_messages
+        )
+
+    st.session_state.ai_tutor_messages.append(
+        {
+            "role": "assistant",
+            "content": answer,
+            "sources": relevant_cards
+        }
+    )
+
+
+def send_message(user_message: str):
+    st.session_state.ai_tutor_messages.append(
+        {"role": "user", "content": user_message}
+    )
+
+    with st.spinner("Thinking..."):
+        answer, relevant_cards = ask_ai_tutor(
+            user_message,
+            st.session_state.ai_tutor_messages
+        )
+
+    st.session_state.ai_tutor_messages.append(
+        {
+            "role": "assistant",
+            "content": answer,
+            "sources": relevant_cards
+        }
+    )
+
+
+for i, message in enumerate(st.session_state.ai_tutor_messages):
+    with st.chat_message(message["role"]):
+        if message["role"] == "assistant":
+            st.markdown(f"🤖 {message['content']}")
+
+            if i == len(st.session_state.ai_tutor_messages) - 1:
+                st.caption("💡 Try asking: 'give me an example', 'summarise this', or 'explain that more simply'")
+
+            sources = message.get("sources", [])
+            if sources:
+                with st.expander("View course context used"):
+                    for j, card in enumerate(sources, start=1):
+                        st.markdown(f"**{j}. {card['topic']}**")
+                        st.markdown(f"- **Match score:** {card['score']}")
+                        st.markdown(f"> **Q:** {card['prompt']}")
+                        st.markdown(f"> **A:** {card['answer']}")
+                        st.markdown("---")
+        else:
+            st.markdown(f"🧑 {message['content']}")
+
+
+col1, col2 = st.columns([6, 1])
+
+with col1:
+    user_input = st.chat_input("Ask a question about COMP201 software engineering...")
+
+with col2:
+    if st.button("🗑️", help="Clear chat"):
+        st.session_state.ai_tutor_messages = [
+            {
+                "role": "assistant",
+                "content": WELCOME_MESSAGE,
+            }
+        ]
+        st.rerun()
+
+if user_input:
+    send_message(user_input)
+    st.rerun()
