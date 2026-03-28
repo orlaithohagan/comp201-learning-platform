@@ -1,0 +1,108 @@
+:root {
+    --uol-blue: #003A8C;
+    --uol-blue-dark: #002b66;
+    --uol-blue-light: #eaf1fb;
+    --uol-text: #1f2937;
+    --uol-muted: #6b7280;
+    --uol-border: #dbe4f0;
+    --uol-white: #ffffff;
+}
+
+/* Main page background */
+.stApp {
+    background-color: #f7f9fc;
+}
+
+/* Main content spacing */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: var(--uol-blue);
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: var(--uol-blue-dark);
+}
+
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* Buttons */
+.stButton > button,
+.stLinkButton > a {
+    background-color: var(--uol-blue) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0.55rem 1rem !important;
+    font-weight: 600 !important;
+}
+
+.stButton > button:hover,
+.stLinkButton > a:hover {
+    background-color: var(--uol-blue-dark) !important;
+}
+
+/* General card style */
+.uol-card {
+    background: var(--uol-white);
+    border: 1px solid var(--uol-border);
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 58, 140, 0.06);
+    height: 100%;
+}
+
+/* Hero box */
+.uol-hero {
+    background: linear-gradient(135deg, #003A8C 0%, #1d5bbf 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 2rem 2rem 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 58, 140, 0.15);
+}
+
+.uol-hero h1,
+.uol-hero h3,
+.uol-hero p {
+    color: white !important;
+    margin: 0;
+}
+
+.uol-hero-subtext {
+    margin-top: 0.6rem;
+    font-size: 1rem;
+    opacity: 0.95;
+}
+
+/* Muted text */
+.uol-muted {
+    color: var(--uol-muted);
+}
+
+/* Sidebar spacing */
+section[data-testid="stSidebar"] {
+    padding-top: 1rem;
+}
+
+/* Sidebar buttons */
+section[data-testid="stSidebar"] .stButton > button {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    background-color: #1d4ed8 !important;
+    color: white !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background-color: #1e40af !important;
+}

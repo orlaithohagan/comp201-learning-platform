@@ -1,4 +1,5 @@
 import streamlit as st
+from src.services.navigation import render_sidebar_navigation
 
 from src.concept_map import (
     load_concept_map_data,
@@ -8,6 +9,7 @@ from src.concept_map import (
     get_topic_options,
 )
 
+render_sidebar_navigation("pages/ConceptMap.py")
 
 st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
 

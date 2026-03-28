@@ -1,19 +1,17 @@
 import json
 import random
 from pathlib import Path
-
 import streamlit as st
-
 from src.progress import log_quiz_attempt, log_daily_activity
 from src.services.auth_ui import require_login, logout_button
+from src.services.navigation import render_sidebar_navigation
 
 st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
 
 require_login()
+render_sidebar_navigation("pages/Quiz.py")
 logout_button()
 
-
-# ------------ Helpers ------------ #
 
 def load_flashcards():
     """Load flashcards JSON and return a list of card dicts."""

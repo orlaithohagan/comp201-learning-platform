@@ -5,12 +5,14 @@ import altair as alt
 from datetime import datetime
 from pathlib import Path
 from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_progress, get_attempted_topics, get_quiz_attempts_for_topic, get_learning_streak, get_leaderboard
+from src.services.navigation import render_sidebar_navigation
 from src.services.auth_ui import require_login, logout_button
 from src.gamification import BADGES, get_user_badges
 
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
 
 require_login()
+render_sidebar_navigation("pages/Dashboard.py")
 logout_button()
 
 def get_all_quiz_topics():

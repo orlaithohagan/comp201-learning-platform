@@ -1,0 +1,28 @@
+.home-section-title {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: #003A8C;
+    font-weight: 700;
+}
+
+.home-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #003A8C;
+    margin-bottom: 0.4rem;
+}
+
+.home-card-text {
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.home-highlight {
+    background-color: #eaf1fb;
+    border-left: 5px solid #003A8C;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: #1f2937;
+}

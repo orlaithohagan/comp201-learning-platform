@@ -3,10 +3,12 @@ import json
 import time, random
 from pathlib import Path
 from src.services.auth_ui import require_login, logout_button
+from src.services.navigation import render_sidebar_navigation
 
 selected_topic = st.session_state.get("selected_topic")
 
 require_login()
+render_sidebar_navigation("pages/Flashcards.py")
 logout_button()
 
 def local_css(file_name):
