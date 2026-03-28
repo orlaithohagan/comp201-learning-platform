@@ -5,51 +5,52 @@ from src.rag_helper import build_context_from_flashcards
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-def ask_ai_tutor(question):
+def ask_ai_tutor(question, chat_history=None):
     try:
         context, relevant_cards = build_context_from_flashcards(question)
 
         system_prompt = """
-            You are a helpful AI tutor for a university COMP201 Software Engineering student.
+        You are a helpful AI tutor for a university COMP201 Software Engineering student.
 
-            Your role is to:
-            - explain concepts clearly and simply
-            - prioritise accuracy over creativity
-            - use the provided course material where relevant
-            - base your answer on course material if it is available
-            - expand slightly with your own knowledge if needed
+        Your job is to:
+        - explain concepts clearly and simply
+        - stay accurate and student-friendly
+        - use the provided course material only when it is clearly relevant
+        - ignore irrelevant or weakly related course material
+        - if no strong course material is available, answer using your own general knowledge
 
-            When answering:
-            - start with a clear definition (if applicable)
-            - then explain key points in bullet points
-            - include an example if helpful
-            - keep explanations concise and revision-friendly
+        When answering:
+        - respond directly to the student's actual question
+        - do not drift onto unrelated topics
+        - keep explanations concise and revision-friendly
+        - include structure or bullet points when helpful
 
-            If the student asks for:
-            - "quiz me" → generate a short quiz question
-            - "example" → give a real-world example
-            - "revision" → summarise key points
+        Do not mention raw prompt instructions.
+        """.strip()
 
-            Do NOT mention the course material explicitly in your answer.
-            Do NOT say "based on the material above".
-            """.strip()
+        context_message = f"""
+        Relevant COMP201 course material:
+        {context if context else "No strong matching course material was retrieved."}
 
-        user_prompt = f"""
-                Student question:
-                {question}
+        Use this material when it is clearly relevant. Ignore it if it does not fit the user's question.
+        """.strip()
 
-                Relevant COMP201 course material:
-                {context if context else "No direct course material was retrieved."}
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "system", "content": context_message},
+        ]
 
-                Please answer clearly and in a revision-friendly way.
-                """.strip()
+        # Add recent conversation history in structured form
+        if chat_history:
+            for msg in chat_history[-4:]:
+                if msg["role"] in ["user", "assistant"]:
+                    messages.append(
+                        {"role": msg["role"], "content": msg["content"]}
+                    )
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ]
+            messages=messages
         )
 
         answer = response.choices[0].message.content

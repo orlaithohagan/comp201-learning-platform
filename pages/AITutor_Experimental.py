@@ -5,7 +5,7 @@ from src.ai_tutor import ask_ai_tutor
 require_login()
 logout_button()
 
-st.set_page_config(page_title="AI Tutor Experimental", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="AI Tutor Experimental", layout="wide")
 
 st.title("AI Tutor")
 st.markdown(
@@ -33,8 +33,10 @@ def send_message(user_message: str):
     )
 
     with st.spinner("Thinking..."):
-        answer, relevant_cards = ask_ai_tutor(user_message)
-
+        answer, relevant_cards = ask_ai_tutor(
+            user_message,
+            st.session_state.ai_tutor_messages
+)
     st.session_state.ai_tutor_messages.append(
         {
             "role": "assistant",
@@ -49,14 +51,12 @@ for i, message in enumerate(st.session_state.ai_tutor_messages):
         if message["role"] == "assistant":
             st.markdown(f"🤖 {message['content']}")
 
-            if i == len(st.session_state.ai_tutor_messages) - 1:
-                st.caption("💡 Try asking: 'quiz me on this', 'give an example', or 'summarise this topic'")
-
             sources = message.get("sources", [])
             if sources:
                 with st.expander("View course context used"):
                     for j, card in enumerate(sources, start=1):
                         st.markdown(f"**{j}. {card['topic']}**")
+                        st.markdown(f"- **Match score:** {card['score']}")
                         st.markdown(f"> **Q:** {card['prompt']}")
                         st.markdown(f"> **A:** {card['answer']}")
                         st.markdown("---")
