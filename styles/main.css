@@ -2,64 +2,45 @@
     --uol-blue: #003A8C;
     --uol-blue-dark: #002b66;
     --uol-blue-light: #eaf1fb;
+
+    --uol-bg: #f7f9fc;
+    --uol-surface: #ffffff;
+    --uol-border: #dbe4f0;
+
     --uol-text: #1f2937;
     --uol-muted: #6b7280;
-    --uol-border: #dbe4f0;
-    --uol-white: #ffffff;
+
+    --uol-success-bg: #eaf7ef;
+    --uol-success-text: #1f7a3d;
+
+    --uol-warning-bg: #fdf7e7;
+    --uol-warning-text: #9a6b00;
+
+    --uol-danger-bg: #fdecec;
+    --uol-danger-text: #b42318;
 }
 
-/* Main page background */
+
 .stApp {
-    background-color: #f7f9fc;
+    background-color: var(--uol-bg);
 }
 
-/* Main content spacing */
 .block-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
-/* Headings */
+
 h1, h2, h3 {
     color: var(--uol-blue);
+    font-weight: 700;
 }
 
-/* Sidebar */
-section[data-testid="stSidebar"] {
-    background-color: var(--uol-blue-dark);
+p, div, span, label {
+    color: var(--uol-text);
 }
 
-section[data-testid="stSidebar"] * {
-    color: white !important;
-}
 
-/* Buttons */
-.stButton > button,
-.stLinkButton > a {
-    background-color: var(--uol-blue) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 10px !important;
-    padding: 0.55rem 1rem !important;
-    font-weight: 600 !important;
-}
-
-.stButton > button:hover,
-.stLinkButton > a:hover {
-    background-color: var(--uol-blue-dark) !important;
-}
-
-/* General card style */
-.uol-card {
-    background: var(--uol-white);
-    border: 1px solid var(--uol-border);
-    border-radius: 16px;
-    padding: 1.2rem;
-    box-shadow: 0 4px 12px rgba(0, 58, 140, 0.06);
-    height: 100%;
-}
-
-/* Hero box */
 .uol-hero {
     background: linear-gradient(135deg, #003A8C 0%, #1d5bbf 100%);
     color: white;
@@ -69,9 +50,13 @@ section[data-testid="stSidebar"] * {
     box-shadow: 0 8px 20px rgba(0, 58, 140, 0.15);
 }
 
+/* 🔥 Force white text (fix override issue) */
 .uol-hero h1,
+.uol-hero h2,
 .uol-hero h3,
-.uol-hero p {
+.uol-hero p,
+.uol-hero span,
+.uol-hero div {
     color: white !important;
     margin: 0;
 }
@@ -82,15 +67,32 @@ section[data-testid="stSidebar"] * {
     opacity: 0.95;
 }
 
-/* Muted text */
-.uol-muted {
-    color: var(--uol-muted);
+.uol-card {
+    background: var(--uol-surface);
+    border: 1px solid var(--uol-border);
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 58, 140, 0.06);
+    height: 100%;
+    transition: all 0.2s ease;
 }
 
-/* Sidebar spacing */
+.uol-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 58, 140, 0.12);
+}
+
+
 section[data-testid="stSidebar"] {
+    background-color: var(--uol-blue-dark);
     padding-top: 1rem;
 }
+
+/* Force all sidebar text white */
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
 
 /* Sidebar buttons */
 section[data-testid="stSidebar"] .stButton > button {
@@ -105,4 +107,40 @@ section[data-testid="stSidebar"] .stButton > button {
 
 section[data-testid="stSidebar"] .stButton > button:hover {
     background-color: #1e40af !important;
+}
+
+.stButton > button,
+.stLinkButton > a {
+    background-color: var(--uol-blue) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0.55rem 1rem !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover,
+.stLinkButton > a:hover {
+    background-color: var(--uol-blue-dark) !important;
+}
+
+
+.uol-info-box {
+    background-color: var(--uol-blue-light);
+    border-left: 5px solid var(--uol-blue);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.uol-muted {
+    color: var(--uol-muted);
+}
+
+.uol-section-title {
+    color: var(--uol-blue);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.4rem 0 1rem 0;
 }

@@ -2,10 +2,12 @@ import streamlit as st
 from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
 from src.ai_tutor import ask_ai_tutor
+from src.services.theme import apply_styles
 
 require_login()
 render_sidebar_navigation("pages/AITutor.py")
 logout_button()
+apply_styles("styles/tutor.css")
 
 st.set_page_config(page_title="AI Tutor", layout="wide")
 

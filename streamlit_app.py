@@ -2,16 +2,11 @@ import streamlit as st
 from src.services.db import init_db
 from src.services.auth_ui import require_login, logout_button
 from src.progress import create_progress_tables
-from src.utils import load_css
 from src.services.navigation import render_sidebar_navigation
+from src.services.theme import apply_styles
 
 st.set_page_config(page_title="COMP201 Learning Hub", layout="wide")
-
-# Load CSS
-st.markdown(
-    f"<style>{load_css('styles/main.css', 'styles/home.css')}</style>",
-    unsafe_allow_html=True
-)
+apply_styles("styles/home.css")
 
 init_db()
 create_progress_tables()

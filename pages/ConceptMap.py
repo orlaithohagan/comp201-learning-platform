@@ -1,5 +1,6 @@
 import streamlit as st
 from src.services.navigation import render_sidebar_navigation
+from src.services.theme import apply_styles
 
 from src.concept_map import (
     load_concept_map_data,
@@ -10,6 +11,7 @@ from src.concept_map import (
 )
 
 render_sidebar_navigation("pages/ConceptMap.py")
+apply_styles("styles/concept_map.css")
 
 st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
 

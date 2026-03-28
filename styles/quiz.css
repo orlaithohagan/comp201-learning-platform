@@ -1,0 +1,30 @@
+.quiz-panel {
+    background: white;
+    border: 1px solid #dbe4f0;
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 58, 140, 0.05);
+}
+
+.quiz-question-title {
+    color: #003A8C;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.quiz-feedback-correct {
+    background: #eaf7ef;
+    color: #1f7a3d;
+    border-left: 5px solid #1f7a3d;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.quiz-feedback-wrong {
+    background: #fdecec;
+    color: #b42318;
+    border-left: 5px solid #b42318;
+    border-radius: 12px;
+    padding: 1rem;
+}

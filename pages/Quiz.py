@@ -5,7 +5,9 @@ import streamlit as st
 from src.progress import log_quiz_attempt, log_daily_activity
 from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
+from src.services.theme import apply_styles
 
+apply_styles("styles/quiz.css")
 st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
 
 require_login()

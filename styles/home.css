@@ -8,12 +8,12 @@
 .home-card-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #003A8C;
+    color: white; 
     margin-bottom: 0.4rem;
 }
 
 .home-card-text {
-    color: #4b5563;
+    color:white; 
     font-size: 0.95rem;
     line-height: 1.5;
 }

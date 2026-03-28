@@ -4,9 +4,11 @@ import time, random
 from pathlib import Path
 from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
+from src.services.theme import apply_styles
 
 selected_topic = st.session_state.get("selected_topic")
 
+apply_styles("styles/flashcards.css")
 require_login()
 render_sidebar_navigation("pages/Flashcards.py")
 logout_button()

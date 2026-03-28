@@ -1,4 +1,4 @@
-.conceptmap-panel {
+.game-panel {
     background: white;
     border: 1px solid #dbe4f0;
     border-radius: 16px;
@@ -7,10 +7,13 @@
     box-shadow: 0 4px 10px rgba(0, 58, 140, 0.05);
 }
 
-.conceptmap-legend {
-    background: #eef4ff;
-    border-left: 5px solid #003A8C;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-top: 1rem;
+.game-title {
+    color: #003A8C;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.game-helper {
+    color: #6b7280;
+    font-size: 0.95rem;
 }

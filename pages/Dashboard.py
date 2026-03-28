@@ -8,9 +8,11 @@ from src.progress import get_quiz_summary, get_recent_quiz_attempts, get_topic_p
 from src.services.navigation import render_sidebar_navigation
 from src.services.auth_ui import require_login, logout_button
 from src.gamification import BADGES, get_user_badges
+from src.services.theme import apply_styles
 
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
 
+apply_styles("styles/dashboard.css")
 require_login()
 render_sidebar_navigation("pages/Dashboard.py")
 logout_button()

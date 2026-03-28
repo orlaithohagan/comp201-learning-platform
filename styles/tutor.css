@@ -1,0 +1,19 @@
+.tutor-header-box {
+    background: #eef4ff;
+    border-left: 5px solid #003A8C;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tutor-helper-text {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.tutor-context-box {
+    background: white;
+    border: 1px solid #dbe4f0;
+    border-radius: 12px;
+    padding: 1rem;
+}

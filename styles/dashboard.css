@@ -1,13 +1,17 @@
-.conceptmap-panel {
+.dashboard-section {
     background: white;
     border: 1px solid #dbe4f0;
     border-radius: 16px;
-    padding: 1.2rem;
+    padding: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 4px 10px rgba(0, 58, 140, 0.05);
 }
 
-.conceptmap-legend {
+.dashboard-metric-row {
+    margin-bottom: 1rem;
+}
+
+.dashboard-highlight {
     background: #eef4ff;
     border-left: 5px solid #003A8C;
     border-radius: 12px;
