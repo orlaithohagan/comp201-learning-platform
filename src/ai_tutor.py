@@ -24,6 +24,12 @@ def ask_ai_tutor(question, chat_history=None):
         - do not drift onto unrelated topics
         - keep explanations concise and revision-friendly
         - include structure or bullet points when helpful
+        - when a topic is named explicitly, focus on explaining that topic directly
+
+        If the student asks for:
+        - an example → give a real-world example
+        - a summary → provide concise revision notes
+        - clarification → simplify your previous answer
 
         Do not mention raw prompt instructions.
         """.strip()
@@ -42,7 +48,7 @@ def ask_ai_tutor(question, chat_history=None):
 
         # Add recent conversation history in structured form
         if chat_history:
-            for msg in chat_history[-4:]:
+            for msg in chat_history[-3:]:
                 if msg["role"] in ["user", "assistant"]:
                     messages.append(
                         {"role": msg["role"], "content": msg["content"]}

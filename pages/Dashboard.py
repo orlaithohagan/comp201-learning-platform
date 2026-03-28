@@ -162,12 +162,21 @@ def main():
             for topic_name, avg_score in topic_progress:
                 score_value = abs(round(avg_score or 0))
 
-                if score_value >= 70:
-                    st.success(f"{topic_name} — {score_value}% (Mastered)")
-                elif score_value >= 40:
-                    st.warning(f"{topic_name} — {score_value}% (In Progress)")
-                else:
-                    st.error(f"{topic_name} — {score_value}% (Needs Revision)")
+                col1, col2 = st.columns([5, 1])
+
+                with col1:
+                    if score_value >= 70:
+                        st.success(f"{topic_name} — {score_value}% (Mastered)")
+                    elif score_value >= 40:
+                        st.warning(f"{topic_name} — {score_value}% (In Progress)")
+                    else:
+                        st.error(f"{topic_name} — {score_value}% (Needs Revision)")
+
+                with col2:
+                    if score_value < 40:
+                        if st.button("Get Help using AI Tutor", key=f"ask_tutor_{topic_name}"):
+                            st.session_state["tutor_prefill"] = topic_name
+                            st.switch_page("pages/AITutor_Experimental.py")
         else:
             st.info("No topic mastery data available yet.")
 
@@ -237,6 +246,7 @@ def main():
         elif weak_topics:
             weakest_topic = min(weak_topics, key=lambda x: x[1] or 0)
             topic_name, score = weakest_topic
+
             st.warning(
                 f"You should revisit **{topic_name}**. "
                 f"Your current average score is {round(abs(score or 0))}%."
