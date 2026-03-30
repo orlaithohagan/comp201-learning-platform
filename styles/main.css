@@ -105,9 +105,21 @@ section[data-testid="stSidebar"] .stButton > button {
     font-weight: 600 !important;
 }
 
+section[data-testid="stSidebar"] .stButton > button * {
+    color: white !important;
+    fill: white !important;
+}
+
 section[data-testid="stSidebar"] .stButton > button:hover {
     background-color: #1e40af !important;
+    color: white !important;
 }
+
+section[data-testid="stSidebar"] .stButton > button:hover * {
+    color: white !important;
+    fill: white !important;
+}
+
 
 .stButton > button,
 .stLinkButton > a {
@@ -120,11 +132,24 @@ section[data-testid="stSidebar"] .stButton > button:hover {
     transition: all 0.2s ease;
 }
 
+/* Force all button text elements white */
+.stButton > button *,
+.stLinkButton > a * {
+    color: white !important;
+    fill: white !important;
+}
+
 .stButton > button:hover,
 .stLinkButton > a:hover {
     background-color: var(--uol-blue-dark) !important;
+    color: white !important;
 }
 
+.stButton > button:hover *,
+.stLinkButton > a:hover * {
+    color: white !important;
+    fill: white !important;
+}
 
 .uol-info-box {
     background-color: var(--uol-blue-light);
@@ -143,4 +168,16 @@ section[data-testid="stSidebar"] .stButton > button:hover {
     font-size: 1.05rem;
     font-weight: 700;
     margin: 0.4rem 0 1rem 0;
+}
+
+.uol-card {
+    color: var(--uol-text);
+}
+
+.uol-card .home-card-title {
+    color: var(--uol-blue);
+}
+
+.uol-card .home-card-text {
+    color: var(--uol-text);
 }

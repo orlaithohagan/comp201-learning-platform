@@ -8,12 +8,12 @@
 .home-card-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: white; 
+    color: var(--uol-blue);
     margin-bottom: 0.4rem;
 }
 
 .home-card-text {
-    color:white; 
+    color: var(--uol-text);
     font-size: 0.95rem;
     line-height: 1.5;
 }
