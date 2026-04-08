@@ -1,8 +1,9 @@
+import streamlit as st
 from openai import OpenAI
-import os
+# import os
 from src.rag_helper import build_context_from_flashcards
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 
 def ask_ai_tutor(question, chat_history=None):
@@ -46,7 +47,6 @@ def ask_ai_tutor(question, chat_history=None):
             {"role": "system", "content": context_message},
         ]
 
-        # Add recent conversation history in structured form
         if chat_history:
             for msg in chat_history[-3:]:
                 if msg["role"] in ["user", "assistant"]:
