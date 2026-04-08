@@ -6,21 +6,13 @@ from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
 from src.services.theme import apply_styles
 
-selected_topic = st.session_state.get("selected_topic")
-
+st.set_page_config(page_title="Flashcards", page_icon=":books:", layout="wide")
 apply_styles("styles/flashcards.css")
+
 require_login()
 render_sidebar_navigation("pages/Flashcards.py")
 logout_button()
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    
-# Page Configuration
-st.set_page_config(page_title="Flashcards", page_icon=":books:", layout="wide")
-
-# Main heading for this page
 st.title("Flashcards")
 
 st.markdown(
@@ -29,11 +21,6 @@ st.markdown(
     "</p>",
     unsafe_allow_html=True,
 )
-
-
-# Apply external CSS styling
-css_path = Path(__file__).resolve().parents[1] / "styles" / "flashcards.css"
-local_css(css_path)
 
 
 #Flashcards Data Loading
@@ -99,23 +86,19 @@ def render_dashboard():
         seen = len(st.session_state.stats.get(topic, {}).get("seen", set()))
         pct = int((seen / total) * 100)
 
-        # Wrap each topic row in a styled div from your CSS
-        st.markdown('<div class="topic-row">', unsafe_allow_html=True)
-
         col_topic, col_prog, col_study = st.columns([4, 4, 2])
 
         with col_topic:
             st.markdown(f"<span class='topic-name'>{topic}</span>", unsafe_allow_html=True)
 
         with col_prog:
-            # small inline progress bar using your CSS classes
             st.markdown(
                 f"""
                 <div class="topic-progress">
                   <span style="width:{pct}%;"></span>
                 </div>
                 <div style="font-size:12px;margin-top:4px;color:#6b7280">
-                  {seen}/{total} cards studied
+                  {seen} of {total} cards studied
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -127,16 +110,13 @@ def render_dashboard():
                 st.session_state.mode = "study"
                 st.session_state.flashcard_index = 0
                 st.session_state.show_answer = False
-                # start stats timer if first time
                 st.session_state.stats.setdefault(
                     topic,
                     {"start": time.time(), "seen": set(), "flips": 0},
                 )
                 st.rerun()
 
-        st.markdown("</div>", unsafe_allow_html=True)
-
-
+        st.markdown("---")
 
 #Study Mode Rendering
 def render_study():
@@ -150,7 +130,7 @@ def render_study():
             st.session_state.mode = "dashboard"
             st.rerun()
     with top_m:
-        st.header(f"Studying Topic: {topic}")
+        st.subheader(f"Studying Topic: {topic}")
     with top_r:
         st.session_state.shuffle[topic] = st.toggle("Shuffle cards", value=st.session_state.shuffle.get(topic, False))
         review_only = st.toggle("Review only", value=False)
@@ -193,8 +173,6 @@ def render_study():
         unsafe_allow_html=True,
     )
 
-    #Learning aids (CSS-centered)
-    st.markdown('<div class="learning-aids">', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Got it! - Don't ask again.", use_container_width=True):
@@ -204,36 +182,35 @@ def render_study():
             st.session_state.review.add(cid)
     st.markdown('</div>', unsafe_allow_html=True)
 
-
     # Flip + nav
-    c_flip, c_prog, c_prev, c_next = st.columns([2, 5, 2, 2])
-    with c_flip:
-        if st.button("Flip Card"):
-            st.session_state.show_answer = not show_answer
-            # stats: flip count
-            st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
-            st.session_state.stats[topic]["flips"] += 1
-            st.rerun()
+    c_prev, c_prog, c_next, c_flip = st.columns([2, 5, 2, 2])
 
     # stats: mark this card as seen
     st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
     st.session_state.stats[topic]["seen"].add(cid)
 
-    # progress + label
+    with c_prev:
+        if st.button("Previous", disabled=idx == 0, key="prev_card_btn"):
+            st.session_state.flashcard_index = idx - 1
+            st.session_state.show_answer = False
+            st.rerun()
+
     with c_prog:
         total = len(cards)
         st.progress((idx + 1) / total)
         st.caption(f"Card {idx + 1} / {total}")
 
-    with c_prev:
-        if st.button("Previous", disabled=idx == 0):
-            st.session_state.flashcard_index = idx - 1
-            st.session_state.show_answer = False
-            st.rerun()
     with c_next:
-        if st.button("Next", disabled=idx >= total - 1):
+        if st.button("Next", disabled=idx >= total - 1, key="next_card_btn"):
             st.session_state.flashcard_index = idx + 1
             st.session_state.show_answer = False
+            st.rerun()
+
+    with c_flip:
+        if st.button("Flip Card", key="flip_card_btn"):
+            st.session_state.show_answer = not show_answer
+            st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
+            st.session_state.stats[topic]["flips"] += 1
             st.rerun()
 
 if st.session_state.mode == "dashboard":

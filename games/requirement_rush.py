@@ -2,18 +2,13 @@ import time
 import json
 import random
 from pathlib import Path
-
 import streamlit as st
 from streamlit_sortables import sort_items  # drag & drop component
 
-# ---------------- CONFIG ----------------
 
-TIME_LIMIT_SECONDS = 30  # visual target (updates when Streamlit reruns)
 REQ_DATA_PATH = Path("data/requirements_rush.json")
 MAX_REQ_PER_GAME = 10
 
-
-# ---------------- DATA LOADER ----------------
 
 @st.cache_data
 def load_all_requirements():
@@ -62,12 +57,16 @@ def init_requirement_rush_state():
     if "rr_score" not in ss:
         ss.rr_score = 0
 
-    if "rr_start_time" not in ss:
-        ss.rr_start_time = time.time()
+    if "rr_board_version" not in ss:
+        ss.rr_board_version = 0
 
 
 def reset_requirement_rush():
     ss = st.session_state
+
+    if "rr_board_version" not in ss:
+        ss.rr_board_version = 0
+
     selected = choose_game_requirements()
     ss.rr_type_map = {text: rtype for text, rtype in selected}
 
@@ -79,7 +78,7 @@ def reset_requirement_rush():
     ]
     ss.rr_checked = False
     ss.rr_score = 0
-    ss.rr_start_time = time.time()
+    ss.rr_board_version += 1  
 
 
 # ---------------- MAIN GAME ----------------
@@ -89,22 +88,15 @@ def play_requirement_rush():
     init_requirement_rush_state()
     ss = st.session_state
 
-    # Visual timer (updates when Streamlit reruns due to interaction)
-    elapsed = time.time() - ss.rr_start_time
-    remaining = max(0, int(TIME_LIMIT_SECONDS - elapsed))
+    st.title("Requirement Rush")
 
     st.markdown(
-        "<h2 style='text-align:center; margin-bottom:0.25rem;'>"
-        "Requirement Rush – Drag & Drop Board 🎮"
-        "</h2>",
-        unsafe_allow_html=True,
+    "<div class='uol-info-box'><b>Drag each requirement into Functional or Non-functional.</b></div>",
+    unsafe_allow_html=True,
     )
-    st.markdown(
-        "<p style='text-align:center; color:#6b7280; margin-bottom:1rem;'>"
-        f"Drag each requirement into <b>Functional</b> or <b>Non-functional</b>. "
-        f"Each round uses a random selection of up to {MAX_REQ_PER_GAME} requirements. "
-        "Then click <b>Check my answers</b>.</p>",
-        unsafe_allow_html=True,
+
+    st.caption(
+        f"Each round uses a random selection of up to {MAX_REQ_PER_GAME} requirements. Then click Check my answers."
     )
 
     back_col, _ = st.columns([1, 5])
@@ -118,7 +110,7 @@ def play_requirement_rush():
     sorted_containers = sort_items(
         containers,
         multi_containers=True,
-        key="rr_sortables",
+        key=f"rr_sortables_{ss.rr_board_version}",
     )
     ss.rr_containers = sorted_containers
 
@@ -132,7 +124,6 @@ def play_requirement_rush():
 
     st.markdown(
         "<div class='rr-score-row'>"
-        f"<div class='rr-score-card'><h4>Time</h4><div>⏱ {remaining}s left (aim)</div></div>"
         f"<div class='rr-score-card'><h4>Cards Sorted</h4><div>{placed} / {total} placed</div></div>"
         f"<div class='rr-score-card'><h4>Status</h4><div>{'Ready to check ✅' if len(unassigned_items)==0 else 'Sorting…'}</div></div>"
         "</div>",

@@ -65,20 +65,23 @@ def start_new_round(use_cases):
 def play_use_case_scramble():
     load_css()
 
-    col_back, _ = st.columns([1, 6])
-    with col_back:
-        if st.button("← Back to Games Hub"):
-            exit_use_case_scramble()
+    st.title("Use Case Scramble ")
 
-
-    st.title("Use Case Scramble 🧩")
-    st.caption("Drag the steps into the correct order.")
+    st.markdown(
+    "<div class='uol-info-box'><b>Drag the steps into the correct order</b></div>",
+    unsafe_allow_html=True,
+)
     st.markdown(
         "<div class='ucs-instructions'>"
         "Tip: drag items up/down, then click <b>Check answers</b> to see what’s correct."
         "</div>",
         unsafe_allow_html=True,
     )
+
+    col_back, _ = st.columns([1, 6])
+    with col_back:
+        if st.button("← Back to Games Hub"):
+            exit_use_case_scramble()
 
     use_cases = load_use_cases()
     if not use_cases:
@@ -121,9 +124,16 @@ def play_use_case_scramble():
             st.session_state.uc_checked = True
 
     with col2:
-        if st.button("New use case", key=f"ucs_new_{round_id}"):
+        if st.button(
+            "New use case",
+            key=f"ucs_new_{round_id}",
+            disabled=not st.session_state.uc_checked
+        ):
             start_new_round(use_cases)
             st.rerun()
+
+    if not st.session_state.uc_checked:
+        st.caption("Check your answers to unlock the next use case.")
 
     if st.session_state.uc_checked:
         st.markdown("---")
