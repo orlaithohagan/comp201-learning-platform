@@ -109,11 +109,6 @@ def main():
     st.markdown("---")
     render_tool_links(related_tools, selected_topic)
 
-    st.info(
-        "Version 1 note: the buttons are currently placeholders. "
-        "Next, you can connect them to your Flashcards, Quiz, Mini Games, and AI Tutor pages."
-    )
-
 
 if __name__ == "__main__":
     main()
