@@ -16,7 +16,21 @@ logout_button()
 
 username = st.session_state["user"]["username"]
 
-# Hero section
+def render_home_card(title, text, button_label, page_path, button_key):
+    st.markdown(
+        f"""
+        <div class="uol-card">
+            <div class="home-card-title">{title}</div>
+            <div class="home-card-text">
+                {text}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    if st.button(button_label, key=button_key):
+        st.switch_page(page_path)
+
 st.markdown(
     f"""
     <div class="uol-hero">
@@ -38,49 +52,31 @@ st.markdown('<div class="home-section-title">Quick Access</div>', unsafe_allow_h
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown(
-        """
-        <div class="uol-card">
-            <div class="home-card-title">📊 Dashboard</div>
-            <div class="home-card-text">
-                View your topic mastery, quiz progress, achievements, and personalised recommendations.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
+    render_home_card(
+        "📊 Dashboard",
+        "View your topic mastery, quiz progress, achievements, and personalised recommendations.",
+        "Open Dashboard",
+        "pages/Dashboard.py",
+        "home_dashboard",
     )
-    if st.button("Open Dashboard", key="home_dashboard"):
-        st.switch_page("pages/Dashboard.py")
 
 with col2:
-    st.markdown(
-        """
-        <div class="uol-card">
-            <div class="home-card-title">🤖 AI Tutor</div>
-            <div class="home-card-text">
-                Ask questions, review weak topics, and get course-aware explanations using AI and your learning materials.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
+    render_home_card(
+        "🤖 AI Tutor",
+        "Ask questions, review weak topics, and get course-aware explanations using AI and your learning materials.",
+        "Open AI Tutor",
+        "pages/AITutor.py",
+        "home_tutor",
     )
-    if st.button("Open AI Tutor", key="home_tutor"):
-        st.switch_page("pages/AITutor.py")
 
 with col3:
-    st.markdown(
-        """
-        <div class="uol-card">
-            <div class="home-card-title">📝 Quiz</div>
-            <div class="home-card-text">
-                Test your understanding of COMP201 topics and build progress through structured revision.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
+    render_home_card(
+        "📝 Quiz",
+        "Test your understanding of COMP201 topics and build progress through structured revision.",
+        "Open Quiz",
+        "pages/Quiz.py",
+        "home_quiz",
     )
-    if st.button("Open Quiz", key="home_quiz"):
-        st.switch_page("pages/Quiz.py")
 
 st.markdown(
     """
