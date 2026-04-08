@@ -4,21 +4,11 @@ from src.services.auth_service import authenticate, create_user
 
 
 def _hide_sidebar():
-    """Hide Streamlit sidebar (for unauthenticated users)."""
-    st.markdown(
-        """
-        <style>
-        section[data-testid="stSidebar"] { display: none !important; }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
+    st.markdown('<div class="auth-hide-sidebar"></div>', unsafe_allow_html=True)
 
 def _set_view(view: str):
     st.session_state["auth_view"] = view
     st.rerun()
-
 
 def welcome_page():
     _hide_sidebar()
@@ -28,7 +18,6 @@ def welcome_page():
         "Welcome! Log in or create an account to access the AI Tutor, Flashcards, Quizzes, and Mini-Games."
     )
 
-    st.write("")
     col1, col2 = st.columns(2)
 
     with col1:
@@ -39,6 +28,10 @@ def welcome_page():
         if st.button("Sign up", use_container_width=True):
             _set_view("signup")
 
+def _login_user(user: dict):
+    st.session_state["user"] = user
+    st.session_state["user_id"] = user["id"]
+    st.session_state["username"] = user["username"]
 
 def login_page():
     _hide_sidebar()
@@ -59,15 +52,11 @@ def login_page():
             st.error("Invalid username or password.")
             st.stop()
 
-        st.session_state["user"] = user
-        st.session_state["user_id"] = user["id"]
-        st.session_state["username"] = user["username"]
+        _login_user(user)
 
         st.success(f"Welcome, {user['username']}!")
         st.rerun()
 
-    st.write("")
-    # “Don’t have an account?” CTA
     if st.button("Don’t have an account? Create one now", use_container_width=True, key="go_signup"):
         _set_view("signup")
 
@@ -78,7 +67,6 @@ def signup_page():
     st.title("Create account")
     st.caption("Create a student account to access the learning tools.")
 
-    # Back to welcome
     if st.button("← Back", key="back_from_signup"):
         _set_view("welcome")
 
@@ -107,8 +95,6 @@ def signup_page():
         st.success("Account created! Please log in.")
         _set_view("login")
 
-    st.write("")
-    # Nice extra: link back to login
     if st.button("Already have an account? Log in", use_container_width=True, key="go_login"):
         _set_view("login")
 
@@ -135,10 +121,14 @@ def require_login():
         signup_page()
         st.stop()
 
-    # default: login
     login_page()
     st.stop()
 
+def _logout_user():
+    st.session_state.pop("user", None)
+    st.session_state.pop("user_id", None)
+    st.session_state.pop("username", None)
+    st.session_state["auth_view"] = "welcome"
 
 def logout_button():
     """Show logout in the sidebar when logged in."""
@@ -147,9 +137,6 @@ def logout_button():
             st.markdown("---")
             st.write(f"👤 **{st.session_state['user']['username']}**")
             if st.button("Logout", use_container_width=True):
-                st.session_state.pop("user", None)
-                st.session_state.pop("user_id", None)
-                st.session_state.pop("username", None)
-                st.session_state["auth_view"] = "welcome"
+                _logout_user()
                 st.rerun()
 

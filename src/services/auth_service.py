@@ -25,8 +25,8 @@ def authenticate(username: str, password: str):
     if not row:
         return None
 
-    user_id, uname, pw_hash, role = row
-    if bcrypt.checkpw(password.encode("utf-8"), pw_hash):
+    user_id, uname, password_hash, role = row
+    if bcrypt.checkpw(password.encode("utf-8"), password_hash):
         return {"id": user_id, "username": uname, "role": role}
 
     return None

@@ -2,9 +2,11 @@ import streamlit as st
 from src.utils import load_css
 
 
-def apply_styles(*page_css_files):
+def apply_styles(*page_css_files: str) -> None:
     files = ["styles/main.css", *page_css_files]
-    st.markdown(
-        f"<style>{load_css(*files)}</style>",
-        unsafe_allow_html=True
-    )
+    css = load_css(*files)
+    if css:
+        st.markdown(
+                f"<style>{css}</style>",
+                unsafe_allow_html=True
+        )

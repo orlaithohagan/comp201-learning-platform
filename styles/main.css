@@ -181,3 +181,23 @@ section[data-testid="stSidebar"] .stButton > button:hover * {
 .uol-card .home-card-text {
     color: var(--uol-text);
 }
+
+.sidebar-brand {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: white;
+}
+
+.sidebar-active-link {
+    background-color: #1d4ed8;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.auth-hide-sidebar section[data-testid="stSidebar"] {
+    display: none !important;
+}
