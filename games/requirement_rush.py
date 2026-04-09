@@ -1,14 +1,12 @@
-import time
 import json
 import random
 from pathlib import Path
+from src.services.theme import apply_styles
 import streamlit as st
-from streamlit_sortables import sort_items  # drag & drop component
-
+from streamlit_sortables import sort_items 
 
 REQ_DATA_PATH = Path("data/requirements_rush.json")
 MAX_REQ_PER_GAME = 10
-
 
 @st.cache_data
 def load_all_requirements():
@@ -22,19 +20,6 @@ def choose_game_requirements():
     if len(all_reqs) <= MAX_REQ_PER_GAME:
         return all_reqs
     return random.sample(all_reqs, MAX_REQ_PER_GAME)
-
-
-# ---------------- CSS LOADER ----------------
-
-def load_rr_css():
-    try:
-        with open("styles/requirement_rush.css", encoding="utf-8") as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    except FileNotFoundError:
-        st.warning("Could not find styles/requirement_rush.css. Using default styling.")
-
-
-# ---------------- STATE HELPERS ----------------
 
 def init_requirement_rush_state():
     ss = st.session_state
@@ -80,11 +65,8 @@ def reset_requirement_rush():
     ss.rr_score = 0
     ss.rr_board_version += 1  
 
-
-# ---------------- MAIN GAME ----------------
-
 def play_requirement_rush():
-    load_rr_css()
+    apply_styles("styles/requirement_rush.css")
     init_requirement_rush_state()
     ss = st.session_state
 
@@ -125,7 +107,7 @@ def play_requirement_rush():
     st.markdown(
         "<div class='rr-score-row'>"
         f"<div class='rr-score-card'><h4>Cards Sorted</h4><div>{placed} / {total} placed</div></div>"
-        f"<div class='rr-score-card'><h4>Status</h4><div>{'Ready to check ✅' if len(unassigned_items)==0 else 'Sorting…'}</div></div>"
+        f"<div class='rr-score-card'><h4>Status</h4><div>{'Ready to check!' if len(unassigned_items)==0 else 'Sorting…'}</div></div>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -136,7 +118,7 @@ def play_requirement_rush():
     check_col, reset_col = st.columns([2, 1])
 
     with check_col:
-        if st.button("✅ Check my answers", key="rr_check", disabled=not all_assigned):
+        if st.button("Check my answers.", key="rr_check", disabled=not all_assigned):
             score = 0
             for text in functional_items:
                 if ss.rr_type_map[text] == "Functional":
@@ -148,16 +130,16 @@ def play_requirement_rush():
             ss.rr_checked = True
 
     with reset_col:
-        if st.button("🔁 Reset board", key="rr_reset"):
+        if st.button("Reset board.", key="rr_reset"):
             reset_requirement_rush()
             st.rerun()
 
     if ss.rr_checked:
-        st.markdown("### Results 🎉")
+        st.markdown("### Results!")
         st.write(f"You correctly classified **{ss.rr_score} / {total}** requirements.")
 
         if ss.rr_score == total:
-            st.success("Perfect! You're a requirements pro 🤓")
+            st.success("Perfect! You're a requirements pro.")
             st.balloons()
         elif ss.rr_score >= total * 0.75:
             st.info("Nice work! Just a few to revise.")
@@ -181,10 +163,10 @@ def play_requirement_rush():
 
         c1, c2 = st.columns(2)
         with c1:
-            if st.button("Play again 🧩", key="rr_play_again"):
+            if st.button("Play again!", key="rr_play_again"):
                 reset_requirement_rush()
                 st.rerun()
         with c2:
-            if st.button("Back to Games Hub 🏠", key="rr_back_from_results"):
+            if st.button("Back to Games Hub", key="rr_back_from_results"):
                 ss.view = "hub"
                 st.rerun()

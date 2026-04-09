@@ -22,27 +22,22 @@ def run_games_hub():
         play_design_detective()
         return
 
-
     # ---------- HUB SCREEN ----------
-    st.title("Mini Games Hub 🎮")
+    st.title("Mini Games Hub")
     st.caption("Reinforce COMP201 concepts with interactive mini-games.")
 
     col1, col2, col3 = st.columns(3)
 
-    # === Requirement Rush card ===
     with col1:
         st.markdown("### Requirement Rush")
         st.write("Classify each requirement as Functional or Non-functional.")
         start_rr = st.button("Play Requirement Rush", key="btn_rr")
 
-    # === Use Case Scramble placeholder ===
     with col2:
         st.markdown("### Use Case Scramble")
         st.write("Drag and drop steps into the correct order.")
         start_ucs = st.button("Play Use Case Scramble", key="btn_ucs")
 
-
-    # === Design Detective placeholder ===
     with col3:
         st.markdown("### Design Detective")
         st.write("Investigate scenarios and choose the best design fix.")
@@ -50,9 +45,8 @@ def run_games_hub():
 
     st.write("---")
 
-    # If player clicks Play, reset game state and go to full-screen game view
     if start_rr:
-        reset_requirement_rush()              # start a fresh run
+        reset_requirement_rush()             
         st.session_state.view = "requirement_rush"
         st.rerun()
     

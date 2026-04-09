@@ -1,13 +1,11 @@
 # games/use_case_scramble.py
 import json
 import random
-from pathlib import Path
-
 import streamlit as st
+from pathlib import Path
 from streamlit_sortables import sort_items
+from src.services.theme import apply_styles
 
-
-# More robust: build path relative to this file -> project root -> data/use_cases.json
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = PROJECT_ROOT / "data" / "use_cases.json"
 CSS_PATH = PROJECT_ROOT / "styles" / "use_case_scramble.css"
@@ -19,17 +17,6 @@ def exit_use_case_scramble():
 
     st.session_state.view = "hub"
     st.rerun()
-
-
-def load_css():
-    """Inject the game's CSS (kept in styles/)."""
-    try:
-        css = CSS_PATH.read_text(encoding="utf-8")
-        st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
-    except FileNotFoundError:
-        # If you forget to add the CSS file, the game still runs.
-        pass
-
 
 def load_use_cases():
     if not DATA_PATH.exists():
@@ -63,8 +50,7 @@ def start_new_round(use_cases):
 
 
 def play_use_case_scramble():
-    load_css()
-
+    apply_styles("styles/use_case_scramble.css")
     st.title("Use Case Scramble ")
 
     st.markdown(
@@ -99,8 +85,6 @@ def play_use_case_scramble():
     st.markdown("---")
     st.markdown("### Reorder the steps")
 
-    # FIX for your issue:
-    # Key changes every round -> the draggable list refreshes properly when you press "New use case"
     round_id = st.session_state.get("uc_round_id", 0)
     sort_key = f"use_case_sort_{round_id}"
 
