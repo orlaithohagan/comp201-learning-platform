@@ -1,18 +1,14 @@
 import json
 from pathlib import Path
-
 import networkx as nx
 import plotly.graph_objects as go
 
-
 DATA_PATH = Path("data/concept_map.json")
-
 
 def load_concept_map_data(path=DATA_PATH):
     """Load concept map JSON data."""
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
-
 
 def build_graph(data):
     """Build a NetworkX graph from node/edge data."""

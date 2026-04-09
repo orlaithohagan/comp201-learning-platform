@@ -77,9 +77,9 @@ def build_context_from_flashcards(question: str, max_results: int = 3):
     for i, card in enumerate(relevant_cards, start=1):
         context_parts.append(
             f"""Course Material {i}
-Topic: {card['topic']}
-Prompt: {card['prompt']}
-Answer: {card['answer']}"""
+            Topic: {card['topic']}
+            Prompt: {card['prompt']}
+            Answer: {card['answer']}"""
         )
 
     context = "\n\n".join(context_parts)

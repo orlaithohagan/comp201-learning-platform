@@ -1,5 +1,4 @@
 # src/gamification.py
-
 BADGES = [
     {
         "id": "quiz_starter",

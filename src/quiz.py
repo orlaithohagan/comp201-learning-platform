@@ -3,7 +3,7 @@ import json
 import random
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Set, Tuple
+from typing import List, Dict, Any, Optional
 
 DATA_FILENAME = "flashcards.json"
 
@@ -58,8 +58,7 @@ def load_flashcards(path: Optional[Path] = None) -> List[Flashcard]:
     if not isinstance(raw, list):
         raise ValueError("flashcards.json must contain a top-level JSON array")
 
-    flashcards = [Flashcard.from_dict(item) for item in raw]
-    return flashcards
+    return [Flashcard.from_dict(item) for item in raw]
 
 
 def list_topics(flashcards: List[Flashcard]) -> List[str]:
@@ -80,45 +79,45 @@ def _collect_distractors_for_flashcard(
 
     Ensures: distractors are unique and not equal to the correct answer.
     """
-    distractors_set: List[str] = []
+    distractors: List[str] = []
 
-# 1) use explicit distractors from the flashcard if provided
+    # 1) use explicit distractors from the flashcard if provided
     if flashcard.distractors:
         for d in flashcard.distractors:
-            if d and d != flashcard.answer and d not in distractors_set:
-                distractors_set.append(d)
-                if len(distractors_set) >= num_distractors:
-                    return distractors_set[:num_distractors]
+            if d and d != flashcard.answer and d not in distractors:
+                distractors.append(d)
+                if len(distractors) >= num_distractors:
+                    return distractors[:num_distractors]
 
     # Helper to pull answers from a pool (excluding correct answer and already-chosen)
-    def pull_from_pool(pool: List[Flashcard], needed: int) -> None:
+    def pull_from_pool(pool: List[Flashcard]) -> None:
         candidates = [p.answer for p in pool if p.answer and p.answer != flashcard.answer]
         # Deduplicate while preserving random order
         random.shuffle(candidates)
         for c in candidates:
-            if c not in distractors_set:
-                distractors_set.append(c)
-                if len(distractors_set) >= num_distractors:
+            if c not in distractors:
+                distractors.append(c)
+                if len(distractors) >= num_distractors:
                     return
 
     # 2) other answers from same topic
     pull_from_pool(same_topic_pool, num_distractors)
 
     # 3) fallback to global answers
-    if len(distractors_set) < num_distractors:
+    if len(distractors) < num_distractors:
         pull_from_pool(global_pool, num_distractors)
 
     # 4) If still not enough, duplicate existing distractors (rare). Ensure not equal to correct answer.
-    if len(distractors_set) < num_distractors:
+    if len(distractors) < num_distractors:
         # Create filler strings that are not the correct answer
         filler = 1
-        while len(distractors_set) < num_distractors:
+        while len(distractors) < num_distractors:
             candidate = f"Option {filler}"
-            if candidate != flashcard.answer and candidate not in distractors_set:
-                distractors_set.append(candidate)
+            if candidate != flashcard.answer and candidate not in distractors:
+                distractors.append(candidate)
             filler += 1
 
-    return distractors_set[:num_distractors]
+    return distractors[:num_distractors]
 
 def generate_quiz_questions(
     topic: str,

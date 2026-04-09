@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 
 DB_PATH = Path("data/app.db")
 
-
 def get_connection():
     return sqlite3.connect(DB_PATH)
 

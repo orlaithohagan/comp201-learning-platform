@@ -7,8 +7,8 @@ from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
 from src.services.theme import apply_styles
 
-apply_styles("styles/quiz.css")
 st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
+apply_styles("styles/quiz.css")
 
 require_login()
 render_sidebar_navigation("pages/Quiz.py")
@@ -45,7 +45,7 @@ def get_topics(cards):
         topic_counts[topic] = topic_counts.get(topic, 0) + 1
 
     topics = sorted(topic_counts.items(), key=lambda x: x[0])
-    return topics  # list of (topic, count)
+    return topics 
 
 
 def build_questions_for_topic(topic, cards, max_q=10):
@@ -63,14 +63,12 @@ def build_questions_for_topic(topic, cards, max_q=10):
         prompt = card.get("prompt", "No question text")
         correct = card.get("answer", "")
 
-        # Build options from answer + distractors
         options = [correct]
         distractors = card.get("distractors") or []
         for d in distractors:
             if isinstance(d, str) and d not in options:
                 options.append(d)
 
-        # Ensure we have at least one option
         if not options:
             options = [correct]
 
@@ -114,12 +112,6 @@ def reset_quiz_state():
     st.session_state.quiz_answers = []
     st.session_state.quiz_logged = False
 
-
-# Optional: reuse your flashcards CSS if you like
-css_path = Path(__file__).resolve().parents[1] / "styles" / "flashcards.css"
-if css_path.exists():
-    with open(css_path, "r", encoding="utf-8") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Initialise session state defaults
 if "quiz_view" not in st.session_state:
@@ -256,7 +248,7 @@ elif view == "results":
         log_daily_activity(user_id)
         st.session_state.quiz_logged = True
 
-    st.subheader("Quiz complete! 🎉")
+    st.subheader("Quiz complete!")
     st.write(f"**Your score:** {score} / {total}")
 
     if total > 0:
@@ -268,9 +260,9 @@ elif view == "results":
         st.markdown(f"**Q{i}. {ans['prompt']}**")
 
         if ans["is_correct"]:
-            st.markdown("✅ Correct")
+            st.markdown("Correct")
         else:
-            st.markdown("❌ Incorrect")
+            st.markdown("Incorrect")
 
         st.markdown(f"- **Correct answer:** {ans['correct']}")
         st.markdown(f"- **Your answer:** {ans['selected']}")

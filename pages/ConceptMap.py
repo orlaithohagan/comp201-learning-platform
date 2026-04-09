@@ -1,7 +1,7 @@
 import streamlit as st
 from src.services.navigation import render_sidebar_navigation
+from src.services.auth_ui import require_login, logout_button
 from src.services.theme import apply_styles
-
 from src.concept_map import (
     load_concept_map_data,
     build_graph,
@@ -10,11 +10,11 @@ from src.concept_map import (
     get_topic_options,
 )
 
+st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
+require_login()
+logout_button()
 render_sidebar_navigation("pages/ConceptMap.py")
 apply_styles("styles/concept_map.css")
-
-st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
-
 
 def render_tool_links(related_tools, selected_topic):
 
@@ -46,7 +46,7 @@ def render_tool_links(related_tools, selected_topic):
 
 
 def main():
-    st.title("🧠 Concept Map")
+    st.title("Concept Map")
     st.markdown(
         """
         Explore how the main COMP201 software engineering topics connect together.
@@ -75,12 +75,6 @@ def main():
 
     st.markdown("---")
     st.subheader("Select a Topic")
-
-    # selected_label = st.selectbox(
-    #     "Choose a concept to view details",
-    #     options=list(topic_options.keys()),
-    #     index=0
-    # )
     labels = ["Select a topic..."] + list(topic_options.keys())
 
     selected_label = st.selectbox(
@@ -108,7 +102,6 @@ def main():
 
     st.markdown("---")
     render_tool_links(related_tools, selected_topic)
-
 
 if __name__ == "__main__":
     main()

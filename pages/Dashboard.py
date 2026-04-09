@@ -29,6 +29,24 @@ def get_all_quiz_topics():
     topics = sorted({card.get("topic") for card in data if card.get("topic")})
     return topics
 
+def render_badge_card(badge, earned_badges):
+    earned = badge["id"] in earned_badges
+
+    icon = "🏅" if earned else "🔒"
+    status = "Unlocked" if earned else "Locked"
+    state_class = "badge-earned" if earned else "badge-locked"
+
+    st.markdown(
+        f"""
+        <div class="badge-card {state_class}">
+            <div class="badge-title">{icon} {badge['name']}</div>
+            <div class="badge-description">{badge['description']}</div>
+            <div class="badge-status">{status}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 def main():
     st.title("📊 User Dashboard")
     tab1, tab2 = st.tabs(["My Progress", "Leaderboard"])
@@ -40,7 +58,6 @@ def main():
             st.write("View your quiz progress and recent learning activity.")
 
         st.caption("Track your quiz results, topic mastery, and recent learning activity.")
-        st.write("")
 
         user_id = st.session_state.get("user_id")
 
@@ -95,11 +112,41 @@ def main():
         # st.markdown("---")
         # st.subheader("🏆 Achievements")
 
-        # for badge in BADGES:
-        #     if badge["id"] in earned_badges:
-        #         st.success(f"🏅 {badge['name']} — {badge['description']}")
-        #     else:
-        #         st.info(f"🔒 {badge['name']} — {badge['description']}")
+        # cols = st.columns(2)
+
+        # for i, badge in enumerate(BADGES):
+        #     with cols[i % 2]:
+        #         earned = badge["id"] in earned_badges
+
+        #         icon = "🏅" if earned else "🔒"
+        #         status = "Unlocked" if earned else "Locked"
+
+        #         box_color = "#e8f5e9" if earned else "#f3f4f6"
+        #         border_color = "#81c784" if earned else "#d1d5db"
+        #         text_color = "#1b5e20" if earned else "#374151"
+
+        #         st.markdown(
+        #             f"""
+        #             <div style="
+        #                 background-color: {box_color};
+        #                 border: 1px solid {border_color};
+        #                 border-radius: 12px;
+        #                 padding: 16px;
+        #                 margin-bottom: 12px;
+        #             ">
+        #                 <div style="font-size: 18px; font-weight: 700; color: {text_color};">
+        #                     {icon} {badge['name']}
+        #                 </div>
+        #                 <div style="font-size: 14px; color: {text_color}; margin-top: 6px;">
+        #                     {badge['description']}
+        #                 </div>
+        #                 <div style="font-size: 12px; color: {text_color}; margin-top: 10px; opacity: 0.8;">
+        #                     {status}
+        #                 </div>
+        #             </div>
+        #             """,
+        #             unsafe_allow_html=True
+        #         )
 
         st.markdown("---")
         st.subheader("🏆 Achievements")
@@ -108,38 +155,7 @@ def main():
 
         for i, badge in enumerate(BADGES):
             with cols[i % 2]:
-                earned = badge["id"] in earned_badges
-
-                icon = "🏅" if earned else "🔒"
-                status = "Unlocked" if earned else "Locked"
-
-                box_color = "#e8f5e9" if earned else "#f3f4f6"
-                border_color = "#81c784" if earned else "#d1d5db"
-                text_color = "#1b5e20" if earned else "#374151"
-
-                st.markdown(
-                    f"""
-                    <div style="
-                        background-color: {box_color};
-                        border: 1px solid {border_color};
-                        border-radius: 12px;
-                        padding: 16px;
-                        margin-bottom: 12px;
-                    ">
-                        <div style="font-size: 18px; font-weight: 700; color: {text_color};">
-                            {icon} {badge['name']}
-                        </div>
-                        <div style="font-size: 14px; color: {text_color}; margin-top: 6px;">
-                            {badge['description']}
-                        </div>
-                        <div style="font-size: 12px; color: {text_color}; margin-top: 10px; opacity: 0.8;">
-                            {status}
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
+                render_badge_card(badge, earned_badges)
 
         st.markdown("---")
         st.subheader("📘 Course Progress")

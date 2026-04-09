@@ -18,3 +18,39 @@
     padding: 1rem;
     margin-top: 1rem;
 }
+
+.badge-card {
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid #d1d5db;
+}
+
+.badge-earned {
+    background-color: #e8f5e9;
+    border-color: #81c784;
+    color: #1b5e20;
+}
+
+.badge-locked {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+.badge-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.badge-description {
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.badge-status {
+    font-size: 12px;
+    margin-top: 10px;
+    opacity: 0.8;
+}
