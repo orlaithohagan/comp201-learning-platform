@@ -109,44 +109,6 @@ def main():
         else:
             st.info("No learning streak yet. Complete a quiz today to start one.")
 
-        # st.markdown("---")
-        # st.subheader("🏆 Achievements")
-
-        # cols = st.columns(2)
-
-        # for i, badge in enumerate(BADGES):
-        #     with cols[i % 2]:
-        #         earned = badge["id"] in earned_badges
-
-        #         icon = "🏅" if earned else "🔒"
-        #         status = "Unlocked" if earned else "Locked"
-
-        #         box_color = "#e8f5e9" if earned else "#f3f4f6"
-        #         border_color = "#81c784" if earned else "#d1d5db"
-        #         text_color = "#1b5e20" if earned else "#374151"
-
-        #         st.markdown(
-        #             f"""
-        #             <div style="
-        #                 background-color: {box_color};
-        #                 border: 1px solid {border_color};
-        #                 border-radius: 12px;
-        #                 padding: 16px;
-        #                 margin-bottom: 12px;
-        #             ">
-        #                 <div style="font-size: 18px; font-weight: 700; color: {text_color};">
-        #                     {icon} {badge['name']}
-        #                 </div>
-        #                 <div style="font-size: 14px; color: {text_color}; margin-top: 6px;">
-        #                     {badge['description']}
-        #                 </div>
-        #                 <div style="font-size: 12px; color: {text_color}; margin-top: 10px; opacity: 0.8;">
-        #                     {status}
-        #                 </div>
-        #             </div>
-        #             """,
-        #             unsafe_allow_html=True
-        #         )
 
         st.markdown("---")
         st.subheader("🏆 Achievements")
@@ -163,17 +125,6 @@ def main():
         st.write(f"{completed_count} / {total_topics} Topics Attempted")
         st.progress(progress_percent / 100)
         st.caption(f"{progress_percent}% of course topics attempted")
-
-        st.markdown("---")
-        st.subheader("Topic Progress")
-
-        if topic_progress:
-            for topic_name, avg_score in topic_progress:
-                score_value = abs(round(avg_score or 0))
-                st.write(f"**{topic_name}** — {score_value}%")
-                st.progress(score_value / 100)
-        else:
-            st.info("No topic progress recorded yet.")
 
         st.markdown("---")
         st.subheader("Topic Mastery")
