@@ -39,8 +39,7 @@ def login_page():
     st.title("Log in")
     st.caption("Enter your username and password to continue.")
 
-    # Back to welcome
-    if st.button("← Back", key="back_from_login"):
+    if st.button("Back", key="back_from_login"):
         _set_view("welcome")
 
     username = st.text_input("Username", key="login_user")
@@ -67,7 +66,7 @@ def signup_page():
     st.title("Create account")
     st.caption("Create a student account to access the learning tools.")
 
-    if st.button("← Back", key="back_from_signup"):
+    if st.button("Back", key="back_from_signup"):
         _set_view("welcome")
 
     new_user = st.text_input("New username", key="new_user")

@@ -10,8 +10,8 @@ from src.concept_map import (
     get_topic_options,
 )
 
-st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
 require_login()
+st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
 logout_button()
 render_sidebar_navigation("pages/ConceptMap.py")
 apply_styles("styles/concept_map.css")
