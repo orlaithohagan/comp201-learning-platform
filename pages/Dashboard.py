@@ -190,15 +190,14 @@ def main():
         st.subheader("Recent Quiz Attempts")
 
         if recent_attempts:
-            for topic_name, score, total_questions, attempted_at in recent_attempts:
+            for topic_name, score, attempted_at in recent_attempts:
                 score_value = abs(round(score or 0))
                 formatted_date = datetime.strptime(attempted_at, "%Y-%m-%d %H:%M:%S").strftime("%d %b %Y – %H:%M")
 
                 st.markdown(
                     f"""
                     **Topic:** {topic_name or 'General'}  
-                    **Score:** {score_value}%  
-                    **Questions:** {total_questions}  
+                    **Score:** {score_value}%   
                     **Date:** {formatted_date}
                     """
                 )

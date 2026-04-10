@@ -1,6 +1,7 @@
 import streamlit as st
 
 PAGES = {
+    "Home": "streamlit_app.py",
     "Flashcards": "pages/Flashcards.py",
     "Concept Map": "pages/ConceptMap.py",
     "Quiz": "pages/Quiz.py",
@@ -10,11 +11,13 @@ PAGES = {
 }
 
 NAV_SECTIONS = {
+    "🏠 Home": ["Home"],
     "📚 Learn": ["Flashcards", "Concept Map"],
     "🧠 Practice": ["Quiz", "Mini Games"],
     "🤖 Support": ["AI Tutor"],
     "📊 Progress": ["Dashboard"],
 }
+
 
 
 def nav_button(label: str, page_path: str, current_page: str) -> None:

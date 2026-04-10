@@ -74,7 +74,7 @@ def get_recent_quiz_attempts(user_id, limit=5):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT topic_name, score, total_questions, attempted_at
+        SELECT topic_name, score, attempted_at
         FROM quiz_attempts
         WHERE user_id = ?
         ORDER BY attempted_at DESC
