@@ -2,7 +2,6 @@
 import streamlit as st
 from games.requirement_rush import play_requirement_rush, reset_requirement_rush
 from games.use_case_scramble import play_use_case_scramble
-from games.design_detective import play_design_detective, reset_design_detective 
 
 def run_games_hub():
     # Which screen are we on? (hub or a specific game)
@@ -18,15 +17,12 @@ def run_games_hub():
         play_use_case_scramble()
         return
     
-    if st.session_state.view == "design_detective":
-        play_design_detective()
-        return
 
     # ---------- HUB SCREEN ----------
     st.title("Mini Games Hub")
     st.caption("Reinforce COMP201 concepts with interactive mini-games.")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("### Requirement Rush")
@@ -38,10 +34,6 @@ def run_games_hub():
         st.write("Drag and drop steps into the correct order.")
         start_ucs = st.button("Play Use Case Scramble", key="btn_ucs")
 
-    with col3:
-        st.markdown("### Design Detective")
-        st.write("Investigate scenarios and choose the best design fix.")
-        start_dd = st.button("Play Design Detective", key="btn_dd")
 
     st.write("---")
 
@@ -54,8 +46,4 @@ def run_games_hub():
         st.session_state.view = "use_case_scramble"
         st.rerun()
 
-    if start_dd:
-        reset_design_detective()
-        st.session_state.view = "design_detective"
-        st.rerun()
 
