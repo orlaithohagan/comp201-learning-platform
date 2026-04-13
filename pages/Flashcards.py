@@ -6,6 +6,7 @@ from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
 from src.services.theme import apply_styles
 
+# Set page configuration and apply styles
 st.set_page_config(page_title="Flashcards", page_icon=":books:", layout="wide")
 apply_styles("styles/flashcards.css")
 
@@ -14,7 +15,6 @@ render_sidebar_navigation("pages/Flashcards.py")
 logout_button()
 
 st.title("Flashcards")
-
 st.markdown(
     "<p style='color:#4b5563; margin-top:0.25rem;'>"
     "Choose a topic to start studying with interactive flashcards."
@@ -22,8 +22,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-#Flashcards Data Loading
+# Load flashcards data from JSON file
 DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
 flashcards_data = []
 if DATA_PATH.exists():
@@ -38,7 +37,7 @@ if DATA_PATH.exists():
 else:
     st.warning("No flashcards data found.")
 
-#Helpers
+# Helper functions to list topics and filter cards
 def list_topics():
     seen = set()
     topics_in_order = []
@@ -49,13 +48,15 @@ def list_topics():
             topics_in_order.append(t)
     return topics_in_order
 
+# Get cards for a specific topic
 def cards_for(topic: str):
     return [c for c in flashcards_data if c.get("topic") == topic]
 
+# Generate a unique ID for each card (using provided 'id' or fallback to topic+index)
 def card_ids(cards):
     return [c.get("id") or f"{c.get('topic','')}_{i}" for i, c in enumerate(cards)]
 
-#Mode State
+# Initialize session state variables for flashcard functionality
 if "mode" not in st.session_state:
     st.session_state.mode = "dashboard"
 if "selected_topic" not in st.session_state:
@@ -71,7 +72,7 @@ if "review" not in st.session_state:
 if "shuffle" not in st.session_state:   
     st.session_state.shuffle = {}
 
-#Dashboard rendering
+# Shows all available and user's studied flashcard topics with progress bars and "Study" buttons
 def render_dashboard():
     st.subheader("Revision Topics")
 
@@ -118,12 +119,12 @@ def render_dashboard():
 
         st.markdown("---")
 
-#Study Mode Rendering
+# Shows the flashcard interface for the selected topic, with navigation and review options
 def render_study():
     topic = st.session_state.selected_topic
     all_cards = cards_for(topic)
 
-    # Controls row: Back, Shuffle, Review-only, Difficulty filter (optional)
+    # Header with topic name, shuffle toggle, and review-only toggle
     top_l, top_m, top_r = st.columns([1, 5, 4])
     with top_l:
         if st.button("← Back"):
@@ -135,8 +136,8 @@ def render_study():
         st.session_state.shuffle[topic] = st.toggle("Shuffle cards", value=st.session_state.shuffle.get(topic, False))
         review_only = st.toggle("Review only", value=False)
 
-    # Apply order/filter
-    cards = list(all_cards)  # copy
+    # Filter and optionally shuffle cards based on user preferences
+    cards = list(all_cards) 
     if st.session_state.shuffle.get(topic):
         random.shuffle(cards)
     if review_only:
@@ -149,7 +150,7 @@ def render_study():
         st.info("No flashcards available for this selection.")
         return
 
-    # Current index (bound to filtered deck length)
+    # Ensure flashcard index is within bounds, then display the current card with flip animation and navigation buttons
     if st.session_state.flashcard_index >= len(cards):
         st.session_state.flashcard_index = 0
     idx = st.session_state.flashcard_index
@@ -160,7 +161,7 @@ def render_study():
     a = card.get("answer") or "No answer available."
     cid = card.get("id") or f"{card.get('topic','')}_{idx}"
 
-    # --- Flip card (animated) ---
+    # Card display with flip animation
     st.markdown(
         f"""
         <div class="flip-wrap">
@@ -173,6 +174,7 @@ def render_study():
         unsafe_allow_html=True,
     )
 
+    # Buttons for marking card for review and navigating between cards
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Got it! - Don't ask again.", use_container_width=True):
@@ -182,10 +184,9 @@ def render_study():
             st.session_state.review.add(cid)
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # Flip + nav
+    # Navigation buttons and progress bar
     c_prev, c_prog, c_next, c_flip = st.columns([2, 5, 2, 2])
 
-    # stats: mark this card as seen
     st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
     st.session_state.stats[topic]["seen"].add(cid)
 

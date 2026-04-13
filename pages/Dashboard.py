@@ -10,13 +10,14 @@ from src.services.auth_ui import require_login, logout_button
 from src.gamification import BADGES, get_user_badges
 from src.services.theme import apply_styles
 
+# Set page configuration and apply styles
 st.set_page_config(page_title="Dashboard", page_icon="📊", layout="wide")
-
 apply_styles("styles/dashboard.css")
 require_login()
 render_sidebar_navigation("pages/Dashboard.py")
 logout_button()
 
+# Helper function to get all quiz topics from flashcards data
 def get_all_quiz_topics():
     data_path = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
 
@@ -29,6 +30,7 @@ def get_all_quiz_topics():
     topics = sorted({card.get("topic") for card in data if card.get("topic")})
     return topics
 
+# Function to render a badge card in the achievements section
 def render_badge_card(badge, earned_badges):
     earned = badge["id"] in earned_badges
 
@@ -47,9 +49,12 @@ def render_badge_card(badge, earned_badges):
         unsafe_allow_html=True
     )
 
+# Main function to render the dashboard page
 def main():
     st.title("📊 User Dashboard")
     tab1, tab2 = st.tabs(["My Progress", "Leaderboard"])
+
+    #Tab 1: User Progress and Achievements
     with tab1:
         username = st.session_state.get("username")
         if username:
@@ -59,6 +64,7 @@ def main():
 
         st.caption("Track your quiz results, topic mastery, and recent learning activity.")
 
+        # Fetch user progress data
         user_id = st.session_state.get("user_id")
 
         summary = get_quiz_summary(user_id)
@@ -90,6 +96,7 @@ def main():
 
         earned_badges = get_user_badges(user_stats)
 
+        # Display summary metrics at the top of the dashboard
         col1, col2, col3 = st.columns(3)
 
         with col1:
@@ -150,6 +157,7 @@ def main():
                             st.switch_page("pages/AITutor.py")
         else:
             st.info("No topic mastery data available yet.")
+
 
         st.markdown("---")
         st.subheader("Quiz Performance by Topic")

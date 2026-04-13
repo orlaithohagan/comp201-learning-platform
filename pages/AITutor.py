@@ -4,6 +4,7 @@ from src.services.navigation import render_sidebar_navigation
 from src.ai_tutor import ask_ai_tutor
 from src.services.theme import apply_styles
 
+# Set page configuration and apply styles
 st.set_page_config(page_title="AI Tutor", layout="wide")
 apply_styles("styles/tutor.css")
 
@@ -11,6 +12,7 @@ require_login()
 render_sidebar_navigation("pages/AITutor.py")
 logout_button()
 
+# Initial welcome message for the AI tutor
 WELCOME_MESSAGE = (
     "Hi! I'm your COMP201 AI tutor. "
     "Ask me anything about software engineering concepts, and I'll do my best to explain them clearly."
@@ -22,6 +24,7 @@ st.markdown(
 )
 st.caption("Powered by OpenAI API with retrieval from COMP201 course materials")
 
+# Initialize chat history in session state if not already present
 if "ai_tutor_messages" not in st.session_state:
     st.session_state.ai_tutor_messages = [
         {
@@ -30,6 +33,7 @@ if "ai_tutor_messages" not in st.session_state:
         }
     ]
 
+# Check for prefill topic from dashboard and generate initial response if needed
 if "tutor_prefill" in st.session_state:
     prefill_topic = st.session_state.pop("tutor_prefill")
     user_message = f"""
@@ -55,6 +59,7 @@ if "tutor_prefill" in st.session_state:
         }
     )
 
+# Function to send a message to the AI tutor and get a response
 def send_message(user_message: str):
     st.session_state.ai_tutor_messages.append(
         {"role": "user", "content": user_message}
@@ -74,7 +79,7 @@ def send_message(user_message: str):
         }
     )
 
-
+# Loop through all messages and display them in the chat interface
 for i, message in enumerate(st.session_state.ai_tutor_messages):
     with st.chat_message(message["role"]):
         if message["role"] == "assistant":
@@ -95,7 +100,7 @@ for i, message in enumerate(st.session_state.ai_tutor_messages):
         else:
             st.markdown(f"{message['content']}")
 
-
+# Input area for user to ask questions, and button to clear chat
 col1, col2 = st.columns([6, 1])
 
 with col1:
@@ -111,6 +116,7 @@ with col2:
         ]
         st.rerun()
 
+# When the user submits a question, send it to the AI tutor and get a response
 if user_input:
     send_message(user_input)
     st.rerun()

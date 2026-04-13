@@ -10,6 +10,7 @@ from src.concept_map import (
     get_topic_options,
 )
 
+# Set page configuration and apply styles
 st.set_page_config(page_title="Concept Map", page_icon="🧠", layout="wide")
 apply_styles("styles/concept_map.css")
 
@@ -17,9 +18,8 @@ require_login()
 render_sidebar_navigation("pages/ConceptMap.py")
 logout_button()
 
-
+# Function to render links to related learning tools based on the selected topic
 def render_tool_links(related_tools, selected_topic):
-
     st.subheader("Related Learning Tools")
 
     col1, col2, col3 = st.columns(3)
@@ -46,7 +46,7 @@ def render_tool_links(related_tools, selected_topic):
         else:
             st.button("AI Tutor", disabled=True)
 
-
+# Main function to render the concept map page
 def main():
     st.title("Concept Map")
     st.markdown(
@@ -57,6 +57,7 @@ def main():
         """
     )
 
+    # Load concept map data, build the graph, and render it using Plotly
     data = load_concept_map_data()
     graph = build_graph(data)
     fig = create_plotly_figure(graph)
@@ -75,6 +76,7 @@ def main():
         """
         )
 
+# Topic selection dropdown and details section
     st.markdown("---")
     st.subheader("Select a Topic")
     labels = ["Select a topic..."] + list(topic_options.keys())

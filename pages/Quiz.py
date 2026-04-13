@@ -7,6 +7,7 @@ from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
 from src.services.theme import apply_styles
 
+# Set page configuration and apply styles
 st.set_page_config(page_title="Topic Quiz", page_icon="❓", layout="wide")
 apply_styles("styles/quiz.css")
 
@@ -14,7 +15,24 @@ require_login()
 render_sidebar_navigation("pages/Quiz.py")
 logout_button()
 
+# Helper functions for loading flashcards, listing topics, and building quiz questions
+view = st.session_state.get("quiz_view")
+topic = st.session_state.get("quiz_topic")
 
+if view == "quiz" and topic:
+    st.title(f"{topic} Quiz")
+
+elif view == "results" and topic:
+    st.title(f"{topic} Results")
+
+else:
+    st.title("Choose a Topic")
+    st.write(
+        "Select a COMP201 topic below to begin a quiz. "
+        "Each quiz contains up to 10 questions and tracks your progress."
+    )
+
+# Helper functions for loading flashcards, listing topics, and building quiz questions
 def load_flashcards():
     """Load flashcards JSON and return a list of card dicts."""
     data_path = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
@@ -36,7 +54,7 @@ def load_flashcards():
 
     return data
 
-
+# Get sorted list of unique topics with counts
 def get_topics(cards):
     """Return sorted list of unique topic names with counts."""
     topic_counts = {}
@@ -47,7 +65,7 @@ def get_topics(cards):
     topics = sorted(topic_counts.items(), key=lambda x: x[0])
     return topics 
 
-
+# Build quiz questions for a topic based on flashcards data
 def build_questions_for_topic(topic, cards, max_q=10):
     """Create a list of quiz questions for a given topic."""
     topic_cards = [c for c in cards if c.get("topic") == topic]
@@ -85,7 +103,7 @@ def build_questions_for_topic(topic, cards, max_q=10):
 
     return questions
 
-
+# Quiz logic and state management
 def start_quiz(topic, cards):
     """Initialise quiz state for a given topic."""
     questions = build_questions_for_topic(topic, cards)
@@ -101,7 +119,7 @@ def start_quiz(topic, cards):
     st.session_state.quiz_answers = []  # list of {prompt, correct, selected, is_correct}
     st.session_state.quiz_logged = False
 
-
+# Function to log quiz attempt and daily activity when quiz is completed
 def reset_quiz_state():
     """Return to the main topic list."""
     st.session_state.quiz_view = "home"
@@ -113,7 +131,7 @@ def reset_quiz_state():
     st.session_state.quiz_logged = False
 
 
-# Initialise session state defaults
+# Session state initialization 
 if "quiz_view" not in st.session_state:
     st.session_state.quiz_view = "home"
 if "quiz_topic" not in st.session_state:
@@ -132,19 +150,11 @@ if "quiz_logged" not in st.session_state:
 cards = load_flashcards()
 topics = get_topics(cards)
 
-st.title("Topic Quiz")
-st.write(
-    "Each quiz is built from the questions for a single COMP201 topic. "
-    "You’ll answer up to 10 questions and see your score at the end."
-)
 
 st.markdown("---")
-
-# ------------ Views ------------ #
-
+# View logic to switch between topic list, quiz questions, and results based on session state
 view = st.session_state.quiz_view
 
-# ---- Home view: list all topics with 'Start quiz' buttons ---- #
 if view == "home":
 
     if not topics:
@@ -163,7 +173,7 @@ if view == "home":
                     start_quiz(topic, cards)
                     st.rerun()
 
-# ---- Quiz view: show current question ---- #
+# Display quiz questions and handle user answers, updating session state accordingly
 elif view == "quiz":
 
     questions = st.session_state.quiz_questions
@@ -176,7 +186,6 @@ elif view == "quiz":
         st.rerun()
 
     if idx >= total:
-        # Safety: if index goes out of range, show results instead
         st.session_state.quiz_view = "results"
         st.rerun()
 
@@ -189,17 +198,14 @@ elif view == "quiz":
 
     st.write(q["prompt"])
 
-    # Progress bar
     st.progress((idx) / total)
 
-    # Answer options
     selected = st.radio(
         "Choose one answer:",
         q["options"],
         key=f"q_{idx}",
     )
 
-    # Next / finish button
     button_label = "Next question" if idx < total - 1 else "Finish quiz"
     if st.button(button_label):
         if not selected:
@@ -225,19 +231,16 @@ elif view == "quiz":
                 st.session_state.quiz_view = "results"
                 st.rerun()
 
-# ---- Results view: show score + review ---- #
+# Display quiz results, log attempt, and offer review of questions with correct answers
 elif view == "results":
 
     total = len(st.session_state.quiz_questions)
     score = st.session_state.quiz_score
-
-    # TEST
-    # st.write("DEBUG user_id:", st.session_state.get("user_id"))
-
     user_id = st.session_state.get("user_id")
     topic_name = st.session_state.get("quiz_topic")
     score_percent = round((score / total) * 100, 2) if total > 0 else 0
 
+    # Log quiz attempt and daily activity if not already logged for this quiz session
     if user_id is not None and total > 0 and not st.session_state.quiz_logged:
         log_quiz_attempt(
             user_id=user_id,
@@ -254,6 +257,7 @@ elif view == "results":
     if total > 0:
         st.progress(score / total)
 
+    # Offer detailed review of each question with correct answers and user's selected answers
     st.markdown("### Review")
 
     for i, ans in enumerate(st.session_state.quiz_answers, start=1):
@@ -273,6 +277,5 @@ elif view == "results":
         st.rerun()
 
 else:
-    # Fallback if the view somehow gets into an unknown state
     reset_quiz_state()
     st.rerun()
