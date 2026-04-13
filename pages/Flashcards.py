@@ -37,8 +37,9 @@ if DATA_PATH.exists():
 else:
     st.warning("No flashcards data found.")
 
-# Helper functions to list topics and filter cards
+
 def list_topics():
+    """Extract a sorted list of unique quiz topics from the flashcards data."""
     seen = set()
     topics_in_order = []
     for card in flashcards_data:
@@ -48,12 +49,14 @@ def list_topics():
             topics_in_order.append(t)
     return topics_in_order
 
-# Get cards for a specific topic
+
 def cards_for(topic: str):
+    """Return a list of flashcards for the given topic."""
     return [c for c in flashcards_data if c.get("topic") == topic]
 
-# Generate a unique ID for each card (using provided 'id' or fallback to topic+index)
+
 def card_ids(cards):
+    """Generate a list of unique identifiers for the given list of cards."""
     return [c.get("id") or f"{c.get('topic','')}_{i}" for i, c in enumerate(cards)]
 
 # Initialize session state variables for flashcard functionality
@@ -72,8 +75,9 @@ if "review" not in st.session_state:
 if "shuffle" not in st.session_state:   
     st.session_state.shuffle = {}
 
-# Shows all available and user's studied flashcard topics with progress bars and "Study" buttons
+
 def render_dashboard():
+    """Render the dashboard view with a list of flashcard topics, progress bars, and study buttons."""
     st.subheader("Revision Topics")
 
     topics = list_topics()
@@ -119,8 +123,8 @@ def render_dashboard():
 
         st.markdown("---")
 
-# Shows the flashcard interface for the selected topic, with navigation and review options
 def render_study():
+    """Render the flashcard study view for the selected topic, with flip animation and review options."""
     topic = st.session_state.selected_topic
     all_cards = cards_for(topic)
 

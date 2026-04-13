@@ -4,6 +4,7 @@ from src.rag_helper import build_context_from_flashcards
 
 MODEL_NAME = "gpt-4o-mini"
 
+# System prompt defining the AI tutor's behavior and response style
 SYSTEM_PROMPT = """
 You are a helpful AI tutor for a university COMP201 Software Engineering student.
 

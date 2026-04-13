@@ -32,7 +32,6 @@ else:
         "Each quiz contains up to 10 questions and tracks your progress."
     )
 
-# Helper functions for loading flashcards, listing topics, and building quiz questions
 def load_flashcards():
     """Load flashcards JSON and return a list of card dicts."""
     data_path = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
@@ -54,7 +53,6 @@ def load_flashcards():
 
     return data
 
-# Get sorted list of unique topics with counts
 def get_topics(cards):
     """Return sorted list of unique topic names with counts."""
     topic_counts = {}
@@ -65,7 +63,6 @@ def get_topics(cards):
     topics = sorted(topic_counts.items(), key=lambda x: x[0])
     return topics 
 
-# Build quiz questions for a topic based on flashcards data
 def build_questions_for_topic(topic, cards, max_q=10):
     """Create a list of quiz questions for a given topic."""
     topic_cards = [c for c in cards if c.get("topic") == topic]
@@ -103,7 +100,6 @@ def build_questions_for_topic(topic, cards, max_q=10):
 
     return questions
 
-# Quiz logic and state management
 def start_quiz(topic, cards):
     """Initialise quiz state for a given topic."""
     questions = build_questions_for_topic(topic, cards)
@@ -119,7 +115,6 @@ def start_quiz(topic, cards):
     st.session_state.quiz_answers = []  # list of {prompt, correct, selected, is_correct}
     st.session_state.quiz_logged = False
 
-# Function to log quiz attempt and daily activity when quiz is completed
 def reset_quiz_state():
     """Return to the main topic list."""
     st.session_state.quiz_view = "home"
@@ -129,7 +124,6 @@ def reset_quiz_state():
     st.session_state.quiz_score = 0
     st.session_state.quiz_answers = []
     st.session_state.quiz_logged = False
-
 
 # Session state initialization 
 if "quiz_view" not in st.session_state:

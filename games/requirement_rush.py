@@ -5,29 +5,36 @@ from src.services.theme import apply_styles
 import streamlit as st
 from streamlit_sortables import sort_items 
 
+# Path to requirements data and max number of requirements per game
 REQ_DATA_PATH = Path("data/requirements_rush.json")
 MAX_REQ_PER_GAME = 10
 
+
 @st.cache_data
 def load_all_requirements():
+    """Load all requirements from the JSON file and return a list of (text, type) tuples."""
     with REQ_DATA_PATH.open(encoding="utf-8") as f:
         raw = json.load(f)
     return [(item["text"], item["type"]) for item in raw]
 
 
 def choose_game_requirements():
-    all_reqs = load_all_requirements()
-    if len(all_reqs) <= MAX_REQ_PER_GAME:
-        return all_reqs
-    return random.sample(all_reqs, MAX_REQ_PER_GAME)
+        """Select a random subset of requirements for the game, up to MAX_REQ_PER_GAME."""
+        all_reqs = load_all_requirements()
+        if len(all_reqs) <= MAX_REQ_PER_GAME:
+            return all_reqs
+        return random.sample(all_reqs, MAX_REQ_PER_GAME)
+
 
 def init_requirement_rush_state():
+    """Initialize session state variables for the Requirement Rush game if they don't already exist."""
     ss = st.session_state
 
     if "rr_type_map" not in ss:
         selected = choose_game_requirements()
         ss.rr_type_map = {text: rtype for text, rtype in selected}
 
+    # Initialize the containers for the drag-and-drop interface
     if "rr_containers" not in ss:
         all_texts = list(ss.rr_type_map.keys())
         ss.rr_containers = [
@@ -47,6 +54,7 @@ def init_requirement_rush_state():
 
 
 def reset_requirement_rush():
+    """Reset the game state for a new round of Requirement Rush."""
     ss = st.session_state
 
     if "rr_board_version" not in ss:
@@ -66,12 +74,13 @@ def reset_requirement_rush():
     ss.rr_board_version += 1  
 
 def play_requirement_rush():
+    """Main function to render the Requirement Rush game interface and handle game logic."""
+    st.set_page_config(page_title="Requirement Rush", page_icon="⚡")
     apply_styles("styles/requirement_rush.css")
     init_requirement_rush_state()
     ss = st.session_state
 
     st.title("Requirement Rush")
-
     st.markdown(
     "<div class='uol-info-box'><b>Drag each requirement into Functional or Non-functional.</b></div>",
     unsafe_allow_html=True,
@@ -87,6 +96,7 @@ def play_requirement_rush():
             ss.view = "hub"
             st.rerun()
 
+    # Render the drag-and-drop interface using the current state of the containers
     containers = ss.rr_containers
 
     sorted_containers = sort_items(
@@ -96,11 +106,13 @@ def play_requirement_rush():
     )
     ss.rr_containers = sorted_containers
 
+    # Extract grouped items for easier scoring and display
     by_header = {c["header"]: c["items"] for c in sorted_containers}
     unassigned_items = by_header.get("Unassigned", [])
     functional_items = by_header.get("Functional", [])
     nonfunctional_items = by_header.get("Non-functional", [])
 
+    # Display score and status information based on how many requirements have been sorted
     total = len(ss.rr_type_map)
     placed = total - len(unassigned_items)
 
@@ -114,6 +126,7 @@ def play_requirement_rush():
 
     st.markdown("---")
 
+    # Check and Reset buttons, with logic to only enable Check when all requirements have been sorted
     all_assigned = len(unassigned_items) == 0
     check_col, reset_col = st.columns([2, 1])
 
@@ -134,6 +147,7 @@ def play_requirement_rush():
             reset_requirement_rush()
             st.rerun()
 
+    # Results and feedback section, only shown after the user clicks Check my answers
     if ss.rr_checked:
         st.markdown("### Results!")
         st.write(f"You correctly classified **{ss.rr_score} / {total}** requirements.")

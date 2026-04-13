@@ -7,6 +7,7 @@ from typing import List, Dict, Any, Optional
 
 DATA_FILENAME = "flashcards.json"
 
+# Core quiz generation logic: loading flashcards, extracting topics, and building quiz questions with distractors.
 @dataclass
 class Flashcard:
     id: str
@@ -19,16 +20,16 @@ class Flashcard:
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Flashcard":
+        "Create a Flashcard instance from a dictionary, providing defaults for missing fields."
         return Flashcard(
-            id=d.get("id", ""),
-            topic=d.get("topic", ""),
-            prompt=d.get("prompt", ""),
-            answer=d.get("answer", ""),
-            difficulty=d.get("difficulty"),
-            tags=d.get("tags", []),
-            distractors=d.get("distractors", []) or [],
+            id = d.get("id", ""),
+            topic= d.get("topic", ""),
+            prompt = d.get("prompt", ""),
+            answer = d.get("answer", ""),
+            difficulty = d.get("difficulty"),
+            tags = d.get("tags", []),
+            distractors = d.get("distractors", []) or [],
         )
-
 
 @dataclass
 class QuizQuestion:
@@ -37,9 +38,8 @@ class QuizQuestion:
     options: List[str]
     correct_answer: str
 
-
 def _data_file_path() -> Path:
-    # src/quiz.py -> parent is src -> parent.parent is repo root
+    """Return the Path to the flashcards.json data file."""
     return Path(__file__).parent.parent / "data" / DATA_FILENAME
 
 
@@ -62,6 +62,7 @@ def load_flashcards(path: Optional[Path] = None) -> List[Flashcard]:
 
 
 def list_topics(flashcards: List[Flashcard]) -> List[str]:
+    """Extract a sorted list of unique quiz topics from the flashcards data."""
     topics = sorted({fc.topic for fc in flashcards if fc.topic})
     return topics
 
@@ -81,7 +82,6 @@ def _collect_distractors_for_flashcard(
     """
     distractors: List[str] = []
 
-    # 1) use explicit distractors from the flashcard if provided
     if flashcard.distractors:
         for d in flashcard.distractors:
             if d and d != flashcard.answer and d not in distractors:
@@ -89,8 +89,8 @@ def _collect_distractors_for_flashcard(
                 if len(distractors) >= num_distractors:
                     return distractors[:num_distractors]
 
-    # Helper to pull answers from a pool (excluding correct answer and already-chosen)
     def pull_from_pool(pool: List[Flashcard]) -> None:
+        "Pull distractor candidates from the given pool, ensuring uniqueness and not equal to correct answer."
         candidates = [p.answer for p in pool if p.answer and p.answer != flashcard.answer]
         # Deduplicate while preserving random order
         random.shuffle(candidates)
@@ -100,16 +100,15 @@ def _collect_distractors_for_flashcard(
                 if len(distractors) >= num_distractors:
                     return
 
-    # 2) other answers from same topic
+    # First try to pull from same-topic pool
     pull_from_pool(same_topic_pool, num_distractors)
 
-    # 3) fallback to global answers
+    # If still not enough, pull from global pool            
     if len(distractors) < num_distractors:
         pull_from_pool(global_pool, num_distractors)
 
-    # 4) If still not enough, duplicate existing distractors (rare). Ensure not equal to correct answer.
+    # Final fallback: if still not enough distractors, generate generic placeholders
     if len(distractors) < num_distractors:
-        # Create filler strings that are not the correct answer
         filler = 1
         while len(distractors) < num_distractors:
             candidate = f"Option {filler}"
@@ -143,7 +142,6 @@ def generate_quiz_questions(
     # Filter by topic
     topic_pool = [fc for fc in flashcards if fc.topic == topic]
     if not topic_pool:
-        # nothing in this topic
         return []
 
     # Determine which flashcards to use
@@ -178,8 +176,7 @@ def generate_quiz_questions(
                 if len(options) >= 4:
                     break
 
-        # Final safety: dedupe (should already be unique)
-        final_options = list(dict.fromkeys(options))  # preserve order, remove duplicates
+        final_options = list(dict.fromkeys(options)) 
         # If still less than 4, pad with generic placeholders
         pad_counter = 1
         while len(final_options) < 4:

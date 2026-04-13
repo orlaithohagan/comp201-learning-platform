@@ -5,9 +5,11 @@ from datetime import datetime, timedelta
 DB_PATH = Path("data/app.db")
 
 def get_connection():
+    """Establish and return a connection to the SQLite database, ensuring the data directory exists."""
     return sqlite3.connect(DB_PATH)
 
 def create_progress_tables():
+    """Create necessary tables for tracking quiz attempts and daily activity."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -35,6 +37,7 @@ def create_progress_tables():
     conn.close()
 
 def log_quiz_attempt(user_id, topic_name, score, total_questions):
+    """Log a new quiz attempt for the user."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -48,6 +51,7 @@ def log_quiz_attempt(user_id, topic_name, score, total_questions):
 
 
 def get_quiz_summary(user_id):
+    """Fetch a summary of the user's quiz performance, including total quizzes completed, average score, and best score."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -70,6 +74,7 @@ def get_quiz_summary(user_id):
     }
 
 def get_recent_quiz_attempts(user_id, limit=5):
+    """Fetch the most recent quiz attempts for the user, including topic name, score, and attempt date."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -86,6 +91,7 @@ def get_recent_quiz_attempts(user_id, limit=5):
     return rows
 
 def get_topic_progress(user_id):
+    """Fetch average score for each quiz topic attempted by the user, ordered by topic name."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -102,6 +108,7 @@ def get_topic_progress(user_id):
     return rows
 
 def get_quiz_scores_over_time(user_id):
+    """Fetch quiz scores over time for the user."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -117,6 +124,7 @@ def get_quiz_scores_over_time(user_id):
     return rows
 
 def get_attempted_topics(user_id):
+    """Fetch a list of unique quiz topics that the user has attempted."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -132,6 +140,7 @@ def get_attempted_topics(user_id):
     return [row[0] for row in rows if row[0]]
 
 def get_quiz_attempts_for_topic(user_id, topic_name):
+    """Fetch all quiz attempts for a specific topic, including score and attempt date."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -147,6 +156,7 @@ def get_quiz_attempts_for_topic(user_id, topic_name):
     return rows
 
 def log_daily_activity(user_id):
+    """Log a daily activity for the user, ensuring only one entry per day."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -161,6 +171,7 @@ def log_daily_activity(user_id):
     conn.close()
 
 def get_learning_streak(user_id):
+    """Calculate the user's current learning streak based on consecutive days of activity."""
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -178,7 +189,6 @@ def get_learning_streak(user_id):
         return 0
 
     activity_dates = {row[0] for row in rows}
-
     streak = 0
     current_day = datetime.now().date()
 
@@ -189,6 +199,7 @@ def get_learning_streak(user_id):
     return streak
 
 def get_leaderboard(limit=10):
+    """Fetch the top users by average quiz score, including their username, average score, and total quizzes completed."""
     conn = get_connection()
     cursor = conn.cursor()
 

@@ -4,15 +4,17 @@ from src.services.auth_service import authenticate, create_user
 
 
 def _hide_sidebar():
+    """Inject CSS to hide the sidebar on auth pages."""
     st.markdown('<div class="auth-hide-sidebar"></div>', unsafe_allow_html=True)
 
 def _set_view(view: str):
+    """Set the current auth view (welcome, login, signup) and rerun."""
     st.session_state["auth_view"] = view
     st.rerun()
 
 def welcome_page():
+    """Render the welcome page with options to log in or sign up."""
     _hide_sidebar()
-
     st.title("COMP201 Software Engineering Learning Hub 👋")
     st.write(
         "Welcome! Log in or create an account to access the AI Tutor, Flashcards, Quizzes, and Mini-Games."
@@ -29,13 +31,14 @@ def welcome_page():
             _set_view("signup")
 
 def _login_user(user: dict):
+    """Set the authenticated user in session state."""
     st.session_state["user"] = user
     st.session_state["user_id"] = user["id"]
     st.session_state["username"] = user["username"]
 
 def login_page():
+    """Render the login page with username and password fields."""
     _hide_sidebar()
-
     st.title("Log in")
     st.caption("Enter your username and password to continue.")
 
@@ -61,8 +64,8 @@ def login_page():
 
 
 def signup_page():
+    """Render the signup page with fields for new username and password."""
     _hide_sidebar()
-
     st.title("Create account")
     st.caption("Create a student account to access the learning tools.")
 
@@ -99,11 +102,8 @@ def signup_page():
 
 
 def require_login():
-    """
-    Auth router:
-    - welcome -> login/signup
-    - once logged in, returns and the rest of the app can render.
-    """
+    """Check if user is authenticated; if not, show auth UI and stop execution."""
+
     if st.session_state.get("user"):
         return
 
@@ -124,6 +124,7 @@ def require_login():
     st.stop()
 
 def _logout_user():
+    """Clear user authentication from session state."""
     st.session_state.pop("user", None)
     st.session_state.pop("user_id", None)
     st.session_state.pop("username", None)

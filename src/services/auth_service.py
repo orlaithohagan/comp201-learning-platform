@@ -3,6 +3,7 @@ import bcrypt
 from src.services.db import get_conn
 
 def create_user(username: str, password: str, role: str = "student") -> bool:
+    """Create a new user with the given username, password, and role. Returns True if successful."""
     password_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
     try:
         with get_conn() as conn:
@@ -16,6 +17,7 @@ def create_user(username: str, password: str, role: str = "student") -> bool:
         return False
 
 def authenticate(username: str, password: str):
+    """Authenticate a user by username and password. Returns user dict if successful, else None."""
     with get_conn() as conn:
         row = conn.execute(
             "SELECT id, username, password_hash, role FROM users WHERE username = ?",

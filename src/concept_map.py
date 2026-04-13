@@ -53,7 +53,6 @@ def create_plotly_figure(graph):
     center=(0, 0)
     )
     
-        # Force the core topic to the center
     for node, attrs in graph.nodes(data=True):
         if attrs.get("category") == "core":
             pos[node] = (0, 0)

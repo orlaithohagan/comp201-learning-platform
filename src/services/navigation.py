@@ -1,5 +1,6 @@
 import streamlit as st
 
+# Centralized navigation definitions and helper functions for rendering the sidebar navigation across all pages.
 PAGES = {
     "Home": "streamlit_app.py",
     "Flashcards": "pages/Flashcards.py",
@@ -19,8 +20,8 @@ NAV_SECTIONS = {
 }
 
 
-
 def nav_button(label: str, page_path: str, current_page: str) -> None:
+    """Render a navigation button in the sidebar. Highlights if it's the current page."""
     if current_page == page_path:
         st.sidebar.markdown(
             f'<div class="sidebar-active-link">➜ {label}</div>',
@@ -32,6 +33,7 @@ def nav_button(label: str, page_path: str, current_page: str) -> None:
 
 
 def render_sidebar_navigation(current_page: str) -> None:
+    """Render the sidebar navigation with sections and highlight the current page."""
     st.sidebar.markdown(
         '<div class="sidebar-brand">🎓 COMP201 Hub</div>',
         unsafe_allow_html=True,

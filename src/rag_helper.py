@@ -12,6 +12,7 @@ STOPWORDS = {
 
 
 def load_flashcards():
+    """Load flashcards from the data/flashcards.json file."""
     data_path = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
 
     if not data_path.exists():
@@ -22,11 +23,13 @@ def load_flashcards():
 
 
 def extract_keywords(text: str):
+    """Extract keywords from the input text by removing stopwords and non-alphabetic characters."""
     words = re.findall(r"\b[a-zA-Z]{3,}\b", text.lower())
     return [w for w in words if w not in STOPWORDS]
 
 
 def get_relevant_flashcards(question: str, max_results: int = 3):
+    """Return a list of flashcards most relevant to the input question based on keyword matching."""
     flashcards = load_flashcards()
     keywords = extract_keywords(question)
 
@@ -68,6 +71,7 @@ def get_relevant_flashcards(question: str, max_results: int = 3):
 
 
 def build_context_from_flashcards(question: str, max_results: int = 3):
+    """Build a context string from the most relevant flashcards for the given question."""
     relevant_cards = get_relevant_flashcards(question, max_results=max_results)
 
     if not relevant_cards:

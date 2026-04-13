@@ -17,8 +17,9 @@ require_login()
 render_sidebar_navigation("pages/Dashboard.py")
 logout_button()
 
-# Helper function to get all quiz topics from flashcards data
+
 def get_all_quiz_topics():
+    """Extract a sorted list of unique quiz topics from the flashcards data."""
     data_path = Path(__file__).resolve().parents[1] / "data" / "flashcards.json"
 
     if not data_path.exists():
@@ -30,8 +31,9 @@ def get_all_quiz_topics():
     topics = sorted({card.get("topic") for card in data if card.get("topic")})
     return topics
 
-# Function to render a badge card in the achievements section
+
 def render_badge_card(badge, earned_badges):
+    """Render a badge card with its name, description, and earned/locked status."""
     earned = badge["id"] in earned_badges
 
     icon = "🏅" if earned else "🔒"
@@ -49,8 +51,9 @@ def render_badge_card(badge, earned_badges):
         unsafe_allow_html=True
     )
 
-# Main function to render the dashboard page
 def main():
+    """Render the user dashboard with progress tracking, achievements, and leaderboard."""
+
     st.title("📊 User Dashboard")
     tab1, tab2 = st.tabs(["My Progress", "Leaderboard"])
 
