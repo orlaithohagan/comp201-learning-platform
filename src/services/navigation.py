@@ -1,6 +1,13 @@
+"""
+Navigation service for sidebar menu and page routing.
+
+Provides centralised page definitions, sidebar navigation rendering with
+organised sections, and user logout functionality for the application.
+"""
+
 import streamlit as st
 
-# Centralized navigation definitions and helper functions for rendering the sidebar navigation across all pages.
+# Centralised navigation definitions and helper functions for rendering the sidebar navigation across all pages.
 PAGES = {
     "Home": "streamlit_app.py",
     "Flashcards": "pages/Flashcards.py",

@@ -1,3 +1,20 @@
+"""
+Quiz Page Module.
+
+This module implements the Quiz page for the COMP201 learning platform,
+providing interactive topic-based quizzes to assess and reinforce student understanding.
+
+Key features:
+- Topic selection from available flashcard sets
+- Automatic quiz generation from flashcard data (up to 10 questions per quiz)
+- Multiple choice questions with answer validation
+- Real-time scoring and progress tracking
+- Results display with detailed feedback and correct answers
+- Progress logging for dashboard analytics and learning streaks
+- Session state management for quiz flow and user responses
+
+"""
+
 import json
 import random
 from pathlib import Path

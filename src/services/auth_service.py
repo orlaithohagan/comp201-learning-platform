@@ -1,4 +1,9 @@
-# src/services/auth_service.py
+"""
+Authentication service for user management and login verification.
+
+Provides functions to create users with secure password hashing and authenticate
+existing users by validating credentials against stored hashes.
+"""
 import bcrypt
 from src.services.db import get_conn
 

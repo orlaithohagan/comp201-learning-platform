@@ -1,3 +1,10 @@
+"""
+Quiz engine for generating and managing COMP201 topic quizzes.
+
+Provides classes and functions for loading flashcards, creating multiple-choice
+questions with distractors, managing quiz state, and calculating scores.
+"""
+
 from __future__ import annotations
 import json
 import random

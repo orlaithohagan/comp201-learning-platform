@@ -1,4 +1,10 @@
-# src/gamification.py
+"""
+Gamification service for achievement tracking and badge system.
+
+Defines achievement badges and provides functions to evaluate user progress
+against badge criteria for motivation and engagement in the learning platform.
+"""
+
 BADGES = [
     {
         "id": "quiz_starter",

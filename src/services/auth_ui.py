@@ -1,7 +1,12 @@
-# src/services/auth_ui.py
+"""
+Authentication UI components for login, signup, and session management.
+
+Provides Streamlit UI functions for user authentication flows including
+welcome page, login/signup forms, logout functionality, and login requirements.
+"""
+
 import streamlit as st
 from src.services.auth_service import authenticate, create_user
-
 
 def _hide_sidebar():
     """Inject CSS to hide the sidebar on auth pages."""

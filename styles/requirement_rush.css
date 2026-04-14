@@ -1,11 +1,7 @@
-/* Requirement Rush minimal styling */
-
-/* Page layout */
 .block-container {
     padding-top: 1.5rem;
 }
 
-/* Scoreboard container */
 .rr-score-row {
     display: flex;
     gap: 12px;

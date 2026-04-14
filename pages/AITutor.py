@@ -1,3 +1,20 @@
+"""
+AI Tutor Page Module.
+
+This module implements the AI Tutor page for the COMP201 learning platform,
+providing an interactive chat interface where students can ask questions about
+software engineering concepts and receive AI-powered explanations.
+
+Key features:
+- Interactive chat interface with conversation history
+- Integration with OpenAI API for natural language responses
+- Retrieval-Augmented Generation (RAG) using course flashcards for context
+- Support for prefilled questions from other pages (e.g., Dashboard weak topics)
+- Source attribution showing relevant course materials used
+- Clear chat functionality and user-friendly interface
+
+"""
+
 import streamlit as st
 from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation

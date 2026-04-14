@@ -1,3 +1,22 @@
+"""
+Requirement Rush Game Module.
+
+This module implements the "Requirement Rush" mini-game for the COMP201 learning platform.
+The game helps students practice classifying software requirements as either "Functional"
+or "Non-functional" by dragging and dropping requirement statements into the correct categories.
+
+Key features:
+- Loads requirements from a JSON data file
+- Randomly selects up to 10 requirements per game session
+- Uses drag-and-drop interface for classification
+- Provides immediate feedback with scoring
+- Tracks game state using Streamlit session variables
+- Includes detailed feedback showing correct/incorrect classifications
+
+The game reinforces understanding of functional vs non-functional requirements,
+a key concept in software engineering requirements analysis.
+"""
+
 import json
 import random
 from pathlib import Path

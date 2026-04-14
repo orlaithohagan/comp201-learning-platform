@@ -1,3 +1,10 @@
+"""
+Database service for SQLite connection management and schema initialisation.
+
+Provides functions to establish configured database connections and initialise
+the application schema with user tables and constraints.
+"""
+
 import sqlite3
 from pathlib import Path
 

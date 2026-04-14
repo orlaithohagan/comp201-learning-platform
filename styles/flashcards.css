@@ -22,7 +22,6 @@
     margin: 0.5rem 0 1.25rem 0;
 }
 
-/* Standard flashcard appearance */
 .fc-card {
     margin: 14px auto;
     max-width: 960px;
@@ -57,7 +56,6 @@
     border-left: 6px solid #2e7d32;
 }
 
-/* Flip card wrapper */
 .flip-wrap {
     perspective: 1200px;
     margin: 14px auto;

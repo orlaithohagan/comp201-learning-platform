@@ -1,3 +1,10 @@
+"""
+Progress tracking service for quiz attempts, statistics, and learning analytics.
+
+Provides database operations for logging quiz results, calculating performance
+metrics, tracking learning streaks, and generating progress reports.
+"""
+
 import sqlite3
 from pathlib import Path
 from datetime import datetime, timedelta

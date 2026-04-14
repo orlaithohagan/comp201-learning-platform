@@ -1,3 +1,11 @@
+"""
+Main Streamlit app entry point for the COMP201 learning platform.
+
+This file sets up the home page, initialises database and progress tables,
+ensures authentication, applies styling, and renders the home dashboard cards
+for quick navigation to the app's main learning tools.
+"""
+
 import streamlit as st
 from src.services.db import init_db
 from src.services.auth_ui import require_login, logout_button

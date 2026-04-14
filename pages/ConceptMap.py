@@ -1,3 +1,19 @@
+"""
+Concept Map Page Module.
+
+This module implements the Concept Map page for the COMP201 learning platform.
+It displays interactive concept maps showing relationships between software engineering topics,
+allows users to select specific topics for detailed viewing, and provides navigation
+links to related learning tools like flashcards, quizzes, and AI tutor.
+
+Key features:
+- Interactive concept map visualization using Plotly
+- Topic selection dropdown for focused exploration
+- Links to related learning tools (flashcards, quiz, AI tutor)
+- Responsive design with custom CSS styling
+
+"""
+
 import streamlit as st
 from src.services.navigation import render_sidebar_navigation
 from src.services.auth_ui import require_login, logout_button

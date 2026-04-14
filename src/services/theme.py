@@ -1,3 +1,10 @@
+"""
+Theme service for CSS styling and visual customisation.
+
+Provides functions to load and apply CSS stylesheets, including main application
+styles and page-specific customisations for consistent UI theming.
+"""
+
 import streamlit as st
 from src.utils import load_css
 

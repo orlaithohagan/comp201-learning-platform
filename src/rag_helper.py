@@ -1,3 +1,10 @@
+"""
+Retrieval helper for selecting COMP201 flashcards relevant to a user's question.
+
+Provides keyword extraction, flashcard loading, and relevance scoring to build a
+context string used for retrieval-augmented generation (RAG) in the AI tutor.
+"""
+
 import json
 import re
 from pathlib import Path

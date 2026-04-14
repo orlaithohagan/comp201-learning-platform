@@ -1,3 +1,10 @@
+"""
+Concept map service for loading, processing, and visualizing COMP201 knowledge graphs.
+
+Provides functions to load concept map data, build NetworkX graphs, create
+interactive Plotly visualisations, and manage topic navigation and lookups.
+"""
+
 import json
 from pathlib import Path
 import networkx as nx

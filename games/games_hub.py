@@ -1,3 +1,19 @@
+"""
+Mini Games Hub for COMP201 Learning Platform.
+
+This file provides a central hub page for accessing interactive mini-games/activities
+that reinforce COMP201 software engineering concepts. It handles navigation
+between different games, manages session state for game switching, and
+provides an overview of available games with descriptions.
+
+Available games:
+- Requirement Rush: Classify requirements as functional or non-functional
+- Use Case Scramble: Order use case steps correctly
+
+The hub uses Streamlit session state to switch between the hub view and
+individual game views, ensuring smooth navigation within the app.
+"""
+
 import streamlit as st
 from games.requirement_rush import play_requirement_rush, reset_requirement_rush
 from games.use_case_scramble import play_use_case_scramble

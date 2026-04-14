@@ -1,3 +1,22 @@
+"""
+Use Case Scramble Game Module.
+
+This module implements the "Use Case Scramble" mini-game for the COMP201 learning platform.
+The game helps students understand use case modeling by challenging them to reorder
+scrambled use case steps into the correct logical sequence through drag-and-drop interaction.
+
+Key features:
+- Loads use case scenarios from a JSON data file
+- Randomly selects and scrambles use case steps for each round
+- Uses drag-and-drop interface for step reordering
+- Provides immediate feedback comparing user order to correct sequence
+- Tracks game state and scoring using Streamlit session variables
+- Includes detailed feedback showing correct/incorrect step ordering
+
+The game reinforces understanding of use case flow and logical sequencing,
+essential concepts in software requirements and use case analysis.
+"""
+
 import json
 import random
 import streamlit as st

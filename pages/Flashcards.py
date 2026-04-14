@@ -1,3 +1,18 @@
+"""
+Flashcards Page Module.
+
+This module implements the Flashcards page for the COMP201 learning platform,
+providing an interactive flashcard study system for reviewing course concepts.
+
+Key features:
+- Topic selection from available flashcard sets
+- Interactive flashcard display with show/hide answer functionality
+- Progress tracking showing studied cards and completion status
+- Navigation between cards with previous/next buttons
+- Session state management for study progress and current card position
+- Dashboard integration showing topic progress and study statistics
+
+"""
 import streamlit as st
 import json
 import time, random

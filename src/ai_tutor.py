@@ -1,3 +1,10 @@
+"""
+AI tutor service for generating contextual responses to COMP201 questions.
+
+Provides functions to query OpenAI with retrieval-augmented generation (RAG)
+using course flashcards as context for personalised, accurate explanations.
+"""
+
 import streamlit as st
 from openai import OpenAI
 from src.rag_helper import build_context_from_flashcards

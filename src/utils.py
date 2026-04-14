@@ -1,3 +1,10 @@
+"""
+Utility helpers for the COMP201 app.
+
+Provides common helper functions used across the application, such as loading
+CSS files for page styling.
+"""
+
 from pathlib import Path
 
 def load_css(*files):

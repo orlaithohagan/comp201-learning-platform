@@ -50,7 +50,6 @@ p, div, span, label {
     box-shadow: 0 8px 20px rgba(0, 58, 140, 0.15);
 }
 
-/* 🔥 Force white text (fix override issue) */
 .uol-hero h1,
 .uol-hero h2,
 .uol-hero h3,
@@ -88,13 +87,11 @@ section[data-testid="stSidebar"] {
     padding-top: 1rem;
 }
 
-/* Force all sidebar text white */
 section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
 
-/* Sidebar buttons */
 section[data-testid="stSidebar"] .stButton > button {
     width: 100%;
     border-radius: 10px;
@@ -132,7 +129,7 @@ section[data-testid="stSidebar"] .stButton > button:hover * {
     transition: all 0.2s ease;
 }
 
-/* Force all button text elements white */
+
 .stButton > button *,
 .stLinkButton > a * {
     color: white !important;

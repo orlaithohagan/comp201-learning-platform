@@ -1,3 +1,18 @@
+"""
+Dashboard Page Module.
+
+This module implements the Dashboard page for the COMP201 learning platform,
+providing users with comprehensive progress tracking and performance analytics.
+
+Key features:
+- Progress tracking
+- Acheivements and badges
+- Quiz performance analytics
+- Learning streak tracking
+- Leaderboard for social comparison
+
+"""
+
 import streamlit as st
 import pandas as pd
 import json
