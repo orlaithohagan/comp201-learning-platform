@@ -5,3 +5,5 @@ bcrypt
 networkx
 plotly
 openai
+pandas
+altair
