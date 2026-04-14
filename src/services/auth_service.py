@@ -7,9 +7,25 @@ existing users by validating credentials against stored hashes.
 import bcrypt
 from src.services.db import get_conn
 
+# def create_user(username: str, password: str, role: str = "student") -> bool:
+#     """Create a new user with the given username, password, and role. Returns True if successful."""
+#     password_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+#     try:
+#         with get_conn() as conn:
+#             conn.execute(
+#                 "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)",
+#                 (username, password_hash, role),
+#             )
+#             conn.commit()
+#         return True
+#     except Exception:
+#         return False
+
+import sqlite3
+from src.services.db import get_conn
 def create_user(username: str, password: str, role: str = "student") -> bool:
-    """Create a new user with the given username, password, and role. Returns True if successful."""
     password_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+
     try:
         with get_conn() as conn:
             conn.execute(
@@ -18,8 +34,12 @@ def create_user(username: str, password: str, role: str = "student") -> bool:
             )
             conn.commit()
         return True
-    except Exception:
+
+    except sqlite3.IntegrityError:
         return False
+
+    except Exception as e:
+        raise e
 
 def authenticate(username: str, password: str):
     """Authenticate a user by username and password. Returns user dict if successful, else None."""
