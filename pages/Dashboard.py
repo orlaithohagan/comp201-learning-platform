@@ -255,7 +255,7 @@ def main():
 
     with tab2:
         st.subheader("🏆 Leaderboard")
-        st.caption("Compare quiz performance across all users.")
+        st.caption("Compare quiz performance across all users (minimum 3 quizzes required).")
 
         if leaderboard:
             current_user = st.session_state.get("username")

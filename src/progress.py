@@ -206,7 +206,13 @@ def get_learning_streak(user_id):
     return streak
 
 def get_leaderboard(limit=10):
-    """Fetch the top users by average quiz score, including their username, average score, and total quizzes completed."""
+    """
+    Fetch top users ranked by quiz performance.
+
+    Improvements:
+    - Requires a minimum number of quizzes for fairness
+    - Prevents users with only 1 attempt from dominating rankings
+    """
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -218,8 +224,13 @@ def get_leaderboard(limit=10):
         FROM quiz_attempts q
         JOIN users u ON q.user_id = u.id
         GROUP BY q.user_id, u.username
-        HAVING COUNT(q.id) > 0
+
+        -- Only include users with enough attempts (fair ranking)
+        HAVING COUNT(q.id) >= 3  
+
+        -- Rank by performance, then consistency
         ORDER BY average_score DESC, quizzes_completed DESC
+
         LIMIT ?
     """, (limit,))
 
