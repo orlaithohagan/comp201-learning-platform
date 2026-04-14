@@ -154,6 +154,7 @@ welcome page, login/signup forms, logout functionality, and login requirements.
 
 import streamlit as st
 from src.services.auth_service import authenticate, create_user
+from src.services.theme import apply_styles
 
 
 def _hide_sidebar():
@@ -200,49 +201,79 @@ def _handle_create_user_result(result):
 
 
 def welcome_page():
-    """Render the welcome page with login and signup options."""
+    """Render improved welcome page UI."""
     _hide_sidebar()
 
-    st.title("COMP201 Software Engineering Learning Hub 👋")
-    st.markdown(
-        """
-        Welcome to an interactive study platform designed to support software engineering revision
-        through quizzes, flashcards, AI support, progress tracking, and learning activities.
-        """
-    )
+    with open("styles/auth.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    st.info("Create an account or log in to start tracking your learning progress.")
+    st.markdown("""
+    <div class="centered-title">
+        <h1>COMP201 Software Engineering Learning Hub</h1>
+        <p>
+            Welcome to an interactive study platform designed to support software engineering revision 
+            through quizzes, flashcards, AI support, progress tracking, and learning activities.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown("### What you can do")
+    st.markdown("""
+    <div class="centered-info">
+        Create an account or log in to start tracking your learning progress.
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="section-title">
+        🚀 What you can do
+    </div>
+    """, unsafe_allow_html=True)
+
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.markdown("🤖 **AI Tutor**")
-        st.caption("Ask questions and get course-aware explanations.")
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-title">AI Tutor</div>
+            <div class="feature-desc">Ask questions and get instant explanations</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.markdown("📚 **Flashcards**")
-        st.caption("Revise key topics using active recall.")
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-title">Flashcards</div>
+            <div class="feature-desc">Revise key topics using active recall</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.markdown("❓ **Quizzes**")
-        st.caption("Test your understanding and track results.")
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-title">Quizzes</div>
+            <div class="feature-desc">Test your understanding and track results</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col4:
-        st.markdown("🎮 **Mini Games**")
-        st.caption("Reinforce concepts through interactive activities.")
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-title">Mini Games</div>
+            <div class="feature-desc">Learn through interactive activities</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    st.markdown("---")
+    st.markdown("<div class='section-spacing'></div>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
+
     with col1:
-        if st.button("🔐 Log in", use_container_width=True, key="welcome_login"):
+        if st.button("Log in", use_container_width=True):
             _set_view("login")
 
     with col2:
-        if st.button("✨ Create account", use_container_width=True, key="welcome_signup"):
+        if st.button("Create account", use_container_width=True):
             _set_view("signup")
-
 
 def login_page():
     """Render the login form."""
