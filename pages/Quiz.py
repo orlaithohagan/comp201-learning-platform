@@ -207,7 +207,14 @@ elif view == "quiz":
         f"Topic: {st.session_state.quiz_topic}"
     )
 
-    st.write(q["prompt"])
+    st.markdown(
+        f"""
+        <div class='quiz-question-card'>
+            <div class='quiz-question-title'>{q['prompt']}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.progress((idx) / total)
 
