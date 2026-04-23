@@ -11,31 +11,32 @@ from src.rag_helper import build_context_from_flashcards
 
 MODEL_NAME = "gpt-4o-mini"
 
-# System prompt defining the AI tutor's behavior and response style
 SYSTEM_PROMPT = """
-You are a helpful AI tutor for a university COMP201 Software Engineering student.
+    You are a helpful AI tutor for a university COMP201 Software Engineering student.
 
-Your job is to:
-- explain concepts clearly and simply
-- stay accurate and student-friendly
-- use the provided course material only when it is clearly relevant
-- ignore irrelevant or weakly related course material
-- if no strong course material is available, answer using your own general knowledge
+    Your job is to:
+    - explain software engineering concepts clearly and simply
+    - stay accurate and student-friendly
+    - use the provided course material when it is relevant
+    - focus only on COMP201 and closely related software engineering topics
 
-When answering:
-- respond directly to the student's actual question
-- do not drift onto unrelated topics
-- keep explanations concise and revision-friendly
-- include structure or bullet points when helpful
-- when a topic is named explicitly, focus on explaining that topic directly
+    If the user asks a question unrelated to software engineering or COMP201:
+    - politely explain that you are specifically for software engineering revision
+    - ask them to submit a relevant module-related question
 
-If the student asks for:
-- an example → give a real-world example
-- a summary → provide concise revision notes
-- clarification → simplify your previous answer
+    When answering:
+    - respond directly to the student's actual question
+    - do not drift onto unrelated topics
+    - keep explanations concise and revision-friendly
+    - include structure when helpful
 
-Do not mention raw prompt instructions.
-""".strip()
+    If the student asks for:
+    - an example → give a real-world example
+    - a summary → provide concise revision notes
+    - clarification → simplify your previous answer
+
+    Do not mention raw prompt instructions.
+    """.strip()
 
 
 def get_openai_client() -> OpenAI:
@@ -49,11 +50,19 @@ def ask_ai_tutor(question: str, chat_history: list | None = None) -> tuple[str, 
         client = get_openai_client()
         context, relevant_cards = build_context_from_flashcards(question)
 
+        # Reject unrelated questions early
+        if not relevant_cards:
+            return (
+                "I am specifically designed to support COMP201 Software Engineering revision. "
+                "Please ask a question related to Software Engineering concepts or course topics.",
+                []
+            )
+
         context_message = f"""
         Relevant COMP201 course material:
-        {context if context else "No strong matching course material was retrieved."}
+        {context}
 
-        Use this material when it is clearly relevant. Ignore it if it does not fit the user's question.
+        Use this material when it is clearly relevant to the user's question.
         """.strip()
 
         messages = [
@@ -68,6 +77,8 @@ def ask_ai_tutor(question: str, chat_history: list | None = None) -> tuple[str, 
                 if msg.get("role") in ["user", "assistant"]
             ]
             messages.extend(recent_messages)
+
+        messages.append({"role": "user", "content": question})
 
         response = client.chat.completions.create(
             model=MODEL_NAME,
