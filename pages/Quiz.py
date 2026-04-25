@@ -282,12 +282,12 @@ elif view == "results":
         st.markdown(f"**Q{i}. {ans['prompt']}**")
 
         if ans["is_correct"]:
-            st.markdown("Correct")
+            st.success("Correct")
+            st.markdown(f"- **Your answer:** {ans['selected']}")
         else:
-            st.markdown("Incorrect")
-
-        st.markdown(f"- **Correct answer:** {ans['correct']}")
-        st.markdown(f"- **Your answer:** {ans['selected']}")
+            st.error("Incorrect")
+            st.markdown(f"- **Your answer:** {ans['selected']}")
+            st.markdown(f"- **Correct answer:** {ans['correct']}")
         st.markdown("---")
 
     if st.button("Back to all quizzes"):
