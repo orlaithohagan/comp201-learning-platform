@@ -89,6 +89,8 @@ if "review" not in st.session_state:
     st.session_state.review = set()
 if "shuffle" not in st.session_state:   
     st.session_state.shuffle = {}
+if "flashcard_results" not in st.session_state:
+    st.session_state.flashcard_results = {}
 
 
 def render_dashboard():
@@ -98,6 +100,10 @@ def render_dashboard():
     topics = list_topics()
     if not topics:
         st.info("No revision topics available.")
+        return
+
+    if st.session_state.get("mode") == "completed":
+        render_completion()
         return
 
     for topic in topics:
@@ -134,9 +140,49 @@ def render_dashboard():
                     topic,
                     {"start": time.time(), "seen": set(), "flips": 0},
                 )
+                st.session_state.flashcard_results[topic] = {"got_it": [], "review": []}
                 st.rerun()
 
         st.markdown("---")
+
+
+def render_completion():
+    """Render completion summary for the finished flashcard set."""
+    topic = st.session_state.selected_topic
+    results = st.session_state.flashcard_results.get(topic, {})
+
+    got_it_cards = results.get("got_it", [])
+    review_cards = results.get("review", [])
+
+    st.subheader(f"Flashcard Set Complete: {topic}")
+    st.success("You have completed this flashcard set.")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("### Got it!")
+        if got_it_cards:
+            for q in got_it_cards:
+                st.markdown(f"- {q}")
+        else:
+            st.caption("No cards were marked as got it.")
+
+    with col2:
+        st.markdown("### Review")
+        if review_cards:
+            for q in review_cards:
+                st.markdown(f"- {q}")
+        else:
+            st.caption("No cards were marked for review.")
+
+    st.markdown("---")
+
+    if st.button("Back to Flashcard Topics", use_container_width=True):
+        st.session_state.mode = "dashboard"
+        st.session_state.flashcard_index = 0
+        st.session_state.show_answer = False
+        st.rerun()
+    
 
 def render_study():
     """Render the flashcard study view for the selected topic, with flip animation and review options."""
@@ -192,6 +238,7 @@ def render_study():
         """,
         unsafe_allow_html=True,
     )
+    st.caption("Flip the card, then choose ‘Got it’ or ‘Review’ to continue.")
 
     # Buttons for marking card for review and navigating between cards
     # col1, col2 = st.columns(2)
@@ -203,59 +250,67 @@ def render_study():
     #         st.session_state.review.add(cid)
     # st.markdown('</div>', unsafe_allow_html=True)
 
+    st.session_state.flashcard_results.setdefault(topic, {"got_it": [], "review": []})
     col1, col2 = st.columns(2)
 
+    is_flipped = st.session_state.show_answer
+
     with col1:
-        if st.button("Got it! - Don't ask again.", use_container_width=True):
+        if st.button(
+            "Got it! - Don't ask again.",
+            use_container_width=True,
+            disabled=not is_flipped
+        ):
             st.session_state.review.discard(cid)
+            st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
+            st.session_state.stats[topic]["seen"].add(cid)
+
+            if q not in st.session_state.flashcard_results[topic]["got_it"]:
+                st.session_state.flashcard_results[topic]["got_it"].append(q)
+
+            if q in st.session_state.flashcard_results[topic]["review"]:
+                st.session_state.flashcard_results[topic]["review"].remove(q)
 
             if idx < len(cards) - 1:
                 st.session_state.flashcard_index = idx + 1
                 st.session_state.show_answer = False
             else:
-                st.success("You have completed this flashcard set.")
+                st.session_state.mode = "completed"
 
             st.rerun()
 
     with col2:
-        if st.button("Review", use_container_width=True):
+        if st.button(
+            "Review",
+            use_container_width=True,
+            disabled=not is_flipped
+        ):
             st.session_state.review.add(cid)
+            st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
+            st.session_state.stats[topic]["seen"].add(cid)
+
+            if q not in st.session_state.flashcard_results[topic]["review"]:
+                st.session_state.flashcard_results[topic]["review"].append(q)
+
+            if q in st.session_state.flashcard_results[topic]["got_it"]:
+                st.session_state.flashcard_results[topic]["got_it"].remove(q)
 
             if idx < len(cards) - 1:
                 st.session_state.flashcard_index = idx + 1
                 st.session_state.show_answer = False
             else:
-                st.success("You have completed this flashcard set.")
+                st.session_state.mode = "completed"
 
             st.rerun()
-
-
-
-
 
 
     # Navigation buttons and progress bar
-    c_prev, c_prog, c_next, c_flip = st.columns([2, 5, 2, 2])
-
-    st.session_state.stats.setdefault(topic, {"start": time.time(), "seen": set(), "flips": 0})
-    st.session_state.stats[topic]["seen"].add(cid)
-
-    with c_prev:
-        if st.button("Previous", disabled=idx == 0, key="prev_card_btn"):
-            st.session_state.flashcard_index = idx - 1
-            st.session_state.show_answer = False
-            st.rerun()
+    c_prog, c_flip = st.columns([6, 2])
 
     with c_prog:
         total = len(cards)
         st.progress((idx + 1) / total)
         st.caption(f"Card {idx + 1} / {total}")
-
-    with c_next:
-        if st.button("Next", disabled=idx >= total - 1, key="next_card_btn"):
-            st.session_state.flashcard_index = idx + 1
-            st.session_state.show_answer = False
-            st.rerun()
 
     with c_flip:
         if st.button("Flip Card", key="flip_card_btn"):
@@ -268,6 +323,8 @@ if st.session_state.mode == "dashboard":
     render_dashboard()
 elif st.session_state.mode == "study":
     render_study()
+elif st.session_state.mode == "completed":
+    render_completion()
 else:
     st.session_state.mode = "dashboard"
     render_dashboard()
