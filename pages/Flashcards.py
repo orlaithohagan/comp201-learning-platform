@@ -194,14 +194,45 @@ def render_study():
     )
 
     # Buttons for marking card for review and navigating between cards
+    # col1, col2 = st.columns(2)
+    # with col1:
+    #     if st.button("Got it! - Don't ask again.", use_container_width=True):
+    #         st.session_state.review.discard(cid)
+    # with col2:
+    #     if st.button("Review", use_container_width=True):
+    #         st.session_state.review.add(cid)
+    # st.markdown('</div>', unsafe_allow_html=True)
+
     col1, col2 = st.columns(2)
+
     with col1:
         if st.button("Got it! - Don't ask again.", use_container_width=True):
             st.session_state.review.discard(cid)
+
+            if idx < len(cards) - 1:
+                st.session_state.flashcard_index = idx + 1
+                st.session_state.show_answer = False
+            else:
+                st.success("You have completed this flashcard set.")
+
+            st.rerun()
+
     with col2:
         if st.button("Review", use_container_width=True):
             st.session_state.review.add(cid)
-    st.markdown('</div>', unsafe_allow_html=True)
+
+            if idx < len(cards) - 1:
+                st.session_state.flashcard_index = idx + 1
+                st.session_state.show_answer = False
+            else:
+                st.success("You have completed this flashcard set.")
+
+            st.rerun()
+
+
+
+
+
 
     # Navigation buttons and progress bar
     c_prev, c_prog, c_next, c_flip = st.columns([2, 5, 2, 2])
