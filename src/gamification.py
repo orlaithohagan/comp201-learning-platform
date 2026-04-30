@@ -22,11 +22,6 @@ BADGES = [
         "description": "Score 80% or more in a topic quiz.",
     },
     {
-        "id": "game_explorer",
-        "name": "Game Explorer",
-        "description": "Play all mini-games at least once.",
-    },
-    {
         "id": "consistent_learner",
         "name": "Consistent Learner",
         "description": "Complete 3 quizzes.",
