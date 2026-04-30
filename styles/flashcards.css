@@ -142,3 +142,105 @@ button:disabled {
     opacity: 0.5 !important;
     cursor: not-allowed !important;
 }
+
+.topic-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.topic-meta {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.topic-progress-text {
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+    color: #6b7280;
+}
+
+.topic-title-strong {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.2rem;
+}
+
+.topic-meta {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.4rem;
+}
+
+.topic-progress-text {
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+    color: #6b7280;
+}
+
+/* Optional: cleaner spacing */
+hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Main page title (Flashcards) */
+.page-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.5px;
+}
+
+/* Section title (Revision Topics) */
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* subtle accent line under section title */
+.section-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #003A8C, transparent);
+    margin-left: 10px;
+    opacity: 0.3;
+}
+
+.section-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-top: 2rem;
+    margin-bottom: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #003A8C, transparent);
+    margin-left: 12px;
+    opacity: 0.18;
+}
+
+.page-title {
+    font-size: 2.6rem;
+    font-weight: 850;
+    color: #111827;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.7px;
+}

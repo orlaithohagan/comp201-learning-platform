@@ -15,7 +15,7 @@ Key features:
 """
 import streamlit as st
 import json
-import time, random
+import time
 from pathlib import Path
 from src.services.auth_ui import require_login, logout_button
 from src.services.navigation import render_sidebar_navigation
@@ -29,7 +29,7 @@ require_login()
 render_sidebar_navigation("pages/Flashcards.py")
 logout_button()
 
-st.title("Flashcards")
+st.markdown('<div class="page-title">Flashcards</div>', unsafe_allow_html=True)
 st.markdown(
     "<p style='color:#4b5563; margin-top:0.25rem;'>"
     "Choose a topic to start studying with interactive flashcards."
@@ -87,23 +87,17 @@ if "stats" not in st.session_state:
     st.session_state.stats = {}
 if "review" not in st.session_state:    
     st.session_state.review = set()
-if "shuffle" not in st.session_state:   
-    st.session_state.shuffle = {}
 if "flashcard_results" not in st.session_state:
     st.session_state.flashcard_results = {}
 
-
 def render_dashboard():
-    """Render the dashboard view with a list of flashcard topics, progress bars, and study buttons."""
-    st.subheader("Revision Topics")
+    """Render the dashboard view with a list of flashcard topics and progress."""
+    st.markdown('<div class="section-title">Revision Topics</div>', unsafe_allow_html=True)
+    st.caption("Select a topic and track your flashcard progress.")
 
     topics = list_topics()
     if not topics:
         st.info("No revision topics available.")
-        return
-
-    if st.session_state.get("mode") == "completed":
-        render_completion()
         return
 
     for topic in topics:
@@ -115,101 +109,89 @@ def render_dashboard():
         col_topic, col_prog, col_study = st.columns([4, 4, 2])
 
         with col_topic:
-            st.markdown(f"<span class='topic-name'>{topic}</span>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div class="topic-title-strong">{topic}</div>
+            <div class="topic-meta">{total} flashcards</div>
+            """, unsafe_allow_html=True)
 
         with col_prog:
             st.markdown(
                 f"""
                 <div class="topic-progress">
-                  <span style="width:{pct}%;"></span>
+                    <span style="width:{pct}%;"></span>
                 </div>
-                <div style="font-size:12px;margin-top:4px;color:#6b7280">
-                  {seen} of {total} cards studied
+                <div class="topic-progress-text">
+                    {seen} of {total} cards studied · {pct}% complete
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
         with col_study:
-            if st.button("Study", key=f"study_{topic}"):
+            if st.button("Study", key=f"study_{topic}", use_container_width=True):
                 st.session_state.selected_topic = topic
                 st.session_state.mode = "study"
                 st.session_state.flashcard_index = 0
                 st.session_state.show_answer = False
-                st.session_state.stats.setdefault(
-                    topic,
-                    {"start": time.time(), "seen": set(), "flips": 0},
-                )
                 st.session_state.flashcard_results[topic] = {"got_it": [], "review": []}
                 st.rerun()
 
-        st.markdown("---")
-
+        # subtle divider
+        st.markdown("<hr style='margin: 12px 0 18px 0; opacity:0.2;'>", unsafe_allow_html=True)
 
 def render_completion():
-    """Render completion summary for the finished flashcard set."""
-    topic = st.session_state.selected_topic
-    results = st.session_state.flashcard_results.get(topic, {})
+        """Render completion summary for the finished flashcard set."""
+        topic = st.session_state.selected_topic
+        results = st.session_state.flashcard_results.get(topic, {})
 
-    got_it_cards = results.get("got_it", [])
-    review_cards = results.get("review", [])
+        got_it_cards = results.get("got_it", [])
+        review_cards = results.get("review", [])
 
-    st.subheader(f"Flashcard Set Complete: {topic}")
-    st.success("You have completed this flashcard set.")
+        st.subheader(f"Flashcard Set Complete: {topic}")
+        st.success("You have completed this flashcard set.")
 
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-    with col1:
-        st.markdown("### Got it!")
-        if got_it_cards:
-            for q in got_it_cards:
-                st.markdown(f"- {q}")
-        else:
-            st.caption("No cards were marked as got it.")
+        with col1:
+            st.markdown("### Got it!")
+            if got_it_cards:
+                for q in got_it_cards:
+                    st.markdown(f"- {q}")
+            else:
+                st.caption("No cards were marked as got it.")
 
-    with col2:
-        st.markdown("### Review")
-        if review_cards:
-            for q in review_cards:
-                st.markdown(f"- {q}")
-        else:
-            st.caption("No cards were marked for review.")
+        with col2:
+            st.markdown("### Review")
+            if review_cards:
+                for q in review_cards:
+                    st.markdown(f"- {q}")
+            else:
+                st.caption("No cards were marked for review.")
 
-    st.markdown("---")
+        st.markdown("---")
 
-    if st.button("Back to Flashcard Topics", use_container_width=True):
-        st.session_state.mode = "dashboard"
-        st.session_state.flashcard_index = 0
-        st.session_state.show_answer = False
-        st.rerun()
+        if st.button("Back to Flashcard Topics", use_container_width=True):
+                st.session_state.mode = "dashboard"
+                st.session_state.flashcard_index = 0
+                st.session_state.show_answer = False
+                st.rerun()
     
 
 def render_study():
-    """Render the flashcard study view for the selected topic, with flip animation and review options."""
+    """Render the flashcard study view for the selected topic."""
     topic = st.session_state.selected_topic
     all_cards = cards_for(topic)
+    cards = list(all_cards)
 
-    # Header with topic name, shuffle toggle, and review-only toggle
-    top_l, top_m, top_r = st.columns([1, 5, 4])
+    top_l, top_m = st.columns([1, 7])
+
     with top_l:
         if st.button("← Back"):
             st.session_state.mode = "dashboard"
             st.rerun()
+
     with top_m:
         st.subheader(f"Studying Topic: {topic}")
-    with top_r:
-        st.session_state.shuffle[topic] = st.toggle("Shuffle cards", value=st.session_state.shuffle.get(topic, False))
-        review_only = st.toggle("Review only", value=False)
-
-    # Filter and optionally shuffle cards based on user preferences
-    cards = list(all_cards) 
-    if st.session_state.shuffle.get(topic):
-        random.shuffle(cards)
-    if review_only:
-        wanted = set(st.session_state.review)
-        ids = set(card_ids(all_cards))
-        cards = [c for c in cards if (c.get("id") or "") in wanted or
-                 (f"{c.get('topic','')}_{all_cards.index(c)}" in wanted and c.get("id") is None)]
 
     if not cards:
         st.info("No flashcards available for this selection.")
@@ -239,16 +221,6 @@ def render_study():
         unsafe_allow_html=True,
     )
     st.caption("Flip the card, then choose ‘Got it’ or ‘Review’ to continue.")
-
-    # Buttons for marking card for review and navigating between cards
-    # col1, col2 = st.columns(2)
-    # with col1:
-    #     if st.button("Got it! - Don't ask again.", use_container_width=True):
-    #         st.session_state.review.discard(cid)
-    # with col2:
-    #     if st.button("Review", use_container_width=True):
-    #         st.session_state.review.add(cid)
-    # st.markdown('</div>', unsafe_allow_html=True)
 
     st.session_state.flashcard_results.setdefault(topic, {"got_it": [], "review": []})
     col1, col2 = st.columns(2)
