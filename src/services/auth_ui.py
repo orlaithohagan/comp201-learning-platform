@@ -14,6 +14,24 @@ def _hide_sidebar():
     """Inject CSS hook to hide the sidebar on authentication screens."""
     st.markdown('<div class="auth-hide-sidebar"></div>', unsafe_allow_html=True)
 
+def _valid_input_css(label: str, is_valid: bool):
+    """Apply green border to a specific input when valid."""
+    if is_valid:
+        st.markdown(
+            f"""
+            <style>
+            div[data-testid="stTextInput"]:has(input[aria-label="{label}"]) input {{
+                border: 2px solid #22c55e !important;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+
+def _load_auth_css():
+    with open("styles/auth.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 
 def _set_view(view: str):
     """Set the current auth view and rerun the app."""
@@ -56,9 +74,7 @@ def _handle_create_user_result(result):
 def welcome_page():
     """Render improved welcome page UI."""
     _hide_sidebar()
-
-    with open("styles/auth.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    _load_auth_css()
 
     st.markdown("""
     <div class="centered-title">
@@ -131,6 +147,7 @@ def welcome_page():
 def login_page():
     """Render the login form."""
     _hide_sidebar()
+    _load_auth_css()
 
     st.title("Log in")
     st.caption("Enter your username and password to continue.")
@@ -140,6 +157,9 @@ def login_page():
 
     username = st.text_input("Username", key="login_user")
     password = st.text_input("Password", type="password", key="login_pass")
+
+    _valid_input_css("Username", username.strip() != "")
+    _valid_input_css("Password", password != "")
 
     if st.button("Log in", use_container_width=True, key="login_btn"):
         user = authenticate(username.strip(), password)
@@ -164,6 +184,7 @@ def login_page():
 def signup_page():
     """Render the signup form."""
     _hide_sidebar()
+    _load_auth_css() 
 
     st.title("Create account")
     st.caption("Create a student account to access the learning tools.")
@@ -174,6 +195,11 @@ def signup_page():
     new_user = st.text_input("New username", key="new_user")
     new_pass = st.text_input("New password", type="password", key="new_pass")
     new_pass2 = st.text_input("Confirm password", type="password", key="new_pass2")
+
+    _valid_input_css("New username", new_user.strip() != "")
+    _valid_input_css("New password", len(new_pass) >= 6)
+    _valid_input_css("Confirm password", new_pass2 == new_pass and new_pass2 != "")
+
 
     if st.button("Create account", use_container_width=True, key="create_btn"):
         username = new_user.strip()

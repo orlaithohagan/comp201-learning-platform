@@ -87,3 +87,19 @@ div.stButton > button:hover {
     margin-top: 30px;
     margin-bottom: 20px;
 }
+
+/* Hide Streamlit "Press Enter to apply" helper text */
+div[data-testid="stInputInstructions"],
+div[data-testid="InputInstructions"] {
+    display: none !important;
+}
+
+/* Remove default focus shadow */
+div[data-testid="stTextInput"] input:focus {
+    box-shadow: none !important;
+}
+
+/* Green border for valid auth fields */
+.valid-auth-input input {
+    border: 2px solid #22c55e !important;
+}
