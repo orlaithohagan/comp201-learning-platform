@@ -14,20 +14,6 @@ def _hide_sidebar():
     """Inject CSS hook to hide the sidebar on authentication screens."""
     st.markdown('<div class="auth-hide-sidebar"></div>', unsafe_allow_html=True)
 
-def _valid_input_css(label: str, is_valid: bool):
-    """Apply green border to a specific input when valid."""
-    if is_valid:
-        st.markdown(
-            f"""
-            <style>
-            div[data-testid="stTextInput"]:has(input[aria-label="{label}"]) input {{
-                border: 2px solid #22c55e !important;
-            }}
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
-
 def _load_auth_css():
     with open("styles/auth.css") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -158,9 +144,6 @@ def login_page():
     username = st.text_input("Username", key="login_user")
     password = st.text_input("Password", type="password", key="login_pass")
 
-    _valid_input_css("Username", username.strip() != "")
-    _valid_input_css("Password", password != "")
-
     if st.button("Log in", use_container_width=True, key="login_btn"):
         user = authenticate(username.strip(), password)
 
@@ -195,11 +178,6 @@ def signup_page():
     new_user = st.text_input("New username", key="new_user")
     new_pass = st.text_input("New password", type="password", key="new_pass")
     new_pass2 = st.text_input("Confirm password", type="password", key="new_pass2")
-
-    _valid_input_css("New username", new_user.strip() != "")
-    _valid_input_css("New password", len(new_pass) >= 6)
-    _valid_input_css("Confirm password", new_pass2 == new_pass and new_pass2 != "")
-
 
     if st.button("Create account", use_container_width=True, key="create_btn"):
         username = new_user.strip()

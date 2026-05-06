@@ -98,8 +98,3 @@ div[data-testid="InputInstructions"] {
 div[data-testid="stTextInput"] input:focus {
     box-shadow: none !important;
 }
-
-/* Green border for valid auth fields */
-.valid-auth-input input {
-    border: 2px solid #22c55e !important;
-}
