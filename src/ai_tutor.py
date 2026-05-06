@@ -40,15 +40,32 @@ SYSTEM_PROMPT = """
     """.strip()
 
 
-def get_openai_client() -> OpenAI:
+def get_openai_client() -> OpenAI | None:
     """Create and return an OpenAI client using Streamlit secrets."""
-    return OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+    try:
+        api_key = st.secrets.get("OPENAI_API_KEY")
+    except Exception:
+        api_key = None
+
+    if not api_key:
+        return None
+
+    return OpenAI(api_key=api_key)
 
 
 def ask_ai_tutor(question: str, chat_history: list | None = None) -> tuple[str, list]:
     """Generate an AI tutor response using retrieved course context and recent chat history."""
     try:
         client = get_openai_client()
+
+        if client is None:
+            return (
+                "AI Tutor is unavailable because no OpenAI API key has been configured. "
+                "Please add an OpenAI API key to `.streamlit/secrets.toml`.",
+                []
+            )
+
         context, relevant_cards = build_context_from_flashcards(question)
 
         # Reject unrelated questions early

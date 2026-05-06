@@ -72,13 +72,11 @@ For security reasons, API keys are **not included** in the submitted project arc
 
 To enable AI Tutor functionality:
 
-1. Create a folder named `.streamlit` in the project root directory
-2. Inside this folder, create a file named `secrets.toml`
-3. Add the following configuration:
+Copy `.streamlit/secrets.example.toml`
+and rename it to:
 
-```toml
-OPENAI_API_KEY = "your-api-key-here"
-```
+.streamlit/secrets.toml
+
 
 ### If No API Key Is Configured
 
