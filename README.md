@@ -4,7 +4,7 @@
 
 This project is a Streamlit-based educational learning platform developed as part of a Final Year Project for COMP201 Software Engineering.
 
-The platform combines traditional revision tools with AI-enhanced learning features to support active and personalised learning.
+The platform combines traditional revision tools with AI-enhanced learning features to support active, personalised, and interactive learning.
 
 ### Key Features
 
@@ -16,6 +16,7 @@ The platform combines traditional revision tools with AI-enhanced learning featu
 - Gamification features
 - Learning analytics dashboard
 
+
 ## Quick Access
 
 A deployed version of the application is available at:
@@ -26,13 +27,13 @@ https://comp201-learning-platform-apibicfdvdzr4vzuf3nyqu.streamlit.app/
 
 If the application is inactive, Streamlit Cloud may display a **"Wake up app"** message before loading.
 
+
 ## Local Installation
 
-### 1. Clone or Extract the Project
+### 1. Download or Extract the Project
 
 Download or extract the submitted project archive and navigate to the project root directory.
 
----
 
 ### 2. Create a Virtual Environment
 
@@ -42,7 +43,7 @@ Create the virtual environment:
 python -m venv venv
 ```
 
-Activate the virtual environment:
+Activate the virtual environment.
 
 #### Windows
 
@@ -56,6 +57,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
+
 ### 3. Install Dependencies
 
 Install all required packages using:
@@ -63,6 +65,7 @@ Install all required packages using:
 ```bash
 pip install -r requirements.txt
 ```
+
 
 ### 4. Configure OpenAI API Key (Optional)
 
@@ -72,11 +75,26 @@ For security reasons, API keys are **not included** in the submitted project arc
 
 To enable AI Tutor functionality:
 
-Copy `.streamlit/secrets.example.toml`
-and rename it to:
+1. Navigate to the `.streamlit` directory
+2. Copy:
 
-.streamlit/secrets.toml
+```text
+secrets.example.toml
+```
 
+3. Rename the copied file to:
+
+```text
+secrets.toml
+```
+
+4. Open the file and replace:
+
+```toml
+OPENAI_API_KEY = "your-api-key-here"
+```
+
+with your own OpenAI API key.
 
 ### If No API Key Is Configured
 
@@ -97,6 +115,7 @@ Once started, the application will be available at:
 ```text
 http://localhost:8501
 ```
+
 
 ## System Requirements
 
