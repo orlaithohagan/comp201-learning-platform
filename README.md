@@ -107,7 +107,7 @@ with your own OpenAI API key.
 Launch the application locally using:
 
 ```bash
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 
 Once started, the application will be available at:
